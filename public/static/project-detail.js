@@ -1,13 +1,18 @@
-// CHO OS — Project detail page (small enhancements)
-(function () {
-  // smooth section scroll on hash
-  const hash = window.location.hash
-  if (hash) {
-    const el = document.querySelector(hash)
-    if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 100)
-  }
+// === Project Detail ===
+(() => {
+  // 부드러운 스크롤 (앵커가 있을 때)
+  document.querySelectorAll('a[href^="#"]').forEach((a) => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href')
+      const el = id && document.querySelector(id)
+      if (el) {
+        e.preventDefault()
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    })
+  })
 
-  // ESC -> back to desktop
+  // ESC → desktop
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       window.location.href = '/desktop'

@@ -1,72 +1,55 @@
-// CHO OS — Intro page interaction
-(function () {
-  const $ = (s) => document.querySelector(s)
-  const closed = $('#stage-closed')
-  const boot = $('#stage-boot')
-  const laptop = $('#mac-laptop')
-  const openBtn = $('#open-btn')
-  const bar = $('#boot-bar')
-  const logItems = document.querySelectorAll('#boot-log li')
+// === Intro 인터랙션 ===
+(() => {
+  const laptop = document.getElementById('mac-laptop')
+  const openBtn = document.getElementById('open-btn')
+  const stageClosed = document.getElementById('stage-closed')
+  const stageBoot = document.getElementById('stage-boot')
+  const bootBar = document.getElementById('boot-bar')
+  const bootLog = document.getElementById('boot-log')
 
-  let started = false
+  if (!laptop || !openBtn) return
 
-  const startBoot = () => {
-    if (started) return
-    started = true
+  let opened = false
 
-    // 1. open laptop
+  const openMac = () => {
+    if (opened) return
+    opened = true
+
+    // 1) 맥북 열림
     laptop.classList.add('is-open')
 
-    // 2. fade closed stage
+    // 2) 약간의 지연 후 closed stage 페이드아웃
     setTimeout(() => {
-      closed.classList.add('fading')
-      closed.classList.remove('visible')
-    }, 1100)
+      stageClosed.classList.remove('visible')
+    }, 1800)
 
-    // 3. show boot stage
+    // 3) 부팅 화면 페이드인
     setTimeout(() => {
-      boot.classList.add('visible')
-    }, 1500)
+      stageBoot.classList.add('visible')
+      // 진행 바
+      requestAnimationFrame(() => {
+        bootBar.style.width = '100%'
+      })
+      // 로그 순차 표시
+      const logs = bootLog.querySelectorAll('li')
+      logs.forEach((li, i) => {
+        setTimeout(() => li.classList.add('show'), 200 + i * 350)
+      })
+    }, 2000)
 
-    // 4. progress + log
-    let progress = 0
-    let logIdx = 0
-    const total = logItems.length
-    const totalDuration = 1800
-    const stepInterval = totalDuration / 100
-
-    const tick = () => {
-      progress += 1
-      if (bar) bar.style.width = progress + '%'
-
-      // reveal log items at proportional positions
-      const target = Math.floor((progress / 100) * total)
-      while (logIdx < target && logIdx < total) {
-        logItems[logIdx].classList.add('shown')
-        logIdx += 1
-      }
-
-      if (progress < 100) {
-        setTimeout(tick, stepInterval)
-      } else {
-        // ensure all shown
-        for (let i = logIdx; i < total; i++) logItems[i].classList.add('shown')
-        // navigate to desktop
-        setTimeout(() => {
-          window.location.href = '/desktop'
-        }, 700)
-      }
-    }
-    setTimeout(tick, 1700)
+    // 4) 데스크톱으로 이동
+    setTimeout(() => {
+      window.location.href = '/desktop'
+    }, 4400)
   }
 
-  if (openBtn) {
-    openBtn.addEventListener('click', startBoot)
-  }
-  if (laptop) {
-    laptop.addEventListener('click', startBoot)
-  }
+  openBtn.addEventListener('click', openMac)
+  laptop.addEventListener('click', openMac)
+
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') startBoot()
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      openMac()
+    }
   })
 })()

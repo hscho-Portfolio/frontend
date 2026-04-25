@@ -110,6 +110,7 @@ app.get('/admin/dashboard/settings', (c) => {
 
 // === 404 ===
 app.notFound((c) => {
+  c.status(404)
   return c.render(<NotFoundPage />, {
     title: 'CHO OS — System Alert',
     bodyClass: 'not-found-body',
