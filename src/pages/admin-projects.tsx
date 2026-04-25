@@ -1,5 +1,5 @@
 import { AdminShell } from './admin-shell'
-import { PROJECTS } from '../data/mock'
+import { PROJECTS } from '../data/projects'
 
 export const AdminProjectsPage = () => {
   return (

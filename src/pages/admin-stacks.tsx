@@ -1,5 +1,5 @@
 import { AdminShell } from './admin-shell'
-import { ALL_STACKS, STACK_CATEGORIES } from '../data/mock'
+import { ALL_STACKS, STACK_CATEGORIES } from '../data/stacks'
 
 export const AdminStacksPage = () => {
   return (

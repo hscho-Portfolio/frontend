@@ -1,0 +1,333 @@
+/* ============================================================
+   CHO OS — Responsive Breakpoints
+   1280 / 1024 / 768 / 640 / 480  +  hover:none + reduced-motion
+============================================================ */
+
+/* ---- 1280px : large laptop ---- */
+@media (max-width: 1280px) {
+  .pd-hero { padding: 40px 36px 38px; }
+  .pd-body { padding: 36px 36px 48px; }
+  .pd-hero-title { font-size: 38px; }
+  .pd-hero-icon { width: 130px; height: 130px; font-size: 56px; right: 28px; }
+  .admin-content { padding: 22px 22px 40px; }
+  .admin-topbar { padding: 18px 22px; }
+}
+
+/* ---- 1024px : tablet landscape ---- */
+@media (max-width: 1024px) {
+  /* Admin layout — sidebar collapses to icon rail */
+  .admin-root { grid-template-columns: 72px 1fr; }
+  .admin-sidebar { padding: 18px 10px 14px; }
+  .admin-brand-text,
+  .admin-nav-item span,
+  .admin-nav-marker,
+  .admin-back span,
+  .admin-logout span,
+  .admin-back,
+  .admin-logout { display: none; }
+  .admin-back-mini,
+  .admin-logout-mini { display: inline-flex; }
+  .admin-nav-item {
+    justify-content: center;
+    padding: 12px 0;
+  }
+  .admin-nav-item i { font-size: 15px; }
+  .admin-brand { justify-content: center; padding: 8px 0 14px; }
+  .admin-search { width: 200px; }
+  .admin-user-text { display: none; }
+
+  /* Project detail */
+  .pd-hero { padding: 36px 28px 32px; }
+  .pd-hero-title { font-size: 34px; }
+  .pd-hero-icon {
+    width: 110px;
+    height: 110px;
+    font-size: 46px;
+    border-radius: 28px;
+    right: 24px;
+  }
+  .pd-body { padding: 32px 28px 44px; }
+
+  /* Settings & 2-col grids */
+  .adm-settings-grid { grid-template-columns: 1fr; }
+  .adm-grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ---- 768px : tablet portrait ---- */
+@media (max-width: 768px) {
+  /* Top bar slim */
+  .topbar { padding: 0 12px; font-size: 12px; }
+  .topbar-menu { gap: 4px; }
+  .topbar-menu-item:not(:first-child) { display: none; }
+  .topbar-clock { font-size: 11px; }
+
+  /* Desktop icons grid */
+  .desktop-icons {
+    padding: 14px;
+    gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+  .desktop-icon-tile { padding: 10px 6px; }
+  .desktop-icon-art { width: 48px; height: 48px; font-size: 22px; border-radius: 13px; }
+  .desktop-icon-name { font-size: 11px; }
+
+  /* Welcome widget */
+  .welcome-widget { padding: 18px 20px; max-width: 92vw; }
+  .welcome-widget h2 { font-size: 22px; }
+  .welcome-widget p  { font-size: 12.5px; }
+  .welcome-widget-title { font-size: 22px; }
+
+  /* Dock */
+  .dock { padding: 8px 12px; gap: 8px; bottom: 14px; }
+  .dock-item { width: 40px; height: 40px; font-size: 18px; border-radius: 11px; }
+  .dock-item:hover { transform: translateY(-6px) scale(1.1); }
+
+  /* Folder overlay */
+  .folder-overlay { padding: 14px; }
+  .folder-window { max-width: 100%; max-height: 92vh; border-radius: 18px; }
+  .folder-body { padding: 18px; }
+  .project-card-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+
+  /* App window */
+  .app-overlay { padding: 14px; }
+  .app-window { max-width: 100%; max-height: 92vh; border-radius: 18px; }
+  .aw-body { padding: 22px; }
+  .aw-about-grid { grid-template-columns: 1fr; gap: 18px; }
+  .aw-about-portrait { max-width: 220px; margin: 0 auto; }
+  .aw-research-grid { grid-template-columns: 1fr; }
+
+  /* Project detail */
+  .project-body { padding: 16px 12px 56px; }
+  .pd-hero { padding: 28px 22px 24px; }
+  .pd-hero-title { font-size: 26px; }
+  .pd-hero-tagline { font-size: 14.5px; }
+  .pd-hero-icon {
+    position: relative;
+    inset: auto;
+    transform: none;
+    margin: 18px auto 0;
+    width: 88px;
+    height: 88px;
+    font-size: 38px;
+    border-radius: 24px;
+  }
+  .pd-hero-inner { max-width: 100%; }
+  .pd-body { padding: 26px 20px 36px; }
+  .pd-section-head { flex-wrap: wrap; gap: 10px; }
+  .pd-section-head h2 { font-size: 18px; }
+  .pd-section-hint { width: 100%; margin-left: 0; }
+  .pd-features { grid-template-columns: 1fr; }
+  .stack-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  .stack-card { height: 160px; }
+  .pd-arch-node { min-width: auto; width: 100%; }
+  .pd-footer-nav { flex-direction: column; gap: 12px; align-items: stretch; }
+  .pd-footer-nav a { justify-content: center; }
+  .window-bar-detail .window-spacer { display: none; }
+
+  /* Login / 404 */
+  .login-card { padding: 30px 24px 24px; border-radius: 20px; }
+  .login-avatar { width: 72px; height: 72px; font-size: 30px; }
+  .nf-card { border-radius: 18px; }
+  .nf-body { padding: 28px 22px 24px; }
+  .nf-code { font-size: 50px; }
+  .nf-title { font-size: 17px; }
+
+  /* Admin shell */
+  .admin-content { padding: 18px 14px 36px; }
+  .admin-topbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 16px 16px;
+  }
+  .admin-topbar-right { flex-wrap: wrap; gap: 8px; }
+  .admin-search { width: 100%; }
+  .admin-user { margin-left: auto; }
+  .admin-page-title { font-size: 19px; }
+
+  /* Admin grids */
+  .adm-grid-4 { grid-template-columns: 1fr 1fr; }
+  .adm-stat-card { padding: 16px 18px; }
+  .adm-stat-value { font-size: 24px; }
+  .adm-quick-grid { grid-template-columns: 1fr; }
+
+  /* Filters */
+  .adm-filters { padding: 12px 14px; }
+  .adm-filter-group { min-width: calc(50% - 6px); flex: 1; }
+  .adm-search-inline { min-width: 100%; order: -1; }
+
+  /* Table — horizontal scroll */
+  .adm-table-wrap { overflow-x: auto; }
+  .adm-table { min-width: 720px; }
+
+  /* Stack & Cat grids */
+  .adm-stack-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+  .adm-stack-card { padding: 16px; }
+  .adm-cat-grid { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+
+  /* Settings theme rows */
+  .adm-theme-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .adm-theme-label { width: auto; }
+
+  /* Form rows */
+  .adm-form-row.two { grid-template-columns: 1fr; }
+
+  /* Project form (3-H) */
+  .adm-stack-toolbar { flex-direction: column; align-items: stretch; }
+  .adm-stack-search { flex: 1 1 auto; }
+  .adm-arch-upload-meta {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .adm-arch-upload-filename { max-width: 200px; }
+  .adm-modal-card { max-width: 100%; }
+  .adm-stack-preview-wrap { flex-direction: column; align-items: stretch; }
+}
+
+/* ---- 640px : large phone ---- */
+@media (max-width: 640px) {
+  /* Intro */
+  .intro-body { padding: 0; }
+
+  /* Desktop dock magnify off (touch friendly) */
+  .dock-item:hover { transform: translateY(-2px) scale(1.04); }
+  .dock-tooltip { display: none; }
+
+  /* Folder grid → 1 col */
+  .folder-grid { grid-template-columns: 1fr; padding: 16px; }
+
+  /* Project card */
+  .project-card { padding: 14px; }
+  .project-card-thumb { height: 100px; }
+  .project-card-title { font-size: 14px; }
+  .project-card-desc { font-size: 12px; }
+
+  /* Project detail */
+  .pd-hero-title { font-size: 22px; }
+  .pd-hero-meta { gap: 6px; }
+  .pd-hero-period { font-size: 11px; padding: 4px 9px; }
+  .stack-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Admin sidebar shrink */
+  .admin-root { grid-template-columns: 60px 1fr; }
+  .admin-sidebar { padding: 14px 8px 10px; }
+  .admin-brand-mark { width: 34px; height: 34px; font-size: 14px; }
+  .admin-nav-item { padding: 10px 0; }
+  .admin-nav-item i { font-size: 14px; }
+  .admin-search-key { display: none; }
+
+  /* Admin grids */
+  .adm-grid-4 { grid-template-columns: 1fr; }
+  .adm-stat-card { padding: 14px 16px; }
+  .adm-quick-grid { grid-template-columns: 1fr; }
+
+  .adm-cat-tabs { padding: 4px; }
+  .adm-cat-tab { padding: 6px 10px; font-size: 11.5px; }
+
+  .adm-stack-grid { grid-template-columns: 1fr 1fr; }
+  .adm-cat-grid { grid-template-columns: 1fr; }
+
+  /* Modal */
+  .adm-modal { max-width: 94vw; padding: 20px 18px; border-radius: 18px; }
+
+  /* Danger row */
+  .adm-danger-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .adm-danger-row > button { width: 100%; }
+}
+
+/* ---- 480px : small phone ---- */
+@media (max-width: 480px) {
+  /* TopBar even slimmer */
+  .topbar { height: 28px; padding: 0 10px; }
+  .topbar-clock { font-size: 10.5px; }
+  .topbar-icon { width: 22px; height: 22px; font-size: 10.5px; }
+
+  /* Desktop icons */
+  .desktop-icons {
+    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+    padding: 12px;
+    gap: 8px;
+  }
+  .desktop-icon-art { width: 44px; height: 44px; font-size: 20px; border-radius: 12px; }
+  .desktop-icon-name { font-size: 10.5px; }
+  .welcome-widget { padding: 16px 18px; }
+  .welcome-widget h2 { font-size: 19px; }
+
+  /* Project detail */
+  .pd-hero-title { font-size: 20px; line-height: 1.2; }
+  .pd-hero-tagline { font-size: 13.5px; }
+  .pd-section-head h2 { font-size: 16px; }
+  .pd-section-no { font-size: 11px; padding: 3px 8px; }
+  .stack-grid { grid-template-columns: 1fr; }
+  .pd-features li { padding: 14px 14px; }
+  .pd-overview { padding: 18px 18px; font-size: 14px; }
+
+  /* Login */
+  .login-card { padding: 24px 18px 20px; border-radius: 18px; }
+  .login-avatar { width: 64px; height: 64px; font-size: 26px; }
+  .login-name { font-size: 16px; }
+  .login-input { padding: 10px 12px; }
+  .login-submit { padding: 12px 18px; font-size: 13px; }
+
+  /* 404 */
+  .nf-icon { width: 64px; height: 64px; font-size: 26px; }
+  .nf-code { font-size: 42px; }
+  .nf-title { font-size: 15px; }
+  .nf-actions { flex-direction: column; }
+  .nf-actions > a { width: 100%; justify-content: center; }
+
+  /* Admin */
+  .admin-content { padding: 14px 12px 30px; }
+  .admin-page-title { font-size: 17px; }
+  .admin-page-sub { font-size: 11.5px; }
+  .adm-card { padding: 16px 16px; border-radius: 14px; }
+  .adm-stat-icon { width: 38px; height: 38px; font-size: 16px; }
+  .adm-stat-value { font-size: 22px; }
+
+  .adm-stack-grid { grid-template-columns: 1fr; }
+  .adm-stack-card { padding: 16px; }
+
+  .adm-filters { padding: 10px 12px; gap: 8px; }
+  .adm-filter-group { min-width: 100%; }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-ghost {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+
+  /* Project form (3-H) */
+  .adm-arch-mode { width: 100%; }
+  .adm-arch-mode-btn { flex: 1; justify-content: center; }
+  .adm-arch-upload { min-height: 200px; }
+  .adm-arch-upload-icon { width: 48px; height: 48px; font-size: 18px; }
+  .adm-arch-upload-title { font-size: 13.5px; }
+  .adm-stack-filter { padding: 6px 10px; font-size: 11.5px; }
+  .adm-modal-head { padding: 14px 16px; }
+  .adm-modal-body { padding: 16px; }
+  .adm-modal-foot { padding: 12px 16px; }
+}
+
+/* ---- Touch / hover capability ---- */
+@media (hover: none) {
+  /* Stack 3D card: tap to flip on touch devices */
+  .stack-card:active .stack-card-inner { transform: rotateY(180deg); }
+  /* Dock magnify off on touch */
+  .dock-item:hover { transform: none; }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
+    scroll-behavior: auto !important;
+  }
+  .wallpaper-mesh,
+  .login-root .wallpaper-mesh { animation: none; }
+}

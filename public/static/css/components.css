@@ -1,0 +1,183 @@
+/* CHO OS — Reusable Components (Uiverse hover card etc.) */
+/* =====================================================================
+   3-G : UIVERSE-STYLE HOVER CARD (.uiv-card)
+   원본 3d_card.tsx 컨셉을 라이트 글래스 톤으로 재해석.
+   - front-content: 중앙에 큰 그라데이션 텍스트
+   - content: 호버 시 좌측에서 슬라이드 인 (translateX)
+   - 사용처: Core Identity 카드 등 강조용
+   ===================================================================== */
+
+.uiv-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.uiv-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  max-height: 260px;
+  border-radius: 18px;
+  box-shadow:
+    0 14px 30px -10px rgba(124, 58, 237, 0.18),
+    0 6px 16px -6px rgba(236, 72, 153, 0.18),
+    0 0 0 1px rgba(255, 255, 255, 0.55) inset;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.85);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  isolation: isolate;
+}
+
+.uiv-card .uiv-front {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  padding: 20px;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 1;
+}
+.uiv-card .uiv-front-icon {
+  font-size: 36px;
+  background: linear-gradient(-45deg, var(--uiv-c1, #f89b29) 0%, var(--uiv-c2, #ff0f7b) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 8px color-mix(in srgb, var(--uiv-c2, #ff0f7b) 30%, transparent));
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.uiv-card .uiv-front p {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  background: linear-gradient(-45deg, var(--uiv-c1, #f89b29) 0%, var(--uiv-c2, #ff0f7b) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.uiv-card .uiv-front small {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-400);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  transition: opacity 0.4s ease;
+}
+
+.uiv-card .uiv-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 10px;
+  padding: 22px;
+  background: linear-gradient(-45deg, var(--uiv-c1, #f89b29) 0%, var(--uiv-c2, #ff0f7b) 100%);
+  color: white;
+  line-height: 1.55;
+  border-radius: inherit;
+  pointer-events: none;
+  transform: translateX(-100%);
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 2;
+}
+.uiv-card .uiv-content::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 80% at 0% 0%, rgba(255, 255, 255, 0.25), transparent 50%),
+    radial-gradient(80% 60% at 100% 100%, rgba(255, 255, 255, 0.15), transparent 50%);
+  pointer-events: none;
+}
+.uiv-card .uiv-heading {
+  position: relative;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+.uiv-card .uiv-content p {
+  position: relative;
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.96);
+}
+
+/* Hover behaviour — original Uiverse motion */
+.uiv-card:hover .uiv-content {
+  transform: translateX(0);
+}
+.uiv-card:hover .uiv-front {
+  transform: translateX(30%);
+}
+.uiv-card:hover .uiv-front p,
+.uiv-card:hover .uiv-front small {
+  opacity: 0;
+}
+.uiv-card:hover .uiv-front-icon {
+  opacity: 0.25;
+  transform: scale(0.85);
+}
+
+/* Subtle lift on the whole card */
+.uiv-card {
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1),
+              box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.uiv-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 22px 44px -12px color-mix(in srgb, var(--uiv-c2, #ff0f7b) 35%, transparent),
+    0 8px 22px -8px color-mix(in srgb, var(--uiv-c1, #f89b29) 35%, transparent),
+    0 0 0 1px rgba(255, 255, 255, 0.55) inset;
+}
+
+/* Color variants */
+.uiv-card.is-orange  { --uiv-c1: #f89b29; --uiv-c2: #ff0f7b; }
+.uiv-card.is-violet  { --uiv-c1: #6366f1; --uiv-c2: #a855f7; }
+.uiv-card.is-cyan    { --uiv-c1: #06b6d4; --uiv-c2: #22d3ee; }
+.uiv-card.is-mint    { --uiv-c1: #10b981; --uiv-c2: #84cc16; }
+.uiv-card.is-rose    { --uiv-c1: #ec4899; --uiv-c2: #f59e0b; }
+.uiv-card.is-indigo  { --uiv-c1: #4f46e5; --uiv-c2: #ec4899; }
+
+/* Touch fallback — tap to flip */
+@media (hover: none) {
+  .uiv-card:active .uiv-content { transform: translateX(0); }
+  .uiv-card:active .uiv-front { transform: translateX(30%); }
+  .uiv-card:active .uiv-front p,
+  .uiv-card:active .uiv-front small { opacity: 0; }
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .uiv-row { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .uiv-card { max-height: 200px; }
+  .uiv-card .uiv-front-icon { font-size: 28px; }
+  .uiv-card .uiv-front p,
+  .uiv-card .uiv-heading { font-size: 18px; }
+  .uiv-card .uiv-content p { font-size: 12px; }
+}
+@media (max-width: 480px) {
+  .uiv-row { grid-template-columns: 1fr; }
+  .uiv-card { aspect-ratio: 16 / 10; max-height: 180px; }
+}
+
+/* === 3-G END === */

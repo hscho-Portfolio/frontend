@@ -63,6 +63,9 @@ export const AdminLoginPage = () => {
 
       <div class="login-hint">
         <kbd>Tab</kbd> 으로 입력 이동 · <kbd>Enter</kbd> 로 로그인
+        <div style="margin-top:6px;opacity:0.7;font-size:10.5px">
+          🔓 현재는 <strong>임시 인증 우회 모드</strong> — 아무 값이나 입력 후 Login
+        </div>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import { PROJECTS } from '../data/mock'
+import { PROJECTS } from '../data/projects'
 
 const DESKTOP_ICONS = [
   { id: 'projects', label: 'Projects', icon: 'fa-solid fa-folder', color: '#fbbf24' },

@@ -1,4 +1,4 @@
-import { findProject } from '../data/mock'
+import { findProject } from '../data/projects'
 
 export const ProjectDetailPage = ({ slug }: { slug: string }) => {
   const p = findProject(slug)

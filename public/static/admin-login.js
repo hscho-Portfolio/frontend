@@ -14,32 +14,33 @@
       : '<i class="fa-solid fa-eye"></i>'
   })
 
+  // === 임시 인증 우회 (백엔드 연동 전) ===
+  // 어떤 입력값이든 통과시켜 /admin/dashboard 로 이동
+  // 로컬스토리지에 mock 토큰을 박아두어 admin.js 가 이를 인식
   form?.addEventListener('submit', (e) => {
     e.preventDefault()
     const data = new FormData(form)
-    const email = data.get('email')
-    const password = data.get('password')
+    const email = (data.get('email') || 'admin@cho.os').toString()
 
-    // 임시 테스트용 인증 — 실제로는 백엔드 연동
-    if (email === 'admin@cho.os' && password === 'admin1234') {
-      // 성공 — 부드럽게 이동
-      errorBox.hidden = true
-      form.style.opacity = '0.5'
-      form.style.pointerEvents = 'none'
-      setTimeout(() => (window.location.href = '/admin/dashboard'), 400)
-    } else {
-      errorBox.hidden = false
-      errorBox.textContent =
-        '이메일 또는 비밀번호가 올바르지 않습니다. (테스트 계정: admin@cho.os / admin1234)'
-      form.querySelector('.login-submit')?.animate(
-        [
-          { transform: 'translateX(0)' },
-          { transform: 'translateX(-6px)' },
-          { transform: 'translateX(6px)' },
-          { transform: 'translateX(0)' },
-        ],
-        { duration: 280, easing: 'ease-out' }
+    try {
+      localStorage.setItem(
+        'cho-os-admin-token',
+        JSON.stringify({
+          token: 'mock-jwt-' + Date.now().toString(36),
+          email,
+          ts: Date.now(),
+        })
       )
+    } catch {}
+
+    if (errorBox) errorBox.hidden = true
+    form.style.opacity = '0.5'
+    form.style.pointerEvents = 'none'
+    const submitBtn = form.querySelector('.login-submit')
+    if (submitBtn) {
+      submitBtn.innerHTML =
+        '<span>Authenticating…</span><i class="fa-solid fa-circle-notch fa-spin"></i>'
     }
+    setTimeout(() => (window.location.href = '/admin/dashboard'), 500)
   })
 })()

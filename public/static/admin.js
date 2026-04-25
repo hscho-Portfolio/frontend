@@ -1,48 +1,22 @@
-// === Admin global ===
-(() => {
-  const logoutBtn = document.getElementById('admin-logout')
-  logoutBtn?.addEventListener('click', () => {
-    if (confirm('로그아웃 하시겠습니까?')) {
-      window.location.href = '/admin/login'
-    }
-  })
+// ============================================================
+// CHO OS — Admin Entry Script
+// 어드민 모든 페이지의 공통 부트스트랩.
+// ESM 모듈로 분할된 각 기능을 import해서 init만 수행.
+// ============================================================
+import { ensureMockSession, reflectSessionUser, bindLogout, bindGlobalPickers } from './admin/core.js'
+import { initStackPicker } from './admin/stack-picker.js'
+import { initStackModal } from './admin/stack-modal.js'
+import { initUploaders } from './admin/uploaders.js'
 
-  // Color swatch single-select
-  document.querySelectorAll('.adm-color-list').forEach((list) => {
-    list.querySelectorAll('.adm-color-swatch').forEach((sw) => {
-      sw.addEventListener('click', () => {
-        list.querySelectorAll('.adm-color-swatch').forEach((s) => s.classList.remove('on'))
-        sw.classList.add('on')
-      })
-    })
-  })
+// 1) 백엔드 연동 전 임시 세션 확보 (직접 URL 진입도 허용)
+ensureMockSession()
+reflectSessionUser()
 
-  // Wallpaper single-select
-  document.querySelectorAll('.adm-wall-list').forEach((list) => {
-    list.querySelectorAll('.adm-wall').forEach((w) => {
-      w.addEventListener('click', () => {
-        list.querySelectorAll('.adm-wall').forEach((x) => x.classList.remove('on'))
-        w.classList.add('on')
-      })
-    })
-  })
+// 2) 공통 인터랙션
+bindLogout()
+bindGlobalPickers()
 
-  // Cat tab single select
-  document.querySelectorAll('.adm-cat-tabs').forEach((list) => {
-    list.querySelectorAll('.adm-cat-tab').forEach((t) => {
-      t.addEventListener('click', () => {
-        list.querySelectorAll('.adm-cat-tab').forEach((x) => x.classList.remove('active'))
-        t.classList.add('active')
-      })
-    })
-  })
-
-  // Stack picker toggle highlight
-  document.querySelectorAll('.adm-stack-row').forEach((row) => {
-    const cb = row.querySelector('input[type="checkbox"]')
-    if (!cb) return
-    cb.addEventListener('change', () => {
-      row.classList.toggle('on', cb.checked)
-    })
-  })
-})()
+// 3) 페이지별 모듈 — 해당 DOM이 없으면 각 init이 자동 noop
+initStackPicker()
+initStackModal()
+initUploaders()

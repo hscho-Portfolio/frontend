@@ -12,26 +12,45 @@ import { AdminCategoriesPage } from './pages/admin-categories'
 import { AdminSettingsPage } from './pages/admin-settings'
 import { NotFoundPage } from './pages/not-found'
 
-const app = new Hono()
+/**
+ * 페이지 그룹별 CSS 묶음 — renderer가 base.css + group + responsive.css 순으로 로드.
+ *
+ *   intro     : 인트로(맥북 부팅) + 데스크톱 공통
+ *   desktop   : 데스크톱(아이콘·독·앱창·폴더 오버레이)
+ *   project   : 프로젝트 상세(Hero·Stack 3D·Architecture)
+ *   admin     : 어드민 콘솔 전체 (login + shell + form + modal + 404 시스템 알림)
+ */
+const CSS_BUNDLES = {
+  intro: ['/static/mac-laptop.css', '/static/css/desktop.css'],
+  desktop: ['/static/css/desktop.css'],
+  project: ['/static/css/desktop.css', '/static/css/project.css'],
+  admin: ['/static/css/admin.css'],
+  notFound: ['/static/css/project.css'], // 404는 project.css에 포함된 .nf-* 만 사용
+} as const
 
+const app = new Hono()
 app.use(renderer)
 
-// === Public ===
-app.get('/', (c) => {
-  return c.render(<IntroPage />, {
+// ============================================================
+// Public routes
+// ============================================================
+app.get('/', (c) =>
+  c.render(<IntroPage />, {
     title: 'CHO OS — Welcome',
     bodyClass: 'intro-body',
     pageScript: '/static/intro.js',
+    css: CSS_BUNDLES.intro,
   } as any)
-})
+)
 
-app.get('/desktop', (c) => {
-  return c.render(<DesktopPage />, {
+app.get('/desktop', (c) =>
+  c.render(<DesktopPage />, {
     title: 'CHO OS — Desktop',
     bodyClass: 'desktop-body',
     pageScript: '/static/desktop.js',
+    css: CSS_BUNDLES.desktop,
   } as any)
-})
+)
 
 app.get('/project/:slug', (c) => {
   const slug = c.req.param('slug')
@@ -39,81 +58,84 @@ app.get('/project/:slug', (c) => {
     title: `CHO OS — Project / ${slug}`,
     bodyClass: 'project-body',
     pageScript: '/static/project-detail.js',
+    css: CSS_BUNDLES.project,
   } as any)
 })
 
-// === Admin ===
-app.get('/admin/login', (c) => {
-  return c.render(<AdminLoginPage />, {
+// ============================================================
+// Admin routes
+// ============================================================
+app.get('/admin/login', (c) =>
+  c.render(<AdminLoginPage />, {
     title: 'CHO OS — Admin Login',
     bodyClass: 'admin-login-body',
     pageScript: '/static/admin-login.js',
+    css: CSS_BUNDLES.admin,
   } as any)
+)
+
+const adminPage = (
+  Component: any,
+  title: string,
+  extra: { id?: string; mode?: 'new' | 'edit' } = {}
+) => ({
+  body: <Component {...extra} />,
+  opts: {
+    title,
+    bodyClass: 'admin-body',
+    pageScript: '/static/admin.js',
+    css: CSS_BUNDLES.admin,
+  } as any,
 })
 
 app.get('/admin/dashboard', (c) => {
-  return c.render(<AdminDashboardPage />, {
-    title: 'CHO OS — Admin Dashboard',
-    bodyClass: 'admin-body',
-    pageScript: '/static/admin.js',
-  } as any)
+  const { body, opts } = adminPage(AdminDashboardPage, 'CHO OS — Admin Dashboard')
+  return c.render(body, opts)
 })
 
 app.get('/admin/dashboard/projects', (c) => {
-  return c.render(<AdminProjectsPage />, {
-    title: 'CHO OS — Projects Management',
-    bodyClass: 'admin-body',
-    pageScript: '/static/admin.js',
-  } as any)
+  const { body, opts } = adminPage(AdminProjectsPage, 'CHO OS — Projects Management')
+  return c.render(body, opts)
 })
 
 app.get('/admin/dashboard/projects/new', (c) => {
-  return c.render(<AdminProjectFormPage mode="new" />, {
-    title: 'CHO OS — New Project',
-    bodyClass: 'admin-body',
-    pageScript: '/static/admin.js',
-  } as any)
+  const { body, opts } = adminPage(AdminProjectFormPage, 'CHO OS — New Project', { mode: 'new' })
+  return c.render(body, opts)
 })
 
 app.get('/admin/dashboard/projects/:id', (c) => {
   const id = c.req.param('id')
-  return c.render(<AdminProjectFormPage mode="edit" id={id} />, {
-    title: `CHO OS — Edit Project / ${id}`,
-    bodyClass: 'admin-body',
-    pageScript: '/static/admin.js',
-  } as any)
+  const { body, opts } = adminPage(AdminProjectFormPage, `CHO OS — Edit Project / ${id}`, {
+    mode: 'edit',
+    id,
+  })
+  return c.render(body, opts)
 })
 
 app.get('/admin/dashboard/stacks', (c) => {
-  return c.render(<AdminStacksPage />, {
-    title: 'CHO OS — Stacks Management',
-    bodyClass: 'admin-body',
-    pageScript: '/static/admin.js',
-  } as any)
+  const { body, opts } = adminPage(AdminStacksPage, 'CHO OS — Stacks Management')
+  return c.render(body, opts)
 })
 
 app.get('/admin/dashboard/categories', (c) => {
-  return c.render(<AdminCategoriesPage />, {
-    title: 'CHO OS — Categories Management',
-    bodyClass: 'admin-body',
-    pageScript: '/static/admin.js',
-  } as any)
+  const { body, opts } = adminPage(AdminCategoriesPage, 'CHO OS — Categories Management')
+  return c.render(body, opts)
 })
 
 app.get('/admin/dashboard/settings', (c) => {
-  return c.render(<AdminSettingsPage />, {
-    title: 'CHO OS — Settings',
-    bodyClass: 'admin-body',
-    pageScript: '/static/admin.js',
-  } as any)
+  const { body, opts } = adminPage(AdminSettingsPage, 'CHO OS — Settings')
+  return c.render(body, opts)
 })
 
-// === 404 ===
+// ============================================================
+// 404
+// ============================================================
 app.notFound((c) => {
   c.status(404)
   return c.render(<NotFoundPage />, {
     title: 'CHO OS — System Alert',
     bodyClass: 'not-found-body',
+    css: CSS_BUNDLES.notFound,
   } as any)
 })
 

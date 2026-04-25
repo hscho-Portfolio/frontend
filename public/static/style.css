@@ -81,16 +81,25 @@ html, body {
   font-size: 14px;
   line-height: 1.55;
   letter-spacing: -0.01em;
-  overflow: hidden;
 }
 
-body.intro-body,
-body.desktop-body,
-body.admin-login-body,
-body.not-found-body { overflow: hidden; }
+/* Default: scrolling enabled */
+html { overflow-x: hidden; overflow-y: auto; }
+body { min-height: 100vh; overflow-x: hidden; overflow-y: auto; }
 
+/* Intro & Desktop behave like fullscreen OS (no page scroll) */
+html:has(body.intro-body),
+html:has(body.desktop-body),
+html.intro-body,
+html.desktop-body { overflow: hidden; height: 100%; }
+body.intro-body,
+body.desktop-body { overflow: hidden; height: 100vh; }
+
+/* Login / 404 / Project / Admin: allow scrolling on small screens */
+body.admin-login-body,
+body.not-found-body,
 body.project-body,
-body.admin-body { overflow: auto; }
+body.admin-body { overflow-x: hidden; overflow-y: auto; }
 
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; border: 0; background: transparent; color: inherit; }

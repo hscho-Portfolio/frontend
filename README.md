@@ -51,9 +51,54 @@
 - 라운드: 8 / 12 / 18 / 22 / 32 px
 
 ## 데이터 구조 (현재 mock)
-- `src/data/mock.ts` 의 `PROJECTS`, `ALL_STACKS`, `findProject(slug)`
+- `src/data/types.ts` — 도메인 타입 (`TechStack`, `Project`, `StackCategory`, `ProjectStatus`)
+- `src/data/stacks.ts` — `ALL_STACKS`, `STACK_CATEGORIES`, helper(`pickStacks`, `withUsage`, `findStack`)
+- `src/data/projects.ts` — `PROJECTS`, `findProject(slug)`
+- `src/data/mock.ts` — 위 세 파일의 호환성 re-export 레이어 (deprecated, 새 코드는 직접 import 권장)
 - 각 프로젝트는 title / slug / tagline / category / status / period / icon / thumbColor / featured / overview / features / stacks(usage 포함) / architecture / retrospective / links 필드
 - 추후 FastAPI + PostgreSQL 로 대체 예정
+
+## 코드 구조 (리팩터 후)
+```
+src/
+├── index.tsx          # 라우트 정의 + CSS_BUNDLES (페이지별 CSS 묶음 매핑)
+├── renderer.tsx       # 공통 레이아웃 — base/page/responsive CSS 순서 보장
+├── data/
+│   ├── types.ts       # 도메인 타입
+│   ├── stacks.ts      # 스택 카탈로그 + helpers
+│   ├── projects.ts    # 프로젝트 데이터
+│   └── mock.ts        # 호환 re-export
+└── pages/
+    ├── intro.tsx · desktop.tsx · project-detail.tsx · not-found.tsx
+    └── admin-{login,shell,dashboard,projects,project-form,stacks,categories,settings}.tsx
+
+public/static/
+├── style.css          # 공통 디자인 토큰 + reset + base button/wallpaper
+├── mac-laptop.css     # 인트로(맥북) 전용
+├── css/
+│   ├── desktop.css    # 데스크톱·폴더·앱창
+│   ├── project.css    # 프로젝트 상세 + 3D 스택 + 404 시스템 알림
+│   ├── admin.css      # 로그인·콘솔·폼·모달·업로더
+│   ├── components.css # Uiverse hover card 등 재사용 컴포넌트
+│   └── responsive.css # 모든 브레이크포인트
+├── intro.js · desktop.js · project-detail.js · admin-login.js
+├── admin.js           # admin 엔트리 (ESM)
+└── admin/
+    ├── dom.js         # 셀렉터 / escape / formatSize / single-select 헬퍼
+    ├── core.js        # 세션 / 로그아웃 / 글로벌 picker
+    ├── stack-picker.js # 스택 검색·필터·체크 highlight
+    ├── stack-modal.js # "+ 새 스택" 모달 + 라이브 프리뷰 + 새 row 주입
+    └── uploaders.js   # Architecture(DnD) + Thumbnail 업로더, 모드 토글
+```
+
+### 페이지별 CSS 로딩 (renderer가 자동 결정)
+| 페이지 | base | page | components | responsive |
+|---|---|---|---|---|
+| `/` (intro) | style.css | mac-laptop + desktop | components | responsive |
+| `/desktop` | style.css | desktop | components | responsive |
+| `/project/:slug` | style.css | desktop + project | components | responsive |
+| `/admin/*` | style.css | admin | components | responsive |
+| 404 | style.css | project (404 부분만) | components | responsive |
 
 ## 사용 방법
 ```bash
@@ -79,6 +124,23 @@ npm run deploy
 - [ ] S3 직접 업로드 + CloudFront 캐싱
 - [ ] 윈도우 드래그/리사이즈/Z-인덱스 관리, 컨텍스트 메뉴
 - [ ] 다국어(EN/KO) 토글
+
+## 리팩터링 결과 (2026-04)
+| 항목 | Before | After | 증감 |
+|---|---|---|---|
+| `desktop.css` (모놀리식) | 5,270줄 / 130 KB | — | 5개 모듈로 분할 |
+| 페이지별 CSS (Desktop) | ~130 KB | ~46 KB | **-65%** |
+| 페이지별 CSS (Project) | ~130 KB | ~58 KB | **-55%** |
+| 페이지별 CSS (Admin) | ~130 KB | ~85 KB | -35% |
+| 페이지별 CSS (404) | ~130 KB | ~39 KB | **-70%** |
+| `admin.js` (단일 파일) | 366줄 | 22줄 entry + 5 모듈 | 모듈화 |
+| `data/mock.ts` | 262줄 | types + stacks + projects | 도메인 분리 |
+
+### 주요 변경
+- **CSS 모듈 분할**: 페이지마다 필요한 번들만 로드. renderer가 `BASE_CSS + page + RESPONSIVE_CSS` 순으로 자동 주입
+- **JS ESM 모듈화**: `admin.js`를 ESM entry로 변환, 기능별 init 함수가 해당 DOM이 없으면 자동 noop
+- **데이터 도메인 분리**: 타입/스택/프로젝트가 독립 파일에서 export, `mock.ts`는 deprecated barrel
+- **Dead CSS 정리**: 중복된 `.adm-modal*` 정의 제거, 404 스타일을 `project.css`로 이동해 admin 번들 32% 경량화
 
 ## 라이선스
 © 2026 Hosung Cho — Portfolio Edition

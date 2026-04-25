@@ -112,7 +112,45 @@
         <div class="aw-section">
           <div class="aw-eyebrow"><i class="fa-solid fa-flag"></i> Core Identity</div>
           <h2 class="aw-title">단순 분석가가 아니라 <em style="color:#7c3aed;font-style:normal">서비스로 연결하는 사람</em></h2>
-          <p class="aw-sub">분석/모델링에 멈추지 않고 백엔드와 클라우드까지 직접 잇는 것을 원칙으로 합니다.</p>
+          <p class="aw-sub">분석/모델링에 멈추지 않고 백엔드와 클라우드까지 직접 잇는 것을 원칙으로 합니다. <strong style="color:#6d28d9">카드를 호버해보세요 →</strong></p>
+
+          <div class="uiv-row">
+            <div class="uiv-card is-indigo">
+              <div class="uiv-front">
+                <div class="uiv-front-icon"><i class="fa-solid fa-brain"></i></div>
+                <p>AI</p>
+                <small>Implementer</small>
+              </div>
+              <div class="uiv-content">
+                <p class="uiv-heading">AI</p>
+                <p>모델링에 그치지 않고, 실제 동작하는 추론 API와 서비스 형태로 만드는 것까지 책임집니다.</p>
+              </div>
+            </div>
+
+            <div class="uiv-card is-violet">
+              <div class="uiv-front">
+                <div class="uiv-front-icon"><i class="fa-solid fa-database"></i></div>
+                <p>Data-driven</p>
+                <small>Analyst</small>
+              </div>
+              <div class="uiv-content">
+                <p class="uiv-heading">Data-driven</p>
+                <p>가설보다 데이터에서 출발합니다. EDA와 검증을 통해 의사결정의 근거를 설계합니다.</p>
+              </div>
+            </div>
+
+            <div class="uiv-card is-cyan">
+              <div class="uiv-front">
+                <div class="uiv-front-icon"><i class="fa-solid fa-cloud"></i></div>
+                <p>Cloud</p>
+                <small>Native</small>
+              </div>
+              <div class="uiv-content">
+                <p class="uiv-heading">Cloud</p>
+                <p>AWS · Docker · GitHub Actions로 배포 자동화. 분석 결과를 운영 가능한 서비스로 만듭니다.</p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="aw-section">
           <div class="aw-row">

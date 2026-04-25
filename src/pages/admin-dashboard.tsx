@@ -1,5 +1,6 @@
 import { AdminShell } from './admin-shell'
-import { PROJECTS, ALL_STACKS } from '../data/mock'
+import { PROJECTS } from '../data/projects'
+import { ALL_STACKS } from '../data/stacks'
 
 export const AdminDashboardPage = () => {
   const total = PROJECTS.length
