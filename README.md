@@ -1,149 +1,84 @@
-# CHO OS — Portfolio (Frontend)
+# CHO OS — Portfolio (webapp)
 
-OS형 인터페이스를 가진 실무형 포트폴리오 CMS의 **프론트 페이지** 1차 구현입니다.
-맥북 오프닝 인트로 → OS 데스크톱 → iOS 폴더 형식의 프로젝트 탐색 → 3D 카드 기반 프로젝트 상세 → 글래스모피즘 어드민까지 모두 정적 렌더링(SSR + 인터랙션 JS) 으로 구현되어 있습니다.
+## 프로젝트 개요
+- **이름**: CHO OS Portfolio
+- **목표**: macOS 스타일 데스크톱 UI 위에 펼쳐지는 인터랙티브 포트폴리오 + 프로젝트/스택을 직접 관리할 수 있는 어드민 CMS
+- **스타일**: 라이트 톤 파스텔 글래스모피즘, 모던 트렌디 그라디언트, JetBrains Mono + Pretendard 타이포그래피
 
-## 🎯 Project Overview
-- **Name**: CHO OS Portfolio
-- **Goal**: 단순한 정적 포트폴리오를 넘어, 운영 가능한 CMS 구조를 가진 OS형 포트폴리오 제품을 만든다.
-- **Stack**: Hono(SSR) + TypeScript + JSX + Vanilla CSS(Glassmorphism) + Tailwind CDN + FontAwesome
-- **Deploy Target**: Cloudflare Pages
+## 기술 스택
+- **Edge / 서버**: Hono + Cloudflare Pages (Vite SSR)
+- **프론트**: 순수 TSX (Hono JSX) + 바닐라 CSS + 작은 인터랙션 JS
+- **폰트/아이콘**: Pretendard, JetBrains Mono, FontAwesome 6
+- **(예정)** 백엔드: FastAPI + PostgreSQL + AWS (S3, CloudFront, RDS)
 
-## 🌐 URLs (현재 구현된 라우트)
-
-### Public
-| Path | 설명 |
+## 라우트 (현재 완료된 진입점)
+| 경로 | 설명 |
 |---|---|
-| `/` | **Intro** — 별 배경 + 클릭 시 열리는 맥북 + 부팅 화면, 자동으로 `/desktop` 이동 |
-| `/desktop` | **Desktop OS** — TopBar / 바탕화면 아이콘 / Welcome 위젯 / Dock |
-| `/project/:slug` | **Project Detail** — Hero / Overview / Features / 3D Tech Stack 카드 / Architecture / Retrospective |
+| `/` | 인트로. 닫힌 맥북 → 클릭/Enter → 부팅 → `/desktop` 자동 이동 |
+| `/desktop` | 데스크톱 OS UI. 탑바, 아이콘, Dock, 앱/폴더 윈도우 |
+| `/project/:slug` | 프로젝트 상세. Hero / Overview / Key Features / 3D Tech Stack / Architecture / Retrospective |
+| `/admin/login` | 글래스모피즘 로그인 (UI만, 인증은 추후) |
+| `/admin/dashboard` | 요약 카드 + Recent + Quick actions |
+| `/admin/dashboard/projects` | 프로젝트 목록 / 필터 / 토글 / 액션 (UI) |
+| `/admin/dashboard/projects/new` · `/:id` | 프로젝트 등록·수정 폼 (UI) |
+| `/admin/dashboard/stacks` | 기술 스택 카드 그리드 |
+| `/admin/dashboard/categories` | 카테고리 (Project / Stack 탭) |
+| `/admin/dashboard/settings` | 사이트 / 프로필 / 테마 / 위험구역 |
+| 기타 | `not-found` 윈도우 (404) |
 
-### Admin
-| Path | 설명 |
-|---|---|
-| `/admin/login` | 글래스모피즘 OS 로그인 카드 (테스트 계정: `admin@cho.os` / `admin1234`) |
-| `/admin/dashboard` | 통계 카드 4개 + Recent Projects + Quick Actions |
-| `/admin/dashboard/projects` | 프로젝트 테이블, 필터, 토글 스위치 |
-| `/admin/dashboard/projects/new` | 신규 프로젝트 등록 폼 |
-| `/admin/dashboard/projects/:id` | 프로젝트 수정 폼 |
-| `/admin/dashboard/stacks` | 기술 스택 카드 그리드 (카테고리 탭 포함) |
-| `/admin/dashboard/categories` | 카테고리 카드 (정렬 핸들 포함) |
-| `/admin/dashboard/settings` | 사이트 정보 / 외부 링크 / 테마 / Danger Zone |
+## 데스크톱 인터랙션
+- 상단바 시계는 30초마다 갱신
+- 데스크톱 아이콘 / Dock 아이콘 클릭 → 앱 윈도우 또는 폴더 오버레이 오픈
+- Projects 폴더 → iOS-스타일 그리드 + 검색 + 필터(All / Featured / In Progress / Completed)
+- 프로젝트 카드 클릭 → `/project/:slug`
+- About / Skills / Career / Research / Contact 윈도우 → JS로 컨텐츠 주입
+- ESC, 백드롭 클릭 → 윈도우 닫기
+- `?open=projects` 와 같이 쿼리스트링으로 자동 오픈 가능
 
-`/not-exist` 등 매칭되지 않는 경로 → **System Alert 404** 페이지
+## 프로젝트 상세 페이지 구성
+1. Hero (그라디언트 타이틀, 상태/기간/카테고리 칩, GitHub/Demo 버튼)
+2. Overview (보더-액센트 강조 카드)
+3. Key Features (그리드)
+4. **Tech Stack 3D 카드** — hover 시 Y축 180° 플립, 뒷면에 사용 설명
+5. Architecture (수직 노드 + 화살표 다이어그램)
+6. Retrospective (인용 카드 리스트)
 
-## 🧪 Test Account
-어드민 로그인 테스트는 클라이언트 mock 인증으로 동작합니다.
-```
-Email:    admin@cho.os
-Password: admin1234
-```
+## 디자인 토큰 (요약)
+- 배경: lavender / peach / cyan mist + radial mesh 그라디언트
+- 그라디언트: `--grad-accent`, `--grad-aurora`, `--grad-warm`, `--grad-cool`
+- 글래스: `rgba(255,255,255,0.55~0.85)` + `backdrop-filter: blur(28~40px) saturate(180%)`
+- 액센트: violet `#8b5cf6` / pink `#ec4899` / cyan `#06b6d4`
+- 라운드: 8 / 12 / 18 / 22 / 32 px
 
-## 🗂️ 데이터 구조 (현재는 mock)
-실제 DB 연동 전 임시 데이터로 동작합니다. (`src/data/mock.ts`)
+## 데이터 구조 (현재 mock)
+- `src/data/mock.ts` 의 `PROJECTS`, `ALL_STACKS`, `findProject(slug)`
+- 각 프로젝트는 title / slug / tagline / category / status / period / icon / thumbColor / featured / overview / features / stacks(usage 포함) / architecture / retrospective / links 필드
+- 추후 FastAPI + PostgreSQL 로 대체 예정
 
-```ts
-Project {
-  slug, title, tagline,
-  status: 'In Progress' | 'Completed',
-  period, category, featured,
-  thumbColor, icon,
-  overview, features[], stacks[],
-  architecture[], retrospective[],
-  links: { github, demo }
-}
-
-TechStack {
-  name, category, icon, color, usage
-}
-```
-
-## 🧩 핵심 인터랙션
-- **맥북 오프닝**: 사용자가 업로드한 CSS 베이스 위에 클릭/Enter 시 `is-open` 클래스로 스크린이 열림 → 부팅 로그 → 자동 이동
-- **iOS 폴더 확대**: Projects 아이콘/Dock 클릭 시 backdrop blur + 카드 expand
-- **3D 스택 카드**: 호버 시 앞면이 슬라이드되며 사용 설명이 보이는 transition (사용자 업로드 카드 효과 기반)
-- **App Window**: About / Skills / Career / Research / Contact 는 별도 페이지가 아닌 **데스크톱 위 윈도우 오버레이**로 열림 (JS로 컨텐츠 주입)
-- **ESC 키**: 열린 폴더/윈도우/프로젝트 상세 닫기
-
-## 🎨 Design System
-- **Theme**: Dark Glassmorphism + Mesh Gradient + 별 배경
-- **Brand Gradient**: `#6366f1 → #8b5cf6 → #ec4899`
-- **Backdrop blur**: 18~28px + saturate(180%)
-- **Typography**: Pretendard / Inter / JetBrains Mono
-- **Radius**: 8 / 12 / 18 / 24 / 32
-
-## ✅ 1차 완료 (Frontend Design)
-- [x] Intro page — 맥북 오프닝 + 부팅 화면
-- [x] Desktop OS page — TopBar, 데스크톱 아이콘, Welcome 위젯, Dock
-- [x] Projects Folder — 검색/필터/카드 그리드
-- [x] Project Detail Window — Hero / Overview / Key Features / 3D Stack Cards / Architecture / Retrospective
-- [x] About / Skills / Career / Research / Contact 윈도우 (오버레이)
-- [x] Admin Login (Glassmorphism)
-- [x] Admin Dashboard (Stats + Recent + Quick Actions)
-- [x] Admin Projects Table + 필터 + 토글
-- [x] Admin Project Form (new/edit, 좌우 분할)
-- [x] Admin Stacks (3D Card Grid + 카테고리 탭)
-- [x] Admin Categories (정렬 가능 카드)
-- [x] Admin Settings (테마 / 컬러 스와치 / 월페이퍼 / Danger Zone)
-- [x] 404 System Alert page
-
-## 🚧 다음 단계 (Not Yet Implemented)
-- [ ] 백엔드 연동 (FastAPI + PostgreSQL)
-- [ ] JWT 기반 실제 관리자 인증
-- [ ] 프로젝트 CRUD API + 이미지 업로드
-- [ ] D1/KV/R2 또는 외부 DB 통합
-- [ ] AWS 배포 파이프라인 (CloudFront + ECS Fargate)
-- [ ] 모바일 반응형 보강 (현재는 데스크톱 우선)
-
-## 📦 Local Development
+## 사용 방법
 ```bash
-cd /home/user/webapp
+# 개발 (sandbox)
 npm run build
-pm2 start ecosystem.config.cjs
-# → http://localhost:3000
+pm2 start ecosystem.config.cjs    # http://localhost:3000
+
+# 배포 (Cloudflare Pages)
+npm run deploy
 ```
 
-PM2 명령:
-```bash
-pm2 logs webapp --nostream
-pm2 restart webapp
-pm2 list
-```
+## 진행 상태
+- ✅ Phase 1: Intro / Desktop / Projects 폴더 / Project Detail / 3D Tech Stack 카드
+- ✅ Phase 2: About Me / Skills / Career / Research / Contact 윈도우
+- ✅ Phase 3 (UI): Admin Login / Dashboard / Projects CRUD / Stacks / Categories / Settings 화면
+- 🔄 Phase 4: 백엔드 (FastAPI + PostgreSQL) 연동, JWT 인증, 이미지 업로드, AWS 배포
+- 🔄 잔여 폴리싱: 윈도우 드래그/리사이즈/최소화 애니메이션, 컨텍스트 메뉴
 
-## 📂 File Structure
-```
-src/
-├── index.tsx              # Hono 라우터 (모든 라우트)
-├── renderer.tsx           # JSX 공통 레이아웃 (head, scripts)
-├── data/
-│   └── mock.ts            # 임시 프로젝트/스택 데이터
-└── pages/
-    ├── intro.tsx
-    ├── desktop.tsx
-    ├── project-detail.tsx
-    ├── admin-shell.tsx    # 어드민 공통 레이아웃 (사이드바 + 토픽바)
-    ├── admin-login.tsx
-    ├── admin-dashboard.tsx
-    ├── admin-projects.tsx
-    ├── admin-project-form.tsx
-    ├── admin-stacks.tsx
-    ├── admin-categories.tsx
-    ├── admin-settings.tsx
-    └── not-found.tsx
+## 미구현 / 다음 단계
+- [ ] FastAPI 백엔드 (`/api/auth/login`, projects/stacks/categories CRUD)
+- [ ] PostgreSQL 스키마 + Alembic 마이그레이션
+- [ ] JWT 기반 어드민 인증 흐름과 `/admin/login` 폼 연동
+- [ ] S3 직접 업로드 + CloudFront 캐싱
+- [ ] 윈도우 드래그/리사이즈/Z-인덱스 관리, 컨텍스트 메뉴
+- [ ] 다국어(EN/KO) 토글
 
-public/static/
-├── style.css              # 글로벌 토큰 + 공통 컴포넌트
-├── mac-laptop.css         # 맥북 인트로 CSS (업로드 베이스 + is-open 변형)
-├── desktop.css            # 데스크톱/폴더/프로젝트상세/어드민 전체
-├── intro.js               # 맥북 오프닝 시퀀스 + 부팅 로그
-├── desktop.js             # 폴더/앱 윈도우 오버레이, 시계, 필터
-├── admin-login.js         # 로그인 폼 + 비밀번호 토글 + mock 인증
-├── admin.js               # 어드민 컬러/월페이퍼/탭 단일선택
-└── project-detail.js      # ESC → 데스크톱
-```
-
-## 🚀 Deployment Status
-- **Platform**: Cloudflare Pages (예정)
-- **Status**: 🟡 로컬 PM2 실행 중 (배포 전)
-- **Tech**: Hono + Vite (SSR via _worker.js, 96KB)
-- **Last Updated**: 2026-04-25
+## 라이선스
+© 2026 Hosung Cho — Portfolio Edition
