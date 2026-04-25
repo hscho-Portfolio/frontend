@@ -111,7 +111,7 @@
         </div>
         <div class="aw-section">
           <div class="aw-eyebrow"><i class="fa-solid fa-flag"></i> Core Identity</div>
-          <h2 class="aw-title">단순 분석가가 아니라 <em style="color:#c4b5fd;font-style:normal">서비스로 연결하는 사람</em></h2>
+          <h2 class="aw-title">단순 분석가가 아니라 <em style="color:#7c3aed;font-style:normal">서비스로 연결하는 사람</em></h2>
           <p class="aw-sub">분석/모델링에 멈추지 않고 백엔드와 클라우드까지 직접 잇는 것을 원칙으로 합니다.</p>
         </div>
         <div class="aw-section">
@@ -147,7 +147,7 @@
         <div class="aw-section">
           <div class="aw-eyebrow"><i class="fa-solid fa-layer-group"></i> Tech Stack Overview</div>
           <h2 class="aw-title">현재 다루는 기술</h2>
-          <p class="aw-sub">숙련도 막대보다 <em style="color:#c4b5fd;font-style:normal">사용 경험</em>을 중심으로 정리합니다.</p>
+          <p class="aw-sub">숙련도 막대보다 <em style="color:#7c3aed;font-style:normal">사용 경험</em>을 중심으로 정리합니다.</p>
         </div>
         ${renderSkillCat('Language', 'fa-solid fa-code', [
           ['Python', '데이터 전처리, ML 모델링, FastAPI 서버 구현'],

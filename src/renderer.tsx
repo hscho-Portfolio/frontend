@@ -31,7 +31,6 @@ export const renderer = jsxRenderer(({ children, title, bodyClass, pageScript }:
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
           rel="stylesheet"
         />
-        <script src="https://cdn.tailwindcss.com"></script>
         <link href="/static/style.css" rel="stylesheet" />
         <link href="/static/mac-laptop.css" rel="stylesheet" />
         <link href="/static/desktop.css" rel="stylesheet" />
