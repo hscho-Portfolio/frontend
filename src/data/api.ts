@@ -68,6 +68,8 @@ function mapListToProject(api: ApiProjectList): Project {
   }
 }
 
+const isFaClass = (v?: string | null) => !!v && v.trimStart().startsWith('fa-')
+
 function mapDetailToProject(api: ApiProjectDetail): Project {
   return {
     slug: api.slug,
@@ -88,7 +90,8 @@ function mapDetailToProject(api: ApiProjectDetail): Project {
     stacks: api.stacks.map((s) => ({
       name: s.name,
       category: s.category as StackCategory,
-      iconUrl: s.iconUrl ?? undefined,
+      icon:    isFaClass(s.iconUrl) ? s.iconUrl! : undefined,
+      iconUrl: isFaClass(s.iconUrl) ? undefined  : s.iconUrl ?? undefined,
       color: s.color,
       usage: s.usageDescription,
     })),
@@ -145,7 +148,8 @@ export async function fetchStacks(): Promise<TechStack[]> {
     return data.map((s) => ({
       name: s.name,
       category: s.category as StackCategory,
-      iconUrl: s.iconUrl ?? undefined,
+      icon:    isFaClass(s.iconUrl) ? s.iconUrl! : undefined,
+      iconUrl: isFaClass(s.iconUrl) ? undefined  : s.iconUrl ?? undefined,
       color: s.color,
       usage: s.description,
     }))
