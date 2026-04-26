@@ -49,6 +49,7 @@ export interface Project {
   features: string[]
   stacks: TechStack[]
   architecture: string[]
+  architectureImageUrl?: string
   retrospective: string[]
   links: ProjectLinks
 }

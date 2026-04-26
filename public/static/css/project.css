@@ -41,6 +41,8 @@
   padding: 64px 56px 56px;
   overflow: hidden;
   background: var(--hero-bg);
+  background-size: cover;
+  background-position: center;
 }
 .pd-hero::before {
   content: '';
@@ -339,6 +341,17 @@
   font-size: 18px;
   color: var(--accent);
   font-weight: 700;
+}
+.pd-arch-img-wrap {
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.6);
+}
+.pd-arch-img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 /* Retrospective */

@@ -354,87 +354,159 @@ const initProjectFormPage = () => {
   load()
 }
 
-const initProjectPreview = () => {
-  const preview = document.getElementById('projectPreview')
-  if (!preview) return
-
-  const previewThumb   = document.getElementById('previewThumb')
-  const previewFeatured = document.getElementById('previewFeatured')
-  const previewTitle   = document.getElementById('previewTitle')
-  const previewSummary = document.getElementById('previewSummary')
-  const previewStacks  = document.getElementById('previewStacks')
-  const previewDot     = document.getElementById('previewDot')
-  const previewStatus  = document.getElementById('previewStatus')
-  const previewPeriod  = document.getElementById('previewPeriod')
+const initFullPreview = () => {
+  const btn     = document.getElementById('project-full-preview-btn')
+  const overlay = document.getElementById('fpOverlay')
+  const closeBtn = document.getElementById('fpCloseBtn')
+  if (!btn || !overlay) return
 
   const fmtMonth = (val) => val ? val.slice(0, 7).replace('-', '.') : ''
 
-  const update = () => {
-    const title     = document.getElementById('project-title')?.value.trim()    || ''
-    const summary   = document.getElementById('project-summary')?.value.trim()  || ''
-    const status    = document.getElementById('project-status')?.value          || 'in_progress'
-    const featured  = document.getElementById('project-featured')?.checked      || false
-    const thumbUrl  = document.getElementById('project-thumbnail-url')?.value.trim() || ''
-    const startDate = document.getElementById('project-start-date')?.value      || ''
-    const endDate   = document.getElementById('project-end-date')?.value        || ''
-
-    previewTitle.textContent   = title   || 'Project Title'
-    previewSummary.textContent = summary || 'Short summary will appear here.'
-
-    const thumbUpload = document.getElementById('thumbUpload')
-    const thumbBg = thumbUpload?.style.backgroundImage || ''
-    if (thumbBg && thumbBg !== 'none') {
-      previewThumb.style.backgroundImage = thumbBg
-      previewThumb.style.backgroundSize  = 'cover'
-      previewThumb.style.backgroundPosition = 'center'
-      previewThumb.querySelector('i').style.display = 'none'
-    } else {
-      previewThumb.style.backgroundImage = ''
-      previewThumb.querySelector('i').style.display = ''
-    }
-
-    previewFeatured.hidden = !featured
-
-    const isDone = status === 'completed'
-    previewDot.className    = `adm-project-preview-dot${isDone ? '' : ' wip'}`
-    previewStatus.textContent = isDone ? 'Completed' : 'In Progress'
-
-    const start = fmtMonth(startDate)
-    const end   = fmtMonth(endDate)
-    previewPeriod.textContent = start
-      ? (end ? `${start} ~ ${end}` : `${start} ~`)
-      : '—'
-
-    const checkedRows = document.querySelectorAll('.adm-stack-row input[type="checkbox"]:checked')
-    const pills = Array.from(checkedRows).slice(0, 5).map((cb) => {
-      const row  = cb.closest('.adm-stack-row')
-      const name = row?.getAttribute('data-stack-name') || ''
-      return `<span class="adm-project-preview-pill">${escapeHtml(name)}</span>`
-    })
-    previewStacks.innerHTML = pills.join('')
+  const syncClock = () => {
+    const el = document.getElementById('fpClock')
+    if (!el) return
+    const now = new Date()
+    el.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
   }
 
-  const inputs = ['project-title', 'project-summary', 'project-status',
-                  'project-start-date', 'project-end-date', 'project-thumbnail-url',
-                  'project-featured']
-  inputs.forEach((id) => {
-    document.getElementById(id)?.addEventListener('input', update)
-    document.getElementById(id)?.addEventListener('change', update)
+  const buildPreview = () => {
+    const title    = document.getElementById('project-title')?.value.trim()   || ''
+    const summary  = document.getElementById('project-summary')?.value.trim() || ''
+    const desc     = document.getElementById('project-description')?.value.trim() || ''
+    const status   = document.getElementById('project-status')?.value         || 'in_progress'
+    const startDate = document.getElementById('project-start-date')?.value    || ''
+    const endDate   = document.getElementById('project-end-date')?.value      || ''
+    const githubUrl = document.getElementById('project-github-url')?.value.trim() || ''
+    const demoUrl   = document.getElementById('project-demo-url')?.value.trim()   || ''
+    const featuresRaw = document.getElementById('project-features')?.value    || ''
+    const archRaw     = document.getElementById('project-architecture')?.value || ''
+    const retroRaw    = document.getElementById('project-retrospective')?.value || ''
+
+    const thumbBg = document.getElementById('thumbUpload')?.style.backgroundImage || ''
+    const thumbUrl = document.getElementById('project-thumbnail-url')?.value.trim() || ''
+
+    const isDone = status === 'completed'
+    const start  = fmtMonth(startDate)
+    const end    = fmtMonth(endDate)
+    const period = start ? (end ? `${start} ~ ${end}` : `${start} ~`) : '—'
+
+    // Window title
+    document.getElementById('fpWindowTitle').textContent = title || 'Project'
+
+    // Hero background
+    const hero = document.getElementById('fpHero')
+    if (thumbBg && thumbBg !== 'none') {
+      hero.style.backgroundImage = thumbBg
+      hero.classList.add('has-thumb')
+    } else {
+      hero.style.backgroundImage = ''
+      hero.classList.remove('has-thumb')
+    }
+
+    // Status
+    const dot  = document.getElementById('fpStatusDot')
+    const pill = document.getElementById('fpStatusPill')
+    document.getElementById('fpStatusText').textContent = isDone ? 'Completed' : 'In Progress'
+    dot.className  = `adm-fp-status-dot${isDone ? ' done' : ''}`
+    pill.className = `adm-fp-status-pill${isDone ? ' done' : ''}`
+
+    document.getElementById('fpPeriod').textContent = period
+    document.getElementById('fpTitle').textContent   = title   || 'Project Title'
+    document.getElementById('fpSummary').textContent = summary || 'Summary will appear here.'
+    document.getElementById('fpOverview').textContent = desc   || '—'
+
+    // GitHub / Demo buttons
+    const ghBtn = document.getElementById('fpGithubBtn')
+    const dmBtn = document.getElementById('fpDemoBtn')
+    ghBtn.hidden = !githubUrl
+    dmBtn.hidden = !demoUrl
+
+    // Features
+    const featureLines = featuresRaw.split('\n').map(l => l.trim()).filter(Boolean)
+    const featSec = document.getElementById('fpFeaturesSection')
+    const featList = document.getElementById('fpFeatures')
+    featSec.hidden = featureLines.length === 0
+    featList.innerHTML = featureLines.map((f, i) =>
+      `<li><span class="adm-fp-feature-no">${String(i + 1).padStart(2, '0')}</span><span>${escapeHtml(f)}</span></li>`
+    ).join('')
+
+    // Stacks
+    const checkedRows = document.querySelectorAll('.adm-stack-row input[type="checkbox"]:checked')
+    const stackSec   = document.getElementById('fpStackSection')
+    const stackGrid  = document.getElementById('fpStackGrid')
+    const stackItems = Array.from(checkedRows).map(cb => {
+      const row  = cb.closest('.adm-stack-row')
+      const name = row?.getAttribute('data-stack-name') || ''
+      const cat  = row?.getAttribute('data-stack-cat')  || ''
+      return { name, cat }
+    })
+    stackSec.hidden = stackItems.length === 0
+    stackGrid.innerHTML = stackItems.map(s =>
+      `<div class="adm-fp-stack-card">
+        <div class="adm-fp-stack-icon"><i class="fa-solid fa-cube"></i></div>
+        <div class="adm-fp-stack-name">${escapeHtml(s.name)}</div>
+        <div class="adm-fp-stack-cat">${escapeHtml(s.cat)}</div>
+      </div>`
+    ).join('')
+
+    // Architecture
+    const archLines   = archRaw.split('\n').map(l => l.trim()).filter(Boolean)
+    const archImageUrl = document.getElementById('archUpload')?.querySelector('input[name="archImageUrl"]')?.value || ''
+    const archSec     = document.getElementById('fpArchSection')
+    const archImgWrap = document.getElementById('fpArchImg')
+    const archEl      = document.getElementById('fpArch')
+    archSec.hidden = archLines.length === 0 && !archImageUrl
+    if (archImgWrap) {
+      if (archImageUrl) {
+        archImgWrap.hidden = false
+        archImgWrap.querySelector('img').src = archImageUrl
+      } else {
+        archImgWrap.hidden = true
+      }
+    }
+    archEl.hidden = archLines.length === 0
+    archEl.innerHTML = archLines.map((node, i) =>
+      `<div class="adm-fp-arch-node">${escapeHtml(node)}</div>${i < archLines.length - 1 ? '<div class="adm-fp-arch-arrow">↓</div>' : ''}`
+    ).join('')
+
+    // Retrospective
+    const retroLines = retroRaw.split('\n').map(l => l.trim()).filter(Boolean)
+    const retroSec   = document.getElementById('fpRetroSection')
+    const retroList  = document.getElementById('fpRetro')
+    retroSec.hidden = retroLines.length === 0
+    retroList.innerHTML = retroLines.map(r =>
+      `<li><i class="fa-solid fa-quote-left"></i><span>${escapeHtml(r)}</span></li>`
+    ).join('')
+  }
+
+  const open = () => {
+    buildPreview()
+    overlay.hidden = false
+    overlay.removeAttribute('aria-hidden')
+    document.body.style.overflow = 'hidden'
+    syncClock()
+  }
+
+  const close = () => {
+    overlay.hidden = true
+    overlay.setAttribute('aria-hidden', 'true')
+    document.body.style.overflow = ''
+  }
+
+  btn.addEventListener('click', open)
+  closeBtn?.addEventListener('click', close)
+  overlay.addEventListener('keydown', (e) => { if (e.key === 'Escape') close() })
+
+  let clockTimer
+  const obs = new MutationObserver(() => {
+    if (!overlay.hidden) { syncClock(); clearInterval(clockTimer); clockTimer = setInterval(syncClock, 30000) }
+    else clearInterval(clockTimer)
   })
-
-  document.getElementById('stackList')?.addEventListener('change', update)
-
-  const thumbObs = new MutationObserver(update)
-  const thumbUploadEl = document.getElementById('thumbUpload')
-  if (thumbUploadEl) thumbObs.observe(thumbUploadEl, { attributes: true, attributeFilter: ['style', 'class'] })
-
-  document.addEventListener('project-form-loaded', update)
-
-  update()
+  obs.observe(overlay, { attributes: true, attributeFilter: ['hidden'] })
 }
 
 export const initProjectsAdmin = () => {
   initProjectsListPage()
   initProjectFormPage()
-  initProjectPreview()
+  initFullPreview()
 }

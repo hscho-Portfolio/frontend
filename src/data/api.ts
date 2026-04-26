@@ -93,6 +93,7 @@ function mapDetailToProject(api: ApiProjectDetail): Project {
       usage: s.usageDescription,
     })),
     architecture: sectionsOf(api.sections, 'architecture'),
+    architectureImageUrl: api.images?.find((i) => i.imageType === 'architecture')?.imageUrl,
     retrospective: sectionsOf(api.sections, 'retrospective'),
     links: {
       github: api.githubUrl ?? undefined,

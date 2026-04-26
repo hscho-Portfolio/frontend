@@ -2,8 +2,7 @@
 // (1) Architecture diagram uploader (드래그&드롭, 미리보기, 교체/삭제)
 // (2) Thumbnail uploader (썸네일 → background-image)
 // (3) Architecture mode toggle (image / text)
-import { $, $$ } from './dom.js'
-import { formatSize } from './dom.js'
+import { $, $$, toast, formatSize } from './dom.js'
 import { authHeaders } from './core.js'
 
 /** 파일을 백엔드 /api/v1/upload 에 업로드하고 URL 반환. 실패 시 null. */
@@ -67,7 +66,10 @@ const initArchUploader = () => {
     reader.readAsDataURL(file)
     // Upload to backend and store URL in a hidden input
     uploadFile(file, 'architecture').then((url) => {
-      if (!url) return
+      if (!url) {
+        toast('Architecture image upload failed. Check your connection and try again.', 'error')
+        return
+      }
       let hidden = upload.querySelector('input[name="archImageUrl"]')
       if (!hidden) {
         hidden = document.createElement('input')
@@ -76,6 +78,7 @@ const initArchUploader = () => {
         upload.appendChild(hidden)
       }
       hidden.value = url
+      toast('Architecture image uploaded.', 'success')
     })
   }
 
@@ -152,15 +155,15 @@ const initThumbUploader = () => {
     reader.readAsDataURL(f)
     // Upload to backend and store URL in hidden input
     uploadFile(f, 'thumbnails').then((url) => {
-      if (!url) return
-      let hidden = document.querySelector('input[name="thumbnailUrl"]')
-      if (!hidden) {
-        hidden = document.createElement('input')
-        hidden.type = 'hidden'
-        hidden.name = 'thumbnailUrl'
-        upload.appendChild(hidden)
+      if (!url) {
+        toast('Thumbnail upload failed. Check your connection and try again.', 'error')
+        upload.classList.remove('has-image')
+        upload.style.backgroundImage = ''
+        return
       }
-      hidden.value = url
+      const hidden = document.getElementById('project-thumbnail-url')
+      if (hidden) hidden.value = url
+      toast('Thumbnail uploaded.', 'success')
     })
   })
 }

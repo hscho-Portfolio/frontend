@@ -146,20 +146,31 @@ export const ProjectDetailPage = ({ project }: { project: Project | null }) => {
           ) : null}
 
           {/* Architecture */}
-          {p.architecture.length > 0 ? (
+          {(p.architecture.length > 0 || p.architectureImageUrl) ? (
             <section class="pd-section">
               <header class="pd-section-head">
                 <span class="pd-section-no">04</span>
                 <h2>Architecture</h2>
               </header>
-              <div class="pd-arch">
-                {p.architecture.map((node, i) => (
-                  <>
-                    <div class="pd-arch-node">{node}</div>
-                    {i < p.architecture.length - 1 ? <div class="pd-arch-arrow">↓</div> : null}
-                  </>
-                ))}
-              </div>
+              {p.architectureImageUrl ? (
+                <div class="pd-arch-img-wrap">
+                  <img
+                    class="pd-arch-img"
+                    src={p.architectureImageUrl}
+                    alt={`${p.title} architecture`}
+                  />
+                </div>
+              ) : null}
+              {p.architecture.length > 0 ? (
+                <div class="pd-arch">
+                  {p.architecture.map((node, i) => (
+                    <>
+                      <div class="pd-arch-node">{node}</div>
+                      {i < p.architecture.length - 1 ? <div class="pd-arch-arrow">↓</div> : null}
+                    </>
+                  ))}
+                </div>
+              ) : null}
             </section>
           ) : null}
 

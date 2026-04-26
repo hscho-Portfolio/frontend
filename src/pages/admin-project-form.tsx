@@ -12,6 +12,9 @@ export const AdminProjectFormPage = ({ mode, id }: { mode: 'new' | 'edit'; id?: 
       subtitle="Create or update a project in the backend database."
       actions={
         <>
+          <button class="btn-ghost" id="project-full-preview-btn" type="button">
+            <i class="fa-solid fa-eye"></i> Full Preview
+          </button>
           <a class="btn-ghost" href="/admin/dashboard/projects">
             Cancel
           </a>
@@ -153,32 +156,6 @@ export const AdminProjectFormPage = ({ mode, id }: { mode: 'new' | 'edit'; id?: 
           <section class="adm-card">
             <header class="adm-card-head">
               <div>
-                <h3>Preview</h3>
-                <p>Live card preview as it appears on desktop.</p>
-              </div>
-            </header>
-            <div class="adm-project-preview" id="projectPreview">
-              <div class="adm-project-preview-thumb" id="previewThumb">
-                <i class="fa-solid fa-folder-open"></i>
-                <span class="adm-project-preview-featured" id="previewFeatured" hidden>★ Featured</span>
-              </div>
-              <div class="adm-project-preview-body">
-                <div class="adm-project-preview-title" id="previewTitle">Project Title</div>
-                <div class="adm-project-preview-summary" id="previewSummary">Short summary will appear here.</div>
-                <div class="adm-project-preview-stacks" id="previewStacks"></div>
-                <div class="adm-project-preview-foot">
-                  <span class="adm-project-preview-dot wip" id="previewDot"></span>
-                  <span id="previewStatus">In Progress</span>
-                  <span class="dot">·</span>
-                  <span id="previewPeriod">—</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="adm-card">
-            <header class="adm-card-head">
-              <div>
                 <h3>Publish</h3>
               </div>
             </header>
@@ -284,6 +261,107 @@ export const AdminProjectFormPage = ({ mode, id }: { mode: 'new' | 'edit'; id?: 
           </section>
         </aside>
       </form>
+
+      {/* Full Desktop Preview Overlay */}
+      <div class="adm-fp-overlay" id="fpOverlay" hidden aria-hidden="true">
+        <div class="adm-fp-desktop">
+          <div class="adm-fp-topbar">
+            <div class="adm-fp-topbar-left">
+              <span class="adm-fp-apple"><i class="fa-brands fa-apple"></i></span>
+              <span class="adm-fp-clock" id="fpClock"></span>
+            </div>
+            <div class="adm-fp-topbar-center">Preview Mode</div>
+            <div class="adm-fp-topbar-right">
+              <button type="button" class="adm-fp-close-btn" id="fpCloseBtn">
+                <i class="fa-solid fa-xmark"></i> Close Preview
+              </button>
+            </div>
+          </div>
+
+          <div class="adm-fp-content">
+            <div class="adm-fp-window">
+              <header class="adm-fp-window-bar">
+                <div class="adm-fp-window-controls">
+                  <span class="adm-fp-wc adm-fp-wc-close"></span>
+                  <span class="adm-fp-wc adm-fp-wc-min"></span>
+                  <span class="adm-fp-wc adm-fp-wc-max"></span>
+                </div>
+                <div class="adm-fp-window-title" id="fpWindowTitle">Project</div>
+                <div class="adm-fp-window-spacer"></div>
+              </header>
+
+              <section class="adm-fp-hero" id="fpHero">
+                <div class="adm-fp-hero-inner">
+                  <div class="adm-fp-hero-meta">
+                    <span class="adm-fp-status-pill" id="fpStatusPill">
+                      <span class="adm-fp-status-dot" id="fpStatusDot"></span>
+                      <span id="fpStatusText">In Progress</span>
+                    </span>
+                    <span class="adm-fp-hero-period">
+                      <i class="fa-regular fa-calendar"></i> <span id="fpPeriod">—</span>
+                    </span>
+                  </div>
+                  <h1 class="adm-fp-hero-title" id="fpTitle">Project Title</h1>
+                  <p class="adm-fp-hero-tagline" id="fpSummary">Summary will appear here.</p>
+                  <div class="adm-fp-hero-actions">
+                    <span class="adm-fp-hero-btn" id="fpGithubBtn" hidden>
+                      <i class="fa-brands fa-github"></i> GitHub
+                    </span>
+                    <span class="adm-fp-hero-btn adm-fp-hero-btn-sec" id="fpDemoBtn" hidden>
+                      <i class="fa-solid fa-up-right-from-square"></i> Live Demo
+                    </span>
+                  </div>
+                </div>
+              </section>
+
+              <div class="adm-fp-body">
+                <section class="adm-fp-section">
+                  <header class="adm-fp-section-head">
+                    <span class="adm-fp-section-no">01</span>
+                    <h2>Overview</h2>
+                  </header>
+                  <p class="adm-fp-overview" id="fpOverview">—</p>
+                </section>
+
+                <section class="adm-fp-section" id="fpFeaturesSection">
+                  <header class="adm-fp-section-head">
+                    <span class="adm-fp-section-no">02</span>
+                    <h2>Key Features</h2>
+                  </header>
+                  <ul class="adm-fp-features" id="fpFeatures"></ul>
+                </section>
+
+                <section class="adm-fp-section" id="fpStackSection">
+                  <header class="adm-fp-section-head">
+                    <span class="adm-fp-section-no">03</span>
+                    <h2>Tech Stack</h2>
+                  </header>
+                  <div class="adm-fp-stack-grid" id="fpStackGrid"></div>
+                </section>
+
+                <section class="adm-fp-section" id="fpArchSection">
+                  <header class="adm-fp-section-head">
+                    <span class="adm-fp-section-no">04</span>
+                    <h2>Architecture</h2>
+                  </header>
+                  <div class="adm-fp-arch-img-wrap" id="fpArchImg" hidden>
+                    <img alt="architecture" />
+                  </div>
+                  <div class="adm-fp-arch" id="fpArch" hidden></div>
+                </section>
+
+                <section class="adm-fp-section" id="fpRetroSection">
+                  <header class="adm-fp-section-head">
+                    <span class="adm-fp-section-no">05</span>
+                    <h2>Retrospective</h2>
+                  </header>
+                  <ul class="adm-fp-retro" id="fpRetro"></ul>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="adm-modal" id="stackModal" hidden aria-hidden="true">
         <div class="adm-modal-backdrop" data-close-stack-modal></div>

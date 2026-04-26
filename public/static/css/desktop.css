@@ -456,6 +456,8 @@
   color: white;
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
 }
 .project-card-thumb::after {
   content: '';

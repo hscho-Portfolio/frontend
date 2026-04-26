@@ -88,11 +88,6 @@ export const AdminShell = ({
             {subtitle ? <p class="admin-page-sub">{subtitle}</p> : null}
           </div>
           <div class="admin-topbar-right">
-            <div class="admin-search">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input placeholder="Search projects, stacks, categories..." />
-              <span class="admin-search-key">⌘K</span>
-            </div>
             {actions ? <div class="admin-actions">{actions}</div> : null}
             <div class="admin-user">
               <span class="admin-user-avatar">
