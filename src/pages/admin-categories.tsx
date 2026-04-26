@@ -1,63 +1,66 @@
 import { AdminShell } from './admin-shell'
 
-const CATEGORIES = [
-  { name: 'AI Service', slug: 'ai-service', count: 2, color: '#6366f1' },
-  { name: 'Web Application', slug: 'web-application', count: 2, color: '#10b981' },
-  { name: 'Cloud / Infra', slug: 'cloud-infra', count: 0, color: '#f59e0b' },
-  { name: 'Data Analysis', slug: 'data-analysis', count: 2, color: '#ec4899' },
-  { name: 'Research', slug: 'research', count: 0, color: '#22d3ee' },
-  { name: 'Frontend', slug: 'frontend', count: 0, color: '#a78bfa' },
-  { name: 'Backend', slug: 'backend', count: 0, color: '#34d399' },
-]
-
 export const AdminCategoriesPage = () => {
   return (
     <AdminShell
       active="Categories"
       title="Categories"
-      subtitle="프로젝트를 분류하는 카테고리를 관리합니다."
+      subtitle="Manage categories stored in the backend database."
       actions={
-        <button class="btn-primary">
+        <button class="btn-primary" id="category-add-button" type="button">
           <i class="fa-solid fa-plus"></i> Add Category
         </button>
       }
     >
-      <div class="adm-cat-grid">
-        {CATEGORIES.map((c, i) => (
-          <div class="adm-cat-card" style={`--c:${c.color}`}>
-            <div class="adm-cat-card-head">
-              <span class="adm-cat-card-mark">
-                <i class="fa-solid fa-sitemap"></i>
-              </span>
-              <span class="adm-cat-card-handle">
-                <i class="fa-solid fa-grip-vertical"></i>
-              </span>
-            </div>
-            <div class="adm-cat-card-name">{c.name}</div>
-            <div class="adm-cat-card-slug">/{c.slug}</div>
-            <div class="adm-cat-card-foot">
-              <span class="adm-cat-card-count">
-                <i class="fa-solid fa-folder-open"></i> {c.count} projects
-              </span>
-              <div class="adm-cat-card-actions">
-                <button class="adm-icon-btn" title="edit">
-                  <i class="fa-solid fa-pen-to-square"></i>
-                </button>
-                <button class="adm-icon-btn adm-icon-btn-danger" title="delete">
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-              </div>
-            </div>
-            <div class="adm-cat-card-order">#{i + 1}</div>
-          </div>
-        ))}
+      <div class="adm-cat-grid" id="categories-grid">
+        <div class="adm-card">Loading categories...</div>
+      </div>
 
-        <button class="adm-cat-card adm-cat-add">
-          <span class="adm-stack-add-icon">
-            <i class="fa-solid fa-plus"></i>
-          </span>
-          <span>새 카테고리 추가</span>
-        </button>
+      {/* Add / Edit Category Modal */}
+      <div class="adm-modal" id="categoryModal" hidden aria-hidden="true">
+        <div class="adm-modal-backdrop" data-close-category></div>
+        <div class="adm-modal-card" role="dialog" aria-modal="true" aria-labelledby="categoryModalTitle">
+          <header class="adm-modal-head">
+            <h3 id="categoryModalTitle">
+              <i class="fa-solid fa-sitemap"></i> <span id="categoryModalTitleText">Add Category</span>
+            </h3>
+            <button type="button" class="adm-icon-btn" data-close-category aria-label="Close">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </header>
+
+          <div class="adm-modal-body">
+            <input type="hidden" id="categoryEditId" />
+
+            <div class="adm-form-row two">
+              <label class="adm-field">
+                <span>Name <em class="adm-required">*</em></span>
+                <input type="text" id="categoryName" placeholder="Web Development" />
+              </label>
+              <label class="adm-field">
+                <span>Slug <em class="adm-required">*</em></span>
+                <input type="text" id="categorySlug" placeholder="web-development" />
+              </label>
+            </div>
+
+            <label class="adm-field">
+              <span>Description</span>
+              <textarea id="categoryDesc" rows={3} placeholder="Short description (optional)"></textarea>
+            </label>
+
+            <label class="adm-field">
+              <span>Sort Order</span>
+              <input type="number" id="categorySortOrder" value="0" min="0" />
+            </label>
+          </div>
+
+          <footer class="adm-modal-foot">
+            <button type="button" class="btn-ghost" data-close-category>Cancel</button>
+            <button type="button" class="btn-primary" id="categorySubmit">
+              <i class="fa-solid fa-floppy-disk"></i> <span id="categorySubmitText">Add Category</span>
+            </button>
+          </footer>
+        </div>
       </div>
     </AdminShell>
   )

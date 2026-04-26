@@ -4,6 +4,27 @@
 // (3) Architecture mode toggle (image / text)
 import { $, $$ } from './dom.js'
 import { formatSize } from './dom.js'
+import { authHeaders } from './core.js'
+
+/** 파일을 백엔드 /api/v1/upload 에 업로드하고 URL 반환. 실패 시 null. */
+export const uploadFile = async (file, folder = 'images') => {
+  try {
+    const backendUrl = window.BACKEND_URL || 'http://localhost:8080'
+    const form = new FormData()
+    form.append('file', file)
+    form.append('folder', folder)
+    const res = await fetch(`${backendUrl}/api/v1/uploads/image`, {
+      method: 'POST',
+      headers: authHeaders(),
+      body: form,
+    })
+    if (!res.ok) return null
+    const data = await res.json()
+    return data.url ?? null
+  } catch {
+    return null
+  }
+}
 
 /** Architecture 이미지/텍스트 모드 토글 */
 const initArchModeToggle = () => {
@@ -44,6 +65,18 @@ const initArchUploader = () => {
       upload.classList.add('has-image')
     }
     reader.readAsDataURL(file)
+    // Upload to backend and store URL in a hidden input
+    uploadFile(file, 'architecture').then((url) => {
+      if (!url) return
+      let hidden = upload.querySelector('input[name="archImageUrl"]')
+      if (!hidden) {
+        hidden = document.createElement('input')
+        hidden.type = 'hidden'
+        hidden.name = 'archImageUrl'
+        upload.appendChild(hidden)
+      }
+      hidden.value = url
+    })
   }
 
   const clearPreview = () => {
@@ -51,6 +84,8 @@ const initArchUploader = () => {
     if (empty) empty.hidden = false
     if (previewBox) previewBox.hidden = true
     upload.classList.remove('has-image')
+    const hidden = upload.querySelector('input[name="archImageUrl"]')
+    if (hidden) hidden.value = ''
     input.value = ''
   }
 
@@ -115,6 +150,18 @@ const initThumbUploader = () => {
       upload.style.backgroundImage = `url(${e.target.result})`
     }
     reader.readAsDataURL(f)
+    // Upload to backend and store URL in hidden input
+    uploadFile(f, 'thumbnails').then((url) => {
+      if (!url) return
+      let hidden = document.querySelector('input[name="thumbnailUrl"]')
+      if (!hidden) {
+        hidden = document.createElement('input')
+        hidden.type = 'hidden'
+        hidden.name = 'thumbnailUrl'
+        upload.appendChild(hidden)
+      }
+      hidden.value = url
+    })
   })
 }
 

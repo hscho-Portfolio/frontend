@@ -1,4 +1,4 @@
-import { PROJECTS } from '../data/projects'
+import type { Project } from '../data/types'
 
 const DESKTOP_ICONS = [
   { id: 'projects', label: 'Projects', icon: 'fa-solid fa-folder', color: '#fbbf24' },
@@ -19,7 +19,7 @@ const DOCK_APPS = [
   { id: 'admin', label: 'Admin', icon: 'fa-solid fa-lock', color: '#94a3b8' },
 ]
 
-export const DesktopPage = () => {
+export const DesktopPage = ({ projects }: { projects: Project[] }) => {
   return (
     <div id="desktop-root" class="desktop-root">
       {/* Wallpaper */}
@@ -103,12 +103,12 @@ export const DesktopPage = () => {
             <div class="folder-filters" id="folder-filters">
               <button class="chip active" data-filter="all">All</button>
               <button class="chip" data-filter="featured">★ Featured</button>
-              <button class="chip" data-filter="In Progress">In Progress</button>
-              <button class="chip" data-filter="Completed">Completed</button>
+              <button class="chip" data-filter="in_progress">In Progress</button>
+              <button class="chip" data-filter="completed">Completed</button>
             </div>
           </div>
           <div class="folder-grid" id="folder-grid">
-            {PROJECTS.map((p) => (
+            {projects.map((p) => (
               <a
                 class="project-card"
                 data-status={p.status}
@@ -116,8 +116,13 @@ export const DesktopPage = () => {
                 data-title={p.title.toLowerCase()}
                 href={`/project/${p.slug}`}
               >
-                <div class="project-card-thumb" style={`background:${p.thumbColor}`}>
-                  <i class={p.icon}></i>
+                <div
+                  class="project-card-thumb"
+                  style={p.thumbnailUrl
+                    ? `background-image:url(${p.thumbnailUrl})`
+                    : `background:${p.thumbColor}`}
+                >
+                  {p.icon ? <i class={p.icon}></i> : null}
                   {p.featured ? <span class="badge-featured">★ Featured</span> : null}
                 </div>
                 <div class="project-card-body">
@@ -129,8 +134,8 @@ export const DesktopPage = () => {
                     ))}
                   </div>
                   <div class="project-card-foot">
-                    <span class={`status-dot status-${p.status === 'Completed' ? 'done' : 'wip'}`}></span>
-                    <span>{p.status}</span>
+                    <span class={`status-dot status-${p.status === 'completed' ? 'done' : 'wip'}`}></span>
+                    <span>{p.status === 'completed' ? 'Completed' : 'In Progress'}</span>
                     <span class="dot">·</span>
                     <span>{p.period}</span>
                   </div>

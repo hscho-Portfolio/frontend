@@ -1873,6 +1873,50 @@
 }
 .adm-form-row.two { grid-template-columns: 1fr 1fr; }
 
+.adm-settings-media-card {
+  grid-column: 1 / -1;
+}
+.adm-media-field {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px dashed rgba(15, 23, 42, 0.08);
+}
+.adm-media-field:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.adm-media-preview {
+  width: 96px;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: rgba(15, 23, 42, 0.04);
+  background-size: cover;
+  background-position: center;
+  color: var(--ink-400);
+  overflow: hidden;
+}
+.adm-media-preview.wide {
+  aspect-ratio: 16 / 10;
+}
+.adm-media-preview.has-image i {
+  display: none;
+}
+.adm-url-upload-row {
+  display: grid;
+  grid-template-columns: 1fr 38px;
+  gap: 8px;
+}
+.adm-url-upload-row .adm-icon-btn {
+  width: 38px;
+  height: 38px;
+}
+
 /* Theme picker rows */
 .adm-theme-row {
   display: flex;
@@ -2334,6 +2378,10 @@
   justify-content: center;
   padding: 20px;
 }
+/* hidden 속성이 display:flex에 덮어씌워지는 것을 방지 */
+.adm-modal[hidden] {
+  display: none !important;
+}
 .adm-modal-backdrop {
   position: absolute;
   inset: 0;
@@ -2506,3 +2554,376 @@
   border-radius: 6px;
 }
 
+/* =====================================================================
+   Project Card Live Preview (admin project form sidebar)
+   ===================================================================== */
+.adm-project-preview {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.08);
+  transition: box-shadow 0.2s;
+}
+
+.adm-project-preview-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #2563eb 0%, #0ea5e9 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  color: rgba(255, 255, 255, 0.65);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.adm-project-preview-featured {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(251, 191, 36, 0.92);
+  color: #78350f;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 9px;
+  border-radius: 20px;
+  letter-spacing: 0.02em;
+}
+
+.adm-project-preview-body {
+  padding: 14px 16px 16px;
+}
+
+.adm-project-preview-title {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink-100);
+  line-height: 1.3;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adm-project-preview-summary {
+  font-size: 12px;
+  color: var(--ink-300);
+  line-height: 1.5;
+  margin-bottom: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.adm-project-preview-stacks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 10px;
+  min-height: 22px;
+}
+
+.adm-project-preview-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #4f46e5;
+  border-radius: 20px;
+}
+
+.adm-project-preview-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11.5px;
+  color: var(--ink-400);
+}
+
+.adm-project-preview-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #10b981;
+}
+.adm-project-preview-dot.wip { background: #f59e0b; }
+
+/* =====================================================================
+   Stack Admin Card (stacks management grid)
+   ===================================================================== */
+.adm-stack-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.adm-stack-card {
+  --c: #64748b;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-left: 3px solid var(--c);
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+  transition: box-shadow 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.adm-stack-card:hover {
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.1);
+  transform: translateY(-2px);
+}
+
+.adm-stack-card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: color-mix(in srgb, var(--c) 14%, white);
+  color: var(--c);
+  font-size: 18px;
+}
+.adm-stack-card-icon img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.adm-stack-card-name {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink-100);
+}
+
+.adm-stack-card-cat {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--c);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.adm-stack-card-desc {
+  font-size: 12px;
+  color: var(--ink-300);
+  line-height: 1.5;
+  flex: 1;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.adm-stack-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+/* =====================================================================
+   Toast 알림 시스템
+   ===================================================================== */
+#adm-toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 20000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.adm-toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 16px;
+  min-width: 260px;
+  max-width: 380px;
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  color: #f1f5f9;
+  font-size: 13.5px;
+  font-weight: 500;
+  pointer-events: all;
+  opacity: 0;
+  transform: translateY(12px) scale(0.97);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.adm-toast.show {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.adm-toast-icon { font-size: 15px; flex-shrink: 0; }
+.adm-toast-msg  { flex: 1; line-height: 1.4; }
+
+.adm-toast-success .adm-toast-icon { color: #34d399; }
+.adm-toast-error   .adm-toast-icon { color: #f87171; }
+.adm-toast-warn    .adm-toast-icon { color: #fbbf24; }
+.adm-toast-info    .adm-toast-icon { color: #818cf8; }
+
+.adm-toast-close {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 12px;
+  flex-shrink: 0;
+  transition: color 0.15s, background 0.15s;
+}
+.adm-toast-close:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* =====================================================================
+   커스텀 Confirm 모달 (confirm() 대체)
+   ===================================================================== */
+.adm-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 15000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.adm-confirm-overlay.show { opacity: 1; }
+
+.adm-confirm-box {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 32px 28px 24px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
+  transform: scale(0.94) translateY(8px);
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.adm-confirm-overlay.show .adm-confirm-box {
+  transform: scale(1) translateY(0);
+}
+
+.adm-confirm-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  margin: 0 auto 16px;
+  background: rgba(99, 102, 241, 0.12);
+  color: #6366f1;
+}
+.adm-confirm-icon.danger {
+  background: rgba(239, 68, 68, 0.12);
+  color: #ef4444;
+}
+
+.adm-confirm-title {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--ink-100);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+}
+
+.adm-confirm-msg {
+  font-size: 13.5px;
+  color: var(--ink-300);
+  line-height: 1.55;
+  margin: 0 0 24px;
+}
+
+.adm-confirm-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.adm-confirm-actions .btn-ghost,
+.adm-confirm-actions .btn-primary,
+.adm-confirm-actions .btn-danger {
+  flex: 1;
+  justify-content: center;
+}
+
+/* btn-danger (삭제 확인용) */
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3);
+  transition: all 0.18s ease;
+  border: none;
+  cursor: pointer;
+}
+.btn-danger:hover {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.4);
+  transform: translateY(-1px);
+}
+
+/* =====================================================================
+   카테고리 카드 설명
+   ===================================================================== */
+.adm-cat-card-desc {
+  font-size: 12px;
+  color: var(--ink-400);
+  line-height: 1.5;
+  margin: 4px 0 0;
+}
+
+/* =====================================================================
+   필수 필드 표시
+   ===================================================================== */
+.adm-required {
+  color: #ef4444;
+  font-style: normal;
+  font-weight: 700;
+  margin-left: 2px;
+}
+
+/* =====================================================================
+   Empty state (카테고리/스택 그리드 비어있을 때)
+   ===================================================================== */
+.adm-empty-state {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--ink-400);
+}
+.adm-empty-state i { font-size: 32px; opacity: 0.4; }
+.adm-empty-state p { font-size: 14px; margin: 0; }

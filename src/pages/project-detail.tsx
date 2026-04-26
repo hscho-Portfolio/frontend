@@ -1,7 +1,7 @@
-import { findProject } from '../data/projects'
+import type { Project } from '../data/types'
 
-export const ProjectDetailPage = ({ slug }: { slug: string }) => {
-  const p = findProject(slug)
+export const ProjectDetailPage = ({ project }: { project: Project | null }) => {
+  const p = project
 
   if (!p) {
     return (
@@ -23,6 +23,10 @@ export const ProjectDetailPage = ({ slug }: { slug: string }) => {
     )
   }
 
+  const heroStyle = p.thumbnailUrl
+    ? `--hero-bg:url(${p.thumbnailUrl})`
+    : `--hero-bg:${p.thumbColor}`
+
   return (
     <div class="project-detail-root">
       {/* Window frame */}
@@ -42,12 +46,12 @@ export const ProjectDetailPage = ({ slug }: { slug: string }) => {
         </header>
 
         {/* Hero */}
-        <section class="pd-hero" style={`--hero-bg:${p.thumbColor}`}>
+        <section class="pd-hero" style={heroStyle}>
           <div class="pd-hero-inner">
             <div class="pd-hero-meta">
-              <span class={`status-pill status-${p.status === 'Completed' ? 'done' : 'wip'}`}>
+              <span class={`status-pill status-${p.status === 'completed' ? 'done' : 'wip'}`}>
                 <span class="status-dot"></span>
-                {p.status}
+                {p.status === 'completed' ? 'Completed' : 'In Progress'}
               </span>
               <span class="pd-hero-period">
                 <i class="fa-regular fa-calendar"></i> {p.period}
@@ -71,9 +75,11 @@ export const ProjectDetailPage = ({ slug }: { slug: string }) => {
               ) : null}
             </div>
           </div>
-          <div class="pd-hero-icon">
-            <i class={p.icon}></i>
-          </div>
+          {p.icon ? (
+            <div class="pd-hero-icon">
+              <i class={p.icon}></i>
+            </div>
+          ) : null}
         </section>
 
         {/* Body */}
@@ -88,80 +94,92 @@ export const ProjectDetailPage = ({ slug }: { slug: string }) => {
           </section>
 
           {/* Key Features */}
-          <section class="pd-section">
-            <header class="pd-section-head">
-              <span class="pd-section-no">02</span>
-              <h2>Key Features</h2>
-            </header>
-            <ul class="pd-features">
-              {p.features.map((f, i) => (
-                <li>
-                  <span class="pd-feature-no">{String(i + 1).padStart(2, '0')}</span>
-                  <span>{f}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
+          {p.features.length > 0 ? (
+            <section class="pd-section">
+              <header class="pd-section-head">
+                <span class="pd-section-no">02</span>
+                <h2>Key Features</h2>
+              </header>
+              <ul class="pd-features">
+                {p.features.map((f, i) => (
+                  <li>
+                    <span class="pd-feature-no">{String(i + 1).padStart(2, '0')}</span>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
 
           {/* Tech Stack — 3D cards */}
-          <section class="pd-section">
-            <header class="pd-section-head">
-              <span class="pd-section-no">03</span>
-              <h2>Tech Stack</h2>
-              <span class="pd-section-hint">카드를 호버해 확인해보세요</span>
-            </header>
-            <div class="stack-grid">
-              {p.stacks.map((s) => (
-                <div class="stack-card" style={`--stack-color:${s.color}`}>
-                  <div class="stack-card-inner">
-                    <div class="stack-card-front">
-                      <div class="stack-card-icon">
-                        <i class={s.icon}></i>
+          {p.stacks.length > 0 ? (
+            <section class="pd-section">
+              <header class="pd-section-head">
+                <span class="pd-section-no">03</span>
+                <h2>Tech Stack</h2>
+                <span class="pd-section-hint">카드를 호버해 확인해보세요</span>
+              </header>
+              <div class="stack-grid">
+                {p.stacks.map((s) => (
+                  <div class="stack-card" style={`--stack-color:${s.color}`}>
+                    <div class="stack-card-inner">
+                      <div class="stack-card-front">
+                        <div class="stack-card-icon">
+                          {s.iconUrl
+                            ? <img src={s.iconUrl} alt={s.name} style="width:2rem;height:2rem;object-fit:contain" />
+                            : s.icon
+                              ? <i class={s.icon}></i>
+                              : <i class="fa-solid fa-cube"></i>}
+                        </div>
+                        <div class="stack-card-name">{s.name}</div>
+                        <div class="stack-card-cat">{s.category}</div>
                       </div>
-                      <div class="stack-card-name">{s.name}</div>
-                      <div class="stack-card-cat">{s.category}</div>
-                    </div>
-                    <div class="stack-card-back">
-                      <div class="stack-card-name-sm">{s.name}</div>
-                      <p class="stack-card-usage">{s.usage || '프로젝트에서 활용'}</p>
+                      <div class="stack-card-back">
+                        <div class="stack-card-name-sm">{s.name}</div>
+                        <p class="stack-card-usage">{s.usage || '프로젝트에서 활용'}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </section>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           {/* Architecture */}
-          <section class="pd-section">
-            <header class="pd-section-head">
-              <span class="pd-section-no">04</span>
-              <h2>Architecture</h2>
-            </header>
-            <div class="pd-arch">
-              {p.architecture.map((node, i) => (
-                <>
-                  <div class="pd-arch-node">{node}</div>
-                  {i < p.architecture.length - 1 ? <div class="pd-arch-arrow">↓</div> : null}
-                </>
-              ))}
-            </div>
-          </section>
+          {p.architecture.length > 0 ? (
+            <section class="pd-section">
+              <header class="pd-section-head">
+                <span class="pd-section-no">04</span>
+                <h2>Architecture</h2>
+              </header>
+              <div class="pd-arch">
+                {p.architecture.map((node, i) => (
+                  <>
+                    <div class="pd-arch-node">{node}</div>
+                    {i < p.architecture.length - 1 ? <div class="pd-arch-arrow">↓</div> : null}
+                  </>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           {/* Retrospective */}
-          <section class="pd-section">
-            <header class="pd-section-head">
-              <span class="pd-section-no">05</span>
-              <h2>Retrospective</h2>
-            </header>
-            <ul class="pd-retro">
-              {p.retrospective.map((r) => (
-                <li>
-                  <i class="fa-solid fa-quote-left"></i>
-                  <span>{r}</span>
-                </li>
-              ))}
-            </ul>
-          </section>
+          {p.retrospective.length > 0 ? (
+            <section class="pd-section">
+              <header class="pd-section-head">
+                <span class="pd-section-no">05</span>
+                <h2>Retrospective</h2>
+              </header>
+              <ul class="pd-retro">
+                {p.retrospective.map((r) => (
+                  <li>
+                    <i class="fa-solid fa-quote-left"></i>
+                    <span>{r}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
 
           {/* Footer nav */}
           <section class="pd-footer-nav">

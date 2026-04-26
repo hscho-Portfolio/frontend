@@ -1,7 +1,8 @@
 // === Admin / New Stack Modal ===
 // "+ 새 스택 추가" 모달 — 입력값으로 라이브 프리뷰 + 리스트에 row 주입
-import { $, $$, escapeHtml, flashClass } from './dom.js'
+import { $, $$, escapeHtml, flashClass, toast } from './dom.js'
 import { applyStackFilter, updateSelectedCount, bindStackRow } from './stack-picker.js'
+import { authHeaders } from './core.js'
 
 const ids = {
   modal: 'stackModal',
@@ -51,8 +52,8 @@ const syncPreview = () => {
   if (pIcon) pIcon.className = ($('#' + ids.icon)?.value || 'fa-solid fa-cube').trim()
 }
 
-/** 새 스택 row를 stackList에 주입 (또는 중복 시 기존 row 활성화) */
-const submitNewStack = () => {
+/** 새 스택을 백엔드에 저장한 뒤 row를 stackList에 주입 (또는 중복 시 기존 row 활성화) */
+const submitNewStack = async () => {
   const list = $('#stackList')
   if (!list) return
 
@@ -64,7 +65,7 @@ const submitNewStack = () => {
     return
   }
   const cat = $('#' + ids.cat)?.value || 'Frontend'
-  const icon = ($('#' + ids.icon)?.value || 'fa-solid fa-cube').trim()
+  const icon = ($('#' + ids.icon)?.value || '').trim()
   const color = ($('#' + ids.colorHex)?.value || $('#' + ids.color)?.value || '#8b5cf6').trim()
   const desc = ($('#' + ids.desc)?.value || '').trim()
 
@@ -85,16 +86,37 @@ const submitNewStack = () => {
     return
   }
 
+  // 백엔드에 저장
+  let savedId = null
+  try {
+    const backendUrl = window.BACKEND_URL || 'http://localhost:8080'
+    const res = await fetch(`${backendUrl}/api/v1/stacks`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...authHeaders() },
+      body: JSON.stringify({ name, category: cat, iconUrl: icon || null, color, description: desc }),
+    })
+    const data = res.headers.get('content-type')?.includes('application/json') ? await res.json() : null
+    if (!res.ok) {
+      toast(data?.error || `Stack save failed (${res.status})`, 'error')
+      return
+    }
+    savedId = data?.id
+  } catch {
+    toast('Cannot connect to backend server.', 'error')
+    return
+  }
+
   // 새 row 생성 + prepend
   const row = document.createElement('div')
   row.className = 'adm-stack-row on is-new'
   row.setAttribute('data-stack-name', name)
   row.setAttribute('data-stack-cat', cat)
+  if (savedId) row.setAttribute('data-stack-id', String(savedId))
   row.innerHTML = `
     <label class="adm-stack-pick">
       <input type="checkbox" checked />
       <span class="adm-stack-pick-mark" style="--c:${color}">
-        <i class="${icon}"></i>
+        ${icon ? `<i class="${icon}"></i>` : `<span>${name[0]}</span>`}
       </span>
       <span class="adm-stack-pick-name">${escapeHtml(name)} <span class="adm-stack-pick-new">NEW</span></span>
       <span class="adm-stack-pick-cat">${escapeHtml(cat)}</span>

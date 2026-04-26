@@ -1,6 +1,4 @@
 // CHO OS — Domain types
-//
-// 도메인 타입을 한 곳에서 관리. 추후 DB 스키마와 1:1로 매핑할 예정.
 
 export type StackCategory =
   | 'Language'
@@ -11,16 +9,17 @@ export type StackCategory =
   | 'DevOps'
   | 'AI/Data'
 
-export type ProjectStatus = 'In Progress' | 'Completed'
+/** Backend status values (snake_case) */
+export type ProjectStatus = 'in_progress' | 'completed'
 
 export interface TechStack {
   name: string
   category: StackCategory
-  /** Font Awesome class string. e.g. "fa-brands fa-react" */
-  icon: string
-  /** Brand hex color. e.g. "#61DAFB" */
+  /** Font Awesome class string — local mock only */
+  icon?: string
+  /** Image URL from backend storage */
+  iconUrl?: string
   color: string
-  /** 이 프로젝트(혹은 전역)에서의 사용 설명 */
   usage?: string
 }
 
@@ -34,17 +33,80 @@ export interface Project {
   title: string
   tagline: string
   status: ProjectStatus
+  /** Formatted display string, e.g. "2026.04 ~" */
   period: string
+  startDate?: string
+  endDate?: string
   category: string
   featured: boolean
-  /** linear-gradient css string for thumbnail */
+  /** CSS gradient fallback when no thumbnailUrl */
   thumbColor: string
-  /** Font Awesome class for project icon */
-  icon: string
+  thumbnailUrl?: string
+  /** Font Awesome class for project hero icon — local mock only */
+  icon?: string
+  /** Maps to backend's `summary` field */
   overview: string
   features: string[]
   stacks: TechStack[]
   architecture: string[]
   retrospective: string[]
   links: ProjectLinks
+}
+
+// ============================================================
+// Backend API response shapes (for api.ts mapping layer)
+// ============================================================
+
+export interface ApiStackInfo {
+  id: number
+  name: string
+  category: string
+  description?: string
+  usageDescription?: string
+  iconUrl?: string
+  color: string
+  sortOrder?: number
+}
+
+export interface ApiSectionInfo {
+  id: number
+  title?: string
+  sectionType: string
+  content: string
+  sortOrder: number
+}
+
+export interface ApiProjectList {
+  id: number
+  title: string
+  slug: string
+  summary?: string
+  thumbnailUrl?: string
+  status: string
+  isFeatured: boolean
+  isPublished: boolean
+  sortOrder: number
+  category?: { id: number; name: string }
+  stacks: { id: number; name: string; category: string }[]
+}
+
+export interface ApiProjectDetail {
+  id: number
+  title: string
+  slug: string
+  summary?: string
+  description?: string
+  thumbnailUrl?: string
+  githubUrl?: string
+  demoUrl?: string
+  status: string
+  startDate?: string
+  endDate?: string
+  isFeatured: boolean
+  isPublished: boolean
+  sortOrder: number
+  category?: { id: number; name: string; slug?: string }
+  stacks: ApiStackInfo[]
+  sections: ApiSectionInfo[]
+  images: { id: number; imageUrl: string; altText?: string; imageType: string; sortOrder: number }[]
 }

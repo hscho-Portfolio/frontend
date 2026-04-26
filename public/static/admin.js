@@ -1,22 +1,28 @@
 // ============================================================
-// CHO OS — Admin Entry Script
-// 어드민 모든 페이지의 공통 부트스트랩.
-// ESM 모듈로 분할된 각 기능을 import해서 init만 수행.
+// CHO OS Admin Entry Script
 // ============================================================
-import { ensureMockSession, reflectSessionUser, bindLogout, bindGlobalPickers } from './admin/core.js'
+import { requireAuth, reflectSessionUser, bindLogout, bindGlobalPickers } from './admin/core.js'
+import { initDashboardAdmin } from './admin/dashboard.js'
+import { initCategoriesAdmin } from './admin/categories-admin.js'
+import { initStacksAdmin } from './admin/stacks-admin.js'
+import { initProjectsAdmin } from './admin/projects.js'
+import { initSettingsAdmin } from './admin/settings-admin.js'
 import { initStackPicker } from './admin/stack-picker.js'
 import { initStackModal } from './admin/stack-modal.js'
 import { initUploaders } from './admin/uploaders.js'
 
-// 1) 백엔드 연동 전 임시 세션 확보 (직접 URL 진입도 허용)
-ensureMockSession()
-reflectSessionUser()
-
-// 2) 공통 인터랙션
-bindLogout()
-bindGlobalPickers()
-
-// 3) 페이지별 모듈 — 해당 DOM이 없으면 각 init이 자동 noop
-initStackPicker()
-initStackModal()
-initUploaders()
+if (!requireAuth()) {
+  // requireAuth handles the redirect to the login page.
+} else {
+  reflectSessionUser()
+  bindLogout()
+  bindGlobalPickers()
+  initDashboardAdmin()
+  initCategoriesAdmin()
+  initStacksAdmin()
+  initProjectsAdmin()
+  initSettingsAdmin()
+  initStackPicker()
+  initStackModal()
+  initUploaders()
+}

@@ -3,29 +3,38 @@ import { $, bindSingleSelect } from './dom.js'
 
 const TOKEN_KEY = 'cho-os-admin-token'
 
-/** 백엔드 연동 전 임시 세션 — 토큰이 없으면 mock 토큰 자동 발급 */
-export const ensureMockSession = () => {
+/** 저장된 세션에서 JWT 토큰 문자열 반환. 없으면 null. */
+export const getToken = () => {
   try {
-    if (!localStorage.getItem(TOKEN_KEY)) {
-      localStorage.setItem(
-        TOKEN_KEY,
-        JSON.stringify({
-          token: 'mock-jwt-bypass-' + Date.now().toString(36),
-          email: 'admin@cho.os',
-          ts: Date.now(),
-        })
-      )
-    }
-  } catch {}
+    const session = JSON.parse(localStorage.getItem(TOKEN_KEY) || 'null')
+    return session?.token ?? null
+  } catch {
+    return null
+  }
 }
 
-/** 로그인된 이메일을 우상단 사용자명에 반영 */
+/** API 요청에 쓸 Authorization 헤더 객체 반환 */
+export const authHeaders = () => {
+  const token = getToken()
+  return token ? { Authorization: `Bearer ${token}` } : {}
+}
+
+/** 토큰이 없으면 로그인 페이지로 리다이렉트 */
+export const requireAuth = () => {
+  if (!getToken()) {
+    window.location.href = '/admin/login'
+    return false
+  }
+  return true
+}
+
+/** 로그인된 이메일/이름을 우상단 사용자명에 반영 */
 export const reflectSessionUser = () => {
   try {
     const session = JSON.parse(localStorage.getItem(TOKEN_KEY) || '{}')
     const nameEl = $('.admin-user-name')
-    if (session.email && nameEl && session.email !== 'admin@cho.os') {
-      nameEl.textContent = session.email
+    if (nameEl) {
+      nameEl.textContent = session.name || session.email || 'Admin'
     }
   } catch {}
 }

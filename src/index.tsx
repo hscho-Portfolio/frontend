@@ -3,6 +3,7 @@ import { renderer } from './renderer'
 import { IntroPage } from './pages/intro'
 import { DesktopPage } from './pages/desktop'
 import { ProjectDetailPage } from './pages/project-detail'
+import { fetchProjects, fetchProjectBySlug } from './data/api'
 import { AdminLoginPage } from './pages/admin-login'
 import { AdminDashboardPage } from './pages/admin-dashboard'
 import { AdminProjectsPage } from './pages/admin-projects'
@@ -43,18 +44,20 @@ app.get('/', (c) =>
   } as any)
 )
 
-app.get('/desktop', (c) =>
-  c.render(<DesktopPage />, {
+app.get('/desktop', async (c) => {
+  const projects = await fetchProjects()
+  return c.render(<DesktopPage projects={projects} />, {
     title: 'CHO OS — Desktop',
     bodyClass: 'desktop-body',
     pageScript: '/static/desktop.js',
     css: CSS_BUNDLES.desktop,
   } as any)
-)
+})
 
-app.get('/project/:slug', (c) => {
+app.get('/project/:slug', async (c) => {
   const slug = c.req.param('slug')
-  return c.render(<ProjectDetailPage slug={slug} />, {
+  const project = await fetchProjectBySlug(slug)
+  return c.render(<ProjectDetailPage project={project} />, {
     title: `CHO OS — Project / ${slug}`,
     bodyClass: 'project-body',
     pageScript: '/static/project-detail.js',

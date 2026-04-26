@@ -15,32 +15,31 @@
     if (opened) return
     opened = true
 
-    // 1) 맥북 열림
+    // 1) 맥북 뚜껑 열림
     laptop.classList.add('is-open')
 
-    // 2) 약간의 지연 후 closed stage 페이드아웃
+    // 2) 뚜껑 열림 완료 후 화면 가득 채우는 줌인
+    setTimeout(() => {
+      laptop.classList.add('is-zooming')
+    }, 2400)
+
+    // 3) 줌 후반부에 stage-closed 페이드아웃 + 부팅 화면 페이드인
     setTimeout(() => {
       stageClosed.classList.remove('visible')
-    }, 1800)
-
-    // 3) 부팅 화면 페이드인
-    setTimeout(() => {
       stageBoot.classList.add('visible')
-      // 진행 바
       requestAnimationFrame(() => {
         bootBar.style.width = '100%'
       })
-      // 로그 순차 표시
       const logs = bootLog.querySelectorAll('li')
       logs.forEach((li, i) => {
         setTimeout(() => li.classList.add('show'), 200 + i * 350)
       })
-    }, 2000)
+    }, 3400)
 
     // 4) 데스크톱으로 이동
     setTimeout(() => {
       window.location.href = '/desktop'
-    }, 4400)
+    }, 5600)
   }
 
   openBtn.addEventListener('click', openMac)

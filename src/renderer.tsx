@@ -1,5 +1,7 @@
 import { jsxRenderer } from 'hono/jsx-renderer'
 
+const BACKEND_URL: string = (import.meta as any).env?.VITE_BACKEND_URL ?? 'http://localhost:8080'
+
 /**
  * 페이지별 추가 CSS/JS 옵션
  * - title       : <title>
@@ -52,7 +54,7 @@ export const renderer = jsxRenderer(
           {/* :has() fallback for older browsers — mirror body class onto <html> for overflow control */}
           <script
             dangerouslySetInnerHTML={{
-              __html: `(function(){var b=document.body.className||'';if(b)document.documentElement.classList.add(b);})();`,
+              __html: `window.BACKEND_URL=${JSON.stringify(BACKEND_URL)};(function(){var b=document.body.className||'';if(b)document.documentElement.classList.add(b);})();`,
             }}
           ></script>
           {pageScript ? <script type="module" src={pageScript}></script> : null}
