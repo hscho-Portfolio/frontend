@@ -1,5 +1,39 @@
 // === Desktop 인터랙션 ===
 (() => {
+  // ============ Theme toggle ============
+  const themeToggle = document.getElementById('theme-toggle')
+  const themeIcon = themeToggle?.querySelector('i')
+  const getTheme = () => {
+    try {
+      return localStorage.getItem('cho-os-theme') === 'dark' ? 'dark' : 'light'
+    } catch {
+      return 'light'
+    }
+  }
+  const setTheme = (theme) => {
+    const nextTheme = theme === 'dark' ? 'dark' : 'light'
+    document.documentElement.dataset.theme = nextTheme
+    try {
+      localStorage.setItem('cho-os-theme', nextTheme)
+    } catch {
+      // Ignore storage failures in private browsing modes.
+    }
+    if (themeToggle) {
+      const isDark = nextTheme === 'dark'
+      themeToggle.setAttribute('aria-pressed', String(isDark))
+      themeToggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode')
+      themeToggle.setAttribute('title', isDark ? 'Switch to light mode' : 'Switch to dark mode')
+    }
+    if (themeIcon) {
+      themeIcon.className = nextTheme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon'
+    }
+  }
+
+  setTheme(getTheme())
+  themeToggle?.addEventListener('click', () => {
+    setTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark')
+  })
+
   // ============ Time ============
   const timeEl = document.getElementById('topbar-time')
   const fmtTime = () => {

@@ -40,6 +40,11 @@ export const renderer = jsxRenderer(
         <head>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `(function(){try{var t=localStorage.getItem('cho-os-theme')||'light';if(t!=='dark')t='light';document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='light';}})();`,
+            }}
+          ></script>
           <title>{pageTitle}</title>
           <link rel="icon" type="image/svg+xml" href={FAVICON} />
           <link href={FA_CSS} rel="stylesheet" />

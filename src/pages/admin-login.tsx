@@ -61,10 +61,18 @@ export const AdminLoginPage = () => {
         </div>
       </div>
 
-      <div class="login-hint">
-        <kbd>Tab</kbd> 으로 입력 이동 · <kbd>Enter</kbd> 로 로그인
-        <div style="margin-top:6px;opacity:0.7;font-size:10.5px">
-          기본 계정: <code>admin@portfolio.local</code> / <code>changeme123!</code>
+
+      {/* 로그인 실패 팝업 */}
+      <div class="hosung-popup" id="hosung-popup">
+        <div class="hosung-popup-inner">
+          <button class="hosung-popup-close" id="hosung-popup-close" aria-label="닫기">✕</button>
+          <div class="hosung-popup-emoji">🚨</div>
+          <div class="hosung-popup-title">비밀번호가 틀렸어요!</div>
+          <div class="hosung-popup-sub">그냥 가시면 안 되고요~</div>
+          <div class="hosung-popup-img-wrap">
+            <img src="/static/hosung.jpg" alt="귀여운 호성이" class="hosung-popup-img" />
+          </div>
+          <div class="hosung-popup-msg">귀여운 호성이 보고 가세요 🐣</div>
         </div>
       </div>
     </div>

@@ -4,6 +4,20 @@
   const errorBox = document.getElementById('login-error')
   const eyeBtn = document.getElementById('login-eye')
   const pw = form?.querySelector('input[name="password"]')
+  const hosungPopup = document.getElementById('hosung-popup')
+  const hosungClose = document.getElementById('hosung-popup-close')
+
+  const showHosung = () => {
+    if (!hosungPopup) return
+    requestAnimationFrame(() => hosungPopup.classList.add('visible'))
+  }
+  const hideHosung = () => {
+    if (!hosungPopup) return
+    hosungPopup.classList.remove('visible')
+  }
+
+  hosungClose?.addEventListener('click', hideHosung)
+  hosungPopup?.addEventListener('click', (e) => { if (e.target === hosungPopup) hideHosung() })
 
   eyeBtn?.addEventListener('click', () => {
     if (!pw) return
@@ -58,6 +72,7 @@
       if (res.status === 401 || res.status === 403) {
         showError('이메일 또는 비밀번호가 올바르지 않습니다.')
         setLoading(false)
+        showHosung()
         return
       }
 

@@ -23,7 +23,7 @@
       laptop.classList.add('is-zooming')
     }, 2400)
 
-    // 3) 줌 후반부에 stage-closed 페이드아웃 + 부팅 화면 페이드인
+    // 3) 줌 중반부에 stage-closed 페이드아웃 + 부팅 화면 페이드인
     setTimeout(() => {
       stageClosed.classList.remove('visible')
       stageBoot.classList.add('visible')
@@ -34,12 +34,12 @@
       logs.forEach((li, i) => {
         setTimeout(() => li.classList.add('show'), 200 + i * 350)
       })
-    }, 3400)
+    }, 3500)
 
-    // 4) 데스크톱으로 이동
+    // 4) 부팅 화면이 충분히 보인 뒤 데스크톱으로 이동
     setTimeout(() => {
       window.location.href = '/desktop'
-    }, 5600)
+    }, 6200)
   }
 
   openBtn.addEventListener('click', openMac)

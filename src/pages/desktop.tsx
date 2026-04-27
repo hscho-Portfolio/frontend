@@ -46,6 +46,9 @@ export const DesktopPage = ({ projects }: { projects: Project[] }) => {
           <span class="topbar-icon" title="Wi-Fi"><i class="fa-solid fa-wifi"></i></span>
           <span class="topbar-icon" title="Battery"><i class="fa-solid fa-battery-three-quarters"></i></span>
           <span class="topbar-icon" title="Search"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <button class="topbar-theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false" title="Toggle dark mode">
+            <i class="fa-solid fa-moon"></i>
+          </button>
           <span class="topbar-time" id="topbar-time">--:--</span>
         </div>
       </header>
