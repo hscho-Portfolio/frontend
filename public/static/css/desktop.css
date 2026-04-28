@@ -871,3 +871,97 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
 .aw-contact-card div { display: flex; flex-direction: column; gap: 2px; }
 .aw-contact-card strong { font-size: 13px; font-weight: 700; color: var(--ink-100); }
 .aw-contact-card span { font-size: 12px; color: var(--ink-400); }
+
+/* =========================================
+   DARK MODE OVERRIDES
+   흰 배경이 하드코딩된 컴포넌트를 다크 서피스로 교체
+========================================= */
+html[data-theme='dark'] .welcome-widget {
+  background: rgba(15, 31, 53, 0.82);
+  border-color: rgba(226, 232, 240, 0.1);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.4),
+    0 4px 12px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(226, 232, 240, 0.08);
+}
+html[data-theme='dark'] .welcome-widget-tags span {
+  background: rgba(226, 232, 240, 0.07);
+  border-color: rgba(226, 232, 240, 0.12);
+}
+html[data-theme='dark'] .dock-tooltip {
+  background: rgba(15, 31, 53, 0.95);
+  border-color: rgba(226, 232, 240, 0.12);
+  color: var(--ink-100);
+}
+html[data-theme='dark'] .folder-backdrop {
+  background: rgba(6, 15, 34, 0.65);
+}
+html[data-theme='dark'] .folder-window,
+html[data-theme='dark'] .app-window {
+  background: rgba(12, 30, 53, 0.96);
+  border-color: rgba(226, 232, 240, 0.1);
+  box-shadow:
+    0 40px 80px rgba(0, 0, 0, 0.5),
+    0 12px 28px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(226, 232, 240, 0.08);
+}
+html[data-theme='dark'] .folder-toolbar {
+  background: rgba(15, 31, 53, 0.6);
+  border-color: rgba(226, 232, 240, 0.08);
+}
+html[data-theme='dark'] .folder-search {
+  background: rgba(226, 232, 240, 0.06);
+  border-color: rgba(226, 232, 240, 0.12);
+}
+html[data-theme='dark'] .folder-search input {
+  color: var(--ink-100);
+}
+html[data-theme='dark'] .chip {
+  background: rgba(226, 232, 240, 0.07);
+  border-color: rgba(226, 232, 240, 0.12);
+  color: var(--ink-300);
+}
+html[data-theme='dark'] .chip:hover {
+  background: rgba(226, 232, 240, 0.12);
+  color: var(--ink-100);
+}
+html[data-theme='dark'] .project-card {
+  background: rgba(15, 31, 53, 0.9);
+  border-color: rgba(226, 232, 240, 0.1);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+}
+html[data-theme='dark'] .project-card:hover {
+  border-color: rgba(196, 181, 253, 0.35);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4);
+}
+html[data-theme='dark'] .stack-pill {
+  background: rgba(226, 232, 240, 0.07);
+  border-color: rgba(226, 232, 240, 0.12);
+}
+html[data-theme='dark'] .aw-skill-cat {
+  background: rgba(15, 31, 53, 0.8);
+  border-color: rgba(226, 232, 240, 0.1);
+}
+html[data-theme='dark'] .aw-skill {
+  background: rgba(226, 232, 240, 0.05);
+  border-color: rgba(226, 232, 240, 0.08);
+}
+html[data-theme='dark'] .aw-tl-item {
+  background: rgba(15, 31, 53, 0.8);
+  border-color: rgba(226, 232, 240, 0.08);
+}
+html[data-theme='dark'] .aw-tl-item::before {
+  background: var(--surface);
+}
+html[data-theme='dark'] .aw-research-card {
+  background: rgba(15, 31, 53, 0.8);
+  border-color: rgba(226, 232, 240, 0.08);
+}
+html[data-theme='dark'] .aw-contact-card {
+  background: rgba(15, 31, 53, 0.8);
+  border-color: rgba(226, 232, 240, 0.08);
+}
+html[data-theme='dark'] .aw-contact-card:hover {
+  border-color: rgba(168, 139, 250, 0.3);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+}
