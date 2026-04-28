@@ -333,7 +333,11 @@
             </div>
             <div class="aw-row">
               <div class="aw-row-key">Contact</div>
-              <div class="aw-row-value">chohosung27@gmail.com · github.com/hscho0048 · +82-10-9757-0148</div>
+              <div class="aw-row-value">
+                <a href="mailto:chohosung27@gmail.com" style="color:inherit;text-decoration:underline;text-underline-offset:3px">chohosung27@gmail.com</a>
+                · <a href="https://github.com/hscho0048" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px">github.com/hscho0048</a>
+                · +82-10-9757-0148
+              </div>
             </div>
           </div>
         `,
