@@ -346,34 +346,59 @@
         title: 'Skills',
         html: `
           <div class="aw-section">
-            <div class="aw-eyebrow"><i class="fa-solid fa-layer-group"></i> Tech Stack Overview</div>
-            <h2 class="aw-title">현재 다루는 기술</h2>
-            <p class="aw-sub">숙련도 막대보다 <em style="color:#7c3aed;font-style:normal">사용 경험</em>을 중심으로 정리합니다.</p>
+            <div class="aw-eyebrow"><i class="fa-solid fa-layer-group"></i> Tech Stack</div>
+            <h2 class="aw-title">기술</h2>
+            <div class="aw-skill-level-grid">
+              <div class="aw-skill-level-col">
+                <div class="aw-skill-level-head">Strong</div>
+                <div class="aw-skill-level-list">
+                  <div class="aw-skill-level-item"><i class="fa-brands fa-python aw-si-python"></i><span>Python</span></div>
+                  <div class="aw-skill-level-item"><i class="fa-brands fa-rust aw-si-rust"></i><span>Rust</span></div>
+                  <div class="aw-skill-level-item"><span class="aw-si-badge aw-si-sklearn">sklearn</span><span>scikit-learn</span></div>
+                  <div class="aw-skill-level-item"><span class="aw-si-badge aw-si-torch">torch</span><span>PyTorch</span></div>
+                </div>
+              </div>
+              <div class="aw-skill-level-col">
+                <div class="aw-skill-level-head">Knowledgeable</div>
+                <div class="aw-skill-level-list">
+                  <div class="aw-skill-level-item"><span class="aw-si-badge aw-si-gcp">GCP</span><span>GCP</span></div>
+                  <div class="aw-skill-level-item"><i class="fa-brands fa-aws aw-si-aws"></i><span>AWS</span></div>
+                  <div class="aw-skill-level-item"><i class="fa-brands fa-java aw-si-java"></i><span>Java</span></div>
+                  <div class="aw-skill-level-item"><i class="fa-brands fa-node-js aw-si-node"></i><span>Node.js</span></div>
+                </div>
+              </div>
+              <div class="aw-skill-level-col">
+                <div class="aw-skill-level-head">Etc</div>
+                <div class="aw-skill-level-list">
+                  <div class="aw-skill-level-item"><i class="fa-brands fa-figma aw-si-figma"></i><span>Figma</span></div>
+                  <div class="aw-skill-level-item"><span class="aw-si-badge aw-si-notion">N</span><span>Notion</span></div>
+                </div>
+              </div>
+            </div>
           </div>
-          ${renderSkillCat('Language', 'fa-solid fa-code', [
-            ['Python', '데이터 전처리, ML 모델링, FastAPI 서버 구현'],
-            ['TypeScript', '프론트엔드 + 백엔드 풀스택 구현'],
-            ['Java', 'Spring Boot 기반 서비스 구현'],
-            ['SQL', '관계형 DB 설계와 쿼리 튜닝'],
-          ])}
-          ${renderSkillCat('Frontend', 'fa-solid fa-window-maximize', [
-            ['React / Next.js', 'OS형 화면 구성과 라우팅'],
-            ['Tailwind CSS', '유틸리티 기반 스타일링'],
-          ])}
-          ${renderSkillCat('Backend', 'fa-solid fa-server', [
-            ['FastAPI', 'CMS API와 CRUD 구현'],
-            ['Spring Boot', '엔터프라이즈 백엔드 서비스'],
-            ['SQLAlchemy', 'ORM 기반 데이터 모델링'],
-          ])}
-          ${renderSkillCat('Cloud / Infra', 'fa-solid fa-cloud', [
-            ['AWS', 'S3, CloudFront, RDS, ECS Fargate 배포 설계'],
-            ['Docker', '백엔드 컨테이너화 및 일관된 배포'],
-            ['GitHub Actions', 'CI/CD 파이프라인 구성'],
-          ])}
-          ${renderSkillCat('AI / Data', 'fa-solid fa-brain', [
-            ['Scikit-learn / XGBoost', 'baseline 모델링과 평가'],
-            ['NLP / Topic Modeling', 'LDA 기반 텍스트 분석'],
-          ])}
+
+          <div class="aw-section">
+            <div class="aw-eyebrow"><i class="fa-solid fa-user"></i> Work Style</div>
+            <h2 class="aw-title">나를 나타내는 말</h2>
+            <div class="aw-trait-grid">
+              <div class="aw-trait-card">
+                <div class="aw-trait-title">실행 중심형</div>
+                <div class="aw-trait-desc">새로운 기술이나 문제를 접하면 빠르게 시도하고, 결과를 바탕으로 개선 방향을 찾는 실행력</div>
+              </div>
+              <div class="aw-trait-card">
+                <div class="aw-trait-title">구조화 성향</div>
+                <div class="aw-trait-desc">복잡한 문제를 단계와 흐름으로 나누어 정리, 체계적으로 해결하는 구조화 능력</div>
+              </div>
+              <div class="aw-trait-card">
+                <div class="aw-trait-title">실용 가치 중심형</div>
+                <div class="aw-trait-desc">기술보다 실제 활용 가능성을 중요하게 여기며, 결과를 서비스와 운영까지 연결하는 실용성</div>
+              </div>
+              <div class="aw-trait-card">
+                <div class="aw-trait-title">개선 지향형</div>
+                <div class="aw-trait-desc">한 번 만든 결과에 머무르지 않고, 더 나은 방식이 있는지 지속적으로 검토하고 발전시키는 개선 지향성</div>
+              </div>
+            </div>
+          </div>
         `,
       },
       career: {

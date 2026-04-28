@@ -1054,6 +1054,96 @@ html[data-theme='dark'] .aw-award-item {
 .aw-contact-card strong { font-size: 13px; font-weight: 700; color: var(--ink-100); }
 .aw-contact-card span { font-size: 12px; color: var(--ink-400); }
 
+/* ── Skill level grid (Strong / Knowledgeable / Etc) ── */
+.aw-skill-level-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.aw-skill-level-col {
+  padding: 16px 18px;
+  border-right: 1px solid var(--line);
+}
+.aw-skill-level-col:last-child { border-right: none; }
+.aw-skill-level-head {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-100);
+  padding-bottom: 10px;
+  margin-bottom: 12px;
+  border-bottom: 2px solid var(--ink-100);
+}
+.aw-skill-level-list { display: flex; flex-direction: column; gap: 12px; }
+.aw-skill-level-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--ink-200);
+  font-weight: 500;
+}
+.aw-skill-level-item i { font-size: 24px; width: 28px; text-align: center; }
+.aw-si-python { color: #3776ab; }
+.aw-si-rust   { color: #ce422b; }
+.aw-si-aws    { color: #ff9900; }
+.aw-si-java   { color: #e76f00; }
+.aw-si-node   { color: #339933; }
+.aw-si-figma  { color: #f24e1e; }
+.aw-si-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 800;
+  color: white;
+  flex-shrink: 0;
+}
+.aw-si-sklearn { background: #f89939; }
+.aw-si-torch   { background: #ee4c2c; }
+.aw-si-gcp     { background: #4285f4; }
+.aw-si-notion  { background: #000; font-size: 13px; }
+
+/* ── Work Style 4-quad ── */
+.aw-trait-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin-top: 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.aw-trait-card {
+  padding: 20px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.aw-trait-card:nth-child(2) { border-right: none; }
+.aw-trait-card:nth-child(3) { border-bottom: none; }
+.aw-trait-card:nth-child(4) { border-right: none; border-bottom: none; }
+.aw-trait-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-100);
+  text-align: center;
+}
+.aw-trait-desc {
+  font-size: 12px;
+  color: var(--ink-300);
+  line-height: 1.6;
+  text-align: center;
+}
+
 /* ── Experience timeline ── */
 .aw-exp-list {
   display: flex;
