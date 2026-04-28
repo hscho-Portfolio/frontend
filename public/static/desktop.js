@@ -140,10 +140,6 @@
   let cachedStacks = []
 
   const applySettings = (s) => {
-    // Welcome widget owner name
-    const nameSpan = document.querySelector('.welcome-widget-title span')
-    if (nameSpan && s.ownerName) nameSpan.textContent = s.ownerName
-
     // Wallpaper
     if (s.defaultWallpaperUrl) {
       const wallpaper = document.querySelector('.wallpaper')
