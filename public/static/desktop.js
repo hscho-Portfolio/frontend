@@ -227,6 +227,7 @@
         title: 'About Me',
         html: `
           <div class="aw-profile-head">
+            <div class="aw-avatar">${avatarHtml}</div>
             <div>
               <div class="aw-profile-name">조호성</div>
               <div class="aw-profile-role">AI Implementer · Full-stack · Cloud / Infra</div>
@@ -239,7 +240,6 @@
                 <span class="aw-tag">#시스템구현</span>
               </div>
             </div>
-            <div class="aw-avatar">${avatarHtml}</div>
           </div>
 
           <div class="aw-section">
