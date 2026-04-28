@@ -7,6 +7,7 @@ import { initCategoriesAdmin } from './admin/categories-admin.js'
 import { initStacksAdmin } from './admin/stacks-admin.js'
 import { initProjectsAdmin } from './admin/projects.js'
 import { initSettingsAdmin } from './admin/settings-admin.js'
+import { initAwardsAdmin } from './admin/awards-admin.js'
 import { initStackPicker } from './admin/stack-picker.js'
 import { initStackModal } from './admin/stack-modal.js'
 import { initUploaders } from './admin/uploaders.js'
@@ -22,6 +23,7 @@ if (!requireAuth()) {
   initStacksAdmin()
   initProjectsAdmin()
   initSettingsAdmin()
+  initAwardsAdmin()
   initStackPicker()
   initStackModal()
   initUploaders()

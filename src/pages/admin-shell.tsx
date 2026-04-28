@@ -26,6 +26,12 @@ const NAV: NavItem[] = [
     match: ['/admin/dashboard/categories'],
   },
   {
+    href: '/admin/dashboard/awards',
+    label: 'Awards',
+    icon: 'fa-solid fa-trophy',
+    match: ['/admin/dashboard/awards'],
+  },
+  {
     href: '/admin/dashboard/settings',
     label: 'Settings',
     icon: 'fa-solid fa-sliders',

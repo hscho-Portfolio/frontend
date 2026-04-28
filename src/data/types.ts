@@ -54,6 +54,15 @@ export interface Project {
   links: ProjectLinks
 }
 
+export interface Award {
+  id: number
+  prize: string
+  contest: string
+  awardDate: string
+  certificateUrl?: string
+  sortOrder: number
+}
+
 // ============================================================
 // Backend API response shapes (for api.ts mapping layer)
 // ============================================================

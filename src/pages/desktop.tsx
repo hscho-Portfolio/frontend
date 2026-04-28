@@ -168,6 +168,17 @@ export const DesktopPage = ({ projects }: { projects: Project[] }) => {
         </div>
       </div>
 
+      {/* Certificate lightbox */}
+      <div id="cert-lightbox" class="cert-lightbox" aria-hidden="true">
+        <div class="cert-lightbox-backdrop" data-close-cert></div>
+        <div class="cert-lightbox-content">
+          <button class="cert-lightbox-close" data-close-cert aria-label="닫기">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+          <img id="cert-lightbox-img" class="cert-lightbox-img" src="" alt="상장" />
+        </div>
+      </div>
+
       {/* Dock */}
       <footer class="dock" aria-label="dock">
         <ul class="dock-list">

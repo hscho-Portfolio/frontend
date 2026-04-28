@@ -3671,6 +3671,112 @@ html[data-theme='dark'] .adm-fp-desktop {
   background: #111111;
 }
 
+/* =====================================================================
+   Awards Admin Grid
+   ===================================================================== */
+.adm-award-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+.adm-award-admin-card {
+  position: relative;
+  padding: 18px 20px 16px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 16px;
+  box-shadow: 0 8px 22px -10px rgba(124, 58, 237, 0.1),
+              0 0 0 1px rgba(255, 255, 255, 0.55) inset;
+  transition: all 0.22s ease;
+}
+.adm-award-admin-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px -10px rgba(124, 58, 237, 0.18);
+}
+.adm-award-admin-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.adm-award-admin-icon {
+  width: 38px;
+  height: 38px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: white;
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  border-radius: 11px;
+  box-shadow: 0 6px 14px -3px rgba(245, 158, 11, 0.45);
+}
+.adm-award-admin-order {
+  font-family: ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--ink-400);
+  background: rgba(15, 23, 42, 0.04);
+  padding: 2px 7px;
+  border-radius: 5px;
+}
+.adm-award-admin-prize {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--ink-100);
+  letter-spacing: -0.015em;
+  margin-bottom: 4px;
+}
+.adm-award-admin-contest {
+  font-size: 12.5px;
+  color: var(--ink-300);
+  line-height: 1.45;
+  margin-bottom: 6px;
+}
+.adm-award-admin-date {
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+.adm-award-admin-cert a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #8b5cf6;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+.adm-award-admin-cert a:hover { text-decoration: underline; }
+.adm-award-admin-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(15, 23, 42, 0.08);
+}
+.adm-award-admin-order-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--ink-300);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.adm-award-admin-actions { display: flex; gap: 4px; }
+
+html[data-theme='dark'] .adm-award-admin-card {
+  background: rgba(24, 24, 24, 0.98);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-award-admin-foot {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
 html[data-theme='dark'] .hosung-popup-inner {
   background: rgba(22, 22, 22, 0.99);
   border-color: rgba(255, 255, 255, 0.10);

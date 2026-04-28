@@ -3,7 +3,7 @@
 // SSR-side fetch functions. Falls back to mock data when the backend is unreachable.
 // Backend URL is read from VITE_BACKEND_URL at build time (default: http://localhost:8080).
 
-import type { Project, TechStack, StackCategory, ApiProjectList, ApiProjectDetail } from './types'
+import type { Project, TechStack, StackCategory, Award, ApiProjectList, ApiProjectDetail } from './types'
 import { PROJECTS } from './projects'
 import { ALL_STACKS } from './stacks'
 
@@ -133,6 +133,19 @@ export async function fetchProjectBySlug(slug: string): Promise<Project | null> 
     return mapDetailToProject(data)
   } catch {
     return PROJECTS.find((p) => p.slug === slug) ?? null
+  }
+}
+
+export async function fetchAwards(): Promise<Award[]> {
+  try {
+    const res = await fetch(`${BACKEND_URL}/api/v1/public/awards`, {
+      headers: { Accept: 'application/json' },
+      signal: AbortSignal.timeout(3000),
+    })
+    if (!res.ok) throw new Error(`HTTP ${res.status}`)
+    return await res.json()
+  } catch {
+    return []
   }
 }
 

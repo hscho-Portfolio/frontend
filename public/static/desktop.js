@@ -67,6 +67,11 @@
       appTitle.textContent = data.title
       appBody.innerHTML = data.html
       appOverlay.classList.add('open')
+      // Award 클릭 → 상장 라이트박스
+      appBody.querySelectorAll('.aw-award-item.has-cert').forEach((el) => {
+        el.addEventListener('click', () => openCert(el.dataset.cert))
+        el.addEventListener('keydown', (e) => { if (e.key === 'Enter') openCert(el.dataset.cert) })
+      })
     }
   }
 
@@ -131,6 +136,7 @@
 
   // ============ Site settings ============
   let siteSettings = {}
+  let cachedAwards = []
 
   const applySettings = (s) => {
     // Welcome widget owner name
@@ -163,7 +169,42 @@
     }
   }
 
+  const loadAwards = async () => {
+    try {
+      const backendUrl = window.BACKEND_URL || 'http://localhost:8080'
+      const res = await fetch(`${backendUrl}/api/v1/public/awards`, {
+        signal: AbortSignal.timeout(3000),
+      })
+      if (res.ok) cachedAwards = await res.json()
+    } catch {
+      // fallback: empty
+    }
+  }
+
   loadSettings()
+  loadAwards()
+
+  // ============ Certificate lightbox ============
+  const certLightbox = document.getElementById('cert-lightbox')
+  const certLightboxImg = document.getElementById('cert-lightbox-img')
+
+  const openCert = (url) => {
+    if (!certLightbox || !certLightboxImg) return
+    certLightboxImg.src = url
+    certLightbox.classList.add('open')
+  }
+  const closeCert = () => {
+    if (!certLightbox) return
+    certLightbox.classList.remove('open')
+    setTimeout(() => { certLightboxImg.src = '' }, 300)
+  }
+
+  certLightbox?.addEventListener('click', (e) => {
+    if (e.target === certLightbox || e.target.closest('[data-close-cert]')) closeCert()
+  })
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeCert()
+  })
 
   // ============ App contents (About/Skills/Career/Contact/Research) ============
   // buildAppContent()는 openFolder() 호출 시점에 최신 siteSettings를 참조한다.
@@ -300,21 +341,26 @@
       },
       career: {
         title: 'Career',
-        html: `
-          <div class="aw-section">
-            <div class="aw-eyebrow"><i class="fa-solid fa-trophy"></i> Awards & Honors</div>
-            <h2 class="aw-title">수상 내역</h2>
-            <p class="aw-sub">각종 경진대회 및 학술대회 수상 이력입니다.</p>
-          </div>
-          <div class="aw-award-list">
-            ${renderAward('2025.08', '우수사업계획서상', '2025 AI Powered SW 창업경진대회')}
-            ${renderAward('2025.08', '우수상', 'K-SoftVation Showcase 프로젝트 경진대회')}
-            ${renderAward('2025.06', '동상', '2025 한국정보기술학회 하계종합학술대회')}
-            ${renderAward('2024.11', '장려상', '제5회 세종시 빅데이터 분석 아이디어 공모전')}
-            ${renderAward('2024.10', '우수상 (생성형 AI 부문)', '2024 캡스톤디자인 및 AI 해커톤 경진대회')}
-            ${renderAward('2024.05', '은상', '2024 한국정보기술학회 하계종합학술대회')}
-          </div>
-        `,
+        html: (() => {
+          const items = cachedAwards.length > 0
+            ? cachedAwards.map((a) => renderAward(a.awardDate, a.prize, a.contest, a.certificateUrl)).join('')
+            : [
+                renderAward('2025.08', '우수사업계획서상', '2025 AI Powered SW 창업경진대회'),
+                renderAward('2025.08', '우수상', 'K-SoftVation Showcase 프로젝트 경진대회'),
+                renderAward('2025.06', '동상', '2025 한국정보기술학회 하계종합학술대회'),
+                renderAward('2024.11', '장려상', '제5회 세종시 빅데이터 분석 아이디어 공모전'),
+                renderAward('2024.10', '우수상 (생성형 AI 부문)', '2024 캡스톤디자인 및 AI 해커톤 경진대회'),
+                renderAward('2024.05', '은상', '2024 한국정보기술학회 하계종합학술대회'),
+              ].join('')
+          return `
+            <div class="aw-section">
+              <div class="aw-eyebrow"><i class="fa-solid fa-trophy"></i> Awards & Honors</div>
+              <h2 class="aw-title">수상 내역</h2>
+              <p class="aw-sub">각종 경진대회 및 학술대회 수상 이력입니다.</p>
+            </div>
+            <div class="aw-award-list">${items}</div>
+          `
+        })(),
       },
       research: {
         title: 'Research',
@@ -382,15 +428,17 @@
       </div>`
   }
 
-  function renderAward(date, prize, contest) {
+  function renderAward(date, prize, contest, certUrl) {
+    const hasCert = !!certUrl
     return `
-      <div class="aw-award-item">
+      <div class="aw-award-item${hasCert ? ' has-cert' : ''}" ${hasCert ? `data-cert="${certUrl}"` : ''} ${hasCert ? 'role="button" tabindex="0" title="상장 보기"' : ''}>
         <div class="aw-award-icon"><i class="fa-solid fa-trophy"></i></div>
         <div class="aw-award-body">
           <div class="aw-award-prize">${prize}</div>
           <div class="aw-award-contest">${contest}</div>
         </div>
         <div class="aw-award-date">${date}</div>
+        ${hasCert ? '<div class="aw-award-cert-badge"><i class="fa-solid fa-image"></i></div>' : ''}
       </div>`
   }
 

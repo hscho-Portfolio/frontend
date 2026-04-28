@@ -862,6 +862,93 @@ html[data-theme='dark'] .aw-award-item {
   border-color: rgba(255, 255, 255, 0.10);
 }
 
+.aw-award-item.has-cert {
+  cursor: pointer;
+}
+.aw-award-item.has-cert:hover {
+  border-color: rgba(85, 173, 197, 0.5);
+  box-shadow: 0 8px 24px rgba(85, 173, 197, 0.18);
+}
+.aw-award-cert-badge {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(85, 173, 197, 0.14);
+  color: var(--accent);
+  font-size: 12px;
+}
+
+/* Certificate lightbox */
+.cert-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s var(--easing);
+}
+.cert-lightbox.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.cert-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.cert-lightbox-content {
+  position: relative;
+  max-width: min(860px, 92vw);
+  max-height: 90vh;
+  transform: scale(0.94) translateY(12px);
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.cert-lightbox.open .cert-lightbox-content {
+  transform: scale(1) translateY(0);
+}
+.cert-lightbox-img {
+  display: block;
+  width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+}
+.cert-lightbox-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: white;
+  color: #1e293b;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: transform 0.15s ease, background 0.15s ease;
+  z-index: 1;
+}
+.cert-lightbox-close:hover {
+  transform: scale(1.1);
+  background: #fee2e2;
+  color: #ef4444;
+}
+
 /* Research grid */
 .aw-research-grid {
   display: grid;

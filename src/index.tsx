@@ -10,6 +10,7 @@ import { AdminProjectsPage } from './pages/admin-projects'
 import { AdminProjectFormPage } from './pages/admin-project-form'
 import { AdminStacksPage } from './pages/admin-stacks'
 import { AdminCategoriesPage } from './pages/admin-categories'
+import { AdminAwardsPage } from './pages/admin-awards'
 import { AdminSettingsPage } from './pages/admin-settings'
 import { NotFoundPage } from './pages/not-found'
 
@@ -123,6 +124,11 @@ app.get('/admin/dashboard/stacks', (c) => {
 
 app.get('/admin/dashboard/categories', (c) => {
   const { body, opts } = adminPage(AdminCategoriesPage, 'CHO OS — Categories Management')
+  return c.render(body, opts)
+})
+
+app.get('/admin/dashboard/awards', (c) => {
+  const { body, opts } = adminPage(AdminAwardsPage, 'CHO OS — Awards Management')
   return c.render(body, opts)
 })
 
