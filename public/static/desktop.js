@@ -249,27 +249,27 @@
             <div class="uiv-row">
               <div class="uiv-card is-indigo">
                 <div class="uiv-front">
-                  <div class="uiv-front-icon"><i class="fa-solid fa-brain"></i></div>
-                  <p>AI</p>
-                  <small>Implementer</small>
+                  <div class="uiv-front-icon" style="display:flex;gap:6px;font-size:20px;align-items:center">
+                    <i class="fa-brands fa-python"></i>
+                    <i class="fa-solid fa-brain"></i>
+                  </div>
+                  <p>Python</p>
+                  <small>AI Implementer</small>
                 </div>
                 <div class="uiv-content">
-                  <p class="uiv-heading">AI Implementer</p>
-                  <p>PyTorch · YOLO · LangChain · LangGraph로 모델을 만들고 FastAPI · Spring Boot로 서비스까지 직접 붙입니다. STT, RAG, 의도 분류 등 LLM 기반 기능을 실제 동작하는 시스템으로 구현합니다.</p>
+                  <p class="uiv-heading">Python × AI</p>
+                  <p>PyTorch · YOLO · LangChain · LangGraph로 모델을 만들고 FastAPI · Spring Boot로 서비스까지 직접 붙입니다. RAG, STT, 의도 분류 등 LLM 기반 기능을 구현합니다.</p>
                 </div>
               </div>
               <div class="uiv-card is-violet">
                 <div class="uiv-front">
-                  <div class="uiv-front-icon" style="display:flex;gap:6px;font-size:20px;align-items:center">
-                    <i class="fa-brands fa-python"></i>
-                    <i class="fa-brands fa-rust"></i>
-                  </div>
-                  <p>Data</p>
-                  <small>Engineer</small>
+                  <div class="uiv-front-icon"><i class="fa-brands fa-rust"></i></div>
+                  <p>Rust</p>
+                  <small>Systems</small>
                 </div>
                 <div class="uiv-content">
-                  <p class="uiv-heading">Data Engineer</p>
-                  <p>Python · <i class="fa-brands fa-rust"></i> Rust · SQL로 34만 건 텍스트 수집·정제부터 임베딩·클러스터링·LDA·감성 분석까지 파이프라인 전 과정을 설계합니다.</p>
+                  <p class="uiv-heading">Rust</p>
+                  <p>Python · SQL과 함께 Rust를 활용해 데이터 처리 및 시스템 구현을 합니다. 34만 건 규모 텍스트 파이프라인 설계 경험을 보유합니다.</p>
                 </div>
               </div>
               <div class="uiv-card is-cyan">
@@ -281,6 +281,25 @@
                 <div class="uiv-content">
                   <p class="uiv-heading">Materials × AI</p>
                   <p>신소재공학(주전공)으로 반도체·이차전지·디스플레이 공정을 이해하고 제조 데이터 해석에 연결합니다. 소재 물성과 공정·성능 간 상관관계 분석 역량을 보유합니다.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="aw-section">
+            <div class="aw-eyebrow"><i class="fa-solid fa-briefcase"></i> Experience</div>
+            <h2 class="aw-title">경험</h2>
+            <div class="aw-exp-list">
+              <div class="aw-exp-item">
+                <div class="aw-exp-period">2025.12 ~ 2026.06</div>
+                <div class="aw-exp-body">
+                  <div class="aw-exp-title">LG 전자 DX School</div>
+                </div>
+              </div>
+              <div class="aw-exp-item">
+                <div class="aw-exp-period">2024.12 ~ 2025.11</div>
+                <div class="aw-exp-body">
+                  <div class="aw-exp-title">KSEB Bootcamp 4기</div>
                 </div>
               </div>
             </div>
