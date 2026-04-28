@@ -390,18 +390,7 @@
           <div class="aw-contact-grid">
             <a class="aw-contact-card" href="mailto:${email}"><i class="fa-solid fa-envelope"></i><div><strong>Email</strong><span>${email}</span></div></a>
             <a class="aw-contact-card" href="${githubUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i><div><strong>GitHub</strong><span>${githubUrl.replace(/^https?:\/\//, '')}</span></div></a>
-            <a class="aw-contact-card" href="${linkedinUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i><div><strong>LinkedIn</strong><span>${linkedinUrl.replace(/^https?:\/\//, '')}</span></div></a>
             <a class="aw-contact-card" href="${resumeUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i><div><strong>Resume</strong><span>이력서 다운로드</span></div></a>
-          </div>
-          <div class="aw-section" style="margin-top:28px">
-            <div class="aw-eyebrow"><i class="fa-solid fa-comment-dots"></i> Quick Message</div>
-            <h2 class="aw-title" style="font-size:18px">메시지 보내기</h2>
-            <p class="aw-sub">백엔드 연동 후 활성화될 예정입니다.</p>
-            <div style="display:flex;flex-direction:column;gap:10px">
-              <input class="adm-stack-usage" placeholder="Your email" />
-              <textarea class="adm-stack-usage" rows="4" placeholder="메시지 내용"></textarea>
-              <button class="btn-primary" style="align-self:flex-start" disabled><i class="fa-solid fa-paper-plane"></i> Send (coming soon)</button>
-            </div>
           </div>
         `,
       },
