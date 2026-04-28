@@ -205,7 +205,7 @@ export const DesktopPage = ({ projects, shortcuts }: { projects: Project[]; shor
           ))}
           <li class="dock-divider"></li>
           <li>
-            <a class="dock-item" href="https://github.com" target="_blank" title="GitHub">
+            <a class="dock-item" href="https://github.com/hscho0048" target="_blank" title="GitHub">
               <span class="dock-icon" style="--icon-color:#e5e7eb">
                 <i class="fa-brands fa-github"></i>
               </span>

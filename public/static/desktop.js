@@ -224,7 +224,7 @@
     const headline    = s.headline    || 'AI Implementer / Full-stack Builder'
     const bio         = s.bio         || '데이터 분석, 백엔드, 클라우드 배포를 연결해 실제 동작하는 AI 서비스를 구현합니다.'
     const email       = s.email       || 'hello@cho.os'
-    const githubUrl   = s.githubUrl   || 'https://github.com'
+    const githubUrl   = s.githubUrl   || 'https://github.com/hscho0048'
     const linkedinUrl = s.linkedinUrl || 'https://linkedin.com'
     const resumeUrl   = s.resumeUrl   || '#'
     const profileImg  = s.profileImageUrl
