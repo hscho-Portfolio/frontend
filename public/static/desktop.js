@@ -219,9 +219,8 @@
     const resumeUrl   = s.resumeUrl   || '#'
     const profileImg  = s.profileImageUrl
 
-    const avatarHtml = profileImg
-      ? `<img src="${profileImg}" alt="${ownerName}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`
-      : `<i class="fa-solid fa-user-astronaut"></i>`
+    const avatarSrc  = profileImg || '/static/hosung.jpg'
+    const avatarHtml = `<img src="${avatarSrc}" alt="${ownerName}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`
 
     const contents = {
       about: {
@@ -230,15 +229,22 @@
           <div class="aw-profile-head">
             <div class="aw-avatar">${avatarHtml}</div>
             <div>
-              <div class="aw-profile-name">${ownerName}</div>
-              <div class="aw-profile-role">${headline}</div>
-              <div class="aw-profile-bio">${bio}</div>
+              <div class="aw-profile-name">조호성</div>
+              <div class="aw-profile-role">AI Implementer · Full-stack · Cloud / Infra</div>
+              <div class="aw-profile-bio">데이터를 분석하고 모델을 설계하는 데서 그치지 않고, 이를 실제 서비스와 시스템으로 구현해 운영까지 연결하는 AI 구현자입니다.</div>
+              <div class="aw-tags" style="margin-top:10px">
+                <span class="aw-tag">#AI구현자</span>
+                <span class="aw-tag">#머신러닝</span>
+                <span class="aw-tag">#데이터엔지니어링</span>
+                <span class="aw-tag">#소재이해</span>
+                <span class="aw-tag">#시스템구현</span>
+              </div>
             </div>
           </div>
           <div class="aw-section">
             <div class="aw-eyebrow"><i class="fa-solid fa-flag"></i> Core Identity</div>
             <h2 class="aw-title">단순 분석가가 아니라 <em style="color:#7c3aed;font-style:normal">서비스로 연결하는 사람</em></h2>
-            <p class="aw-sub">분석/모델링에 멈추지 않고 백엔드와 클라우드까지 직접 잇는 것을 원칙으로 합니다. <strong style="color:#6d28d9">카드를 호버해보세요 →</strong></p>
+            <p class="aw-sub">머신러닝·딥러닝 모델을 설계한 뒤 API와 백엔드에 연동해 문제 해결로 이어가며, 데이터 흐름부터 결과 활용까지 전 과정을 직접 다룹니다. <strong style="color:#6d28d9">카드를 호버해보세요 →</strong></p>
 
             <div class="uiv-row">
               <div class="uiv-card is-indigo">
@@ -248,59 +254,60 @@
                   <small>Implementer</small>
                 </div>
                 <div class="uiv-content">
-                  <p class="uiv-heading">AI</p>
-                  <p>모델링에 그치지 않고, 실제 동작하는 추론 API와 서비스 형태로 만드는 것까지 책임집니다.</p>
+                  <p class="uiv-heading">AI Implementer</p>
+                  <p>YOLO·PyTorch·LangChain으로 모델을 만들고, FastAPI·Spring Boot로 서비스까지 직접 붙입니다.</p>
                 </div>
               </div>
 
               <div class="uiv-card is-violet">
                 <div class="uiv-front">
                   <div class="uiv-front-icon"><i class="fa-solid fa-database"></i></div>
-                  <p>Data-driven</p>
-                  <small>Analyst</small>
+                  <p>Data</p>
+                  <small>Engineer</small>
                 </div>
                 <div class="uiv-content">
-                  <p class="uiv-heading">Data-driven</p>
-                  <p>가설보다 데이터에서 출발합니다. EDA와 검증을 통해 의사결정의 근거를 설계합니다.</p>
+                  <p class="uiv-heading">Data Engineer</p>
+                  <p>34만 건 텍스트 수집·정제부터 임베딩·클러스터링·감성 분석까지, 파이프라인 전 과정을 설계합니다.</p>
                 </div>
               </div>
 
               <div class="uiv-card is-cyan">
                 <div class="uiv-front">
-                  <div class="uiv-front-icon"><i class="fa-solid fa-cloud"></i></div>
-                  <p>Cloud</p>
-                  <small>Native</small>
+                  <div class="uiv-front-icon"><i class="fa-solid fa-flask"></i></div>
+                  <p>Materials</p>
+                  <small>+ AI</small>
                 </div>
                 <div class="uiv-content">
-                  <p class="uiv-heading">Cloud</p>
-                  <p>AWS · Docker · GitHub Actions로 배포 자동화. 분석 결과를 운영 가능한 서비스로 만듭니다.</p>
+                  <p class="uiv-heading">Materials × AI</p>
+                  <p>신소재공학 복수전공으로 반도체·이차전지·디스플레이 공정을 이해하고 제조 데이터 해석에 연결합니다.</p>
                 </div>
               </div>
             </div>
           </div>
           <div class="aw-section">
             <div class="aw-row">
-              <div class="aw-row-key">Identity</div>
-              <div class="aw-row-value">AI 구현 · 데이터 기반 문제 해결 · 클라우드 기반 서비스화</div>
+              <div class="aw-row-key">Education</div>
+              <div class="aw-row-value">경기대학교 신소재공학과 (주전공) · 컴퓨터공학과 (복수전공) · GPA 4.01 / 4.5 · 2020.03 – 2026.08</div>
             </div>
             <div class="aw-row">
               <div class="aw-row-key">Interest</div>
               <div class="aw-row-value">
                 <div class="aw-tags">
-                  <span class="aw-tag">AI Infra</span>
-                  <span class="aw-tag">Manufacturing System</span>
-                  <span class="aw-tag">Cloud Backend</span>
+                  <span class="aw-tag">AX / AI 서비스</span>
+                  <span class="aw-tag">스마트 팩토리</span>
+                  <span class="aw-tag">LLM · RAG</span>
                   <span class="aw-tag">Materials × AI</span>
+                  <span class="aw-tag">Cloud Infra</span>
                 </div>
               </div>
             </div>
             <div class="aw-row">
-              <div class="aw-row-key">Education</div>
-              <div class="aw-row-value">재료공학 전공 · LG DX School 수료</div>
+              <div class="aw-row-key">Contact</div>
+              <div class="aw-row-value">chohosung27@gmail.com · github.com/hscho0048 · +82-10-9757-0148</div>
             </div>
             <div class="aw-row">
               <div class="aw-row-key">Now</div>
-              <div class="aw-row-value">AI Infra / 생산시스템 직무를 준비하며, OS형 포트폴리오 CMS를 직접 만드는 중입니다.</div>
+              <div class="aw-row-value">문제를 정의하고 데이터로 해결 방향을 찾아 구현·검증까지 끝내는 AX 직무를 준비 중입니다.</div>
             </div>
           </div>
         `,
