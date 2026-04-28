@@ -193,5 +193,6 @@ export const DesktopPage = ({ projects }: { projects: Project[] }) => {
         </ul>
       </footer>
     </div>
+    <script src="/static/characters.js"></script>
   )
 }
