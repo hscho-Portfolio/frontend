@@ -227,7 +227,6 @@
         title: 'About Me',
         html: `
           <div class="aw-profile-head">
-            <div class="aw-avatar">${avatarHtml}</div>
             <div>
               <div class="aw-profile-name">조호성</div>
               <div class="aw-profile-role">AI Implementer · Full-stack · Cloud / Infra</div>
@@ -240,6 +239,7 @@
                 <span class="aw-tag">#시스템구현</span>
               </div>
             </div>
+            <div class="aw-avatar">${avatarHtml}</div>
           </div>
 
           <div class="aw-section">
@@ -265,11 +265,11 @@
                 <div class="uiv-front">
                   <div class="uiv-front-icon"><i class="fa-brands fa-rust"></i></div>
                   <p>Rust</p>
-                  <small>Systems</small>
+                  <small>Crabpaste</small>
                 </div>
                 <div class="uiv-content">
-                  <p class="uiv-heading">Rust</p>
-                  <p>Python · SQL과 함께 Rust를 활용해 데이터 처리 및 시스템 구현을 합니다. 34만 건 규모 텍스트 파이프라인 설계 경험을 보유합니다.</p>
+                  <p class="uiv-heading">Crabpaste</p>
+                  <p>LAN 내 장치 간 클립보드 실시간 동기화 오픈소스. mDNS 자동 탐색, P2P WebSocket, 6자리 핀 페어링. CLI · egui · Tauri 멀티 인터페이스, 크로스 플랫폼 지원.</p>
                 </div>
               </div>
               <div class="uiv-card is-cyan">

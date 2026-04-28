@@ -615,6 +615,7 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
 .aw-profile-head {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 22px;
   padding-bottom: 26px;
   margin-bottom: 28px;
