@@ -137,6 +137,7 @@
   // ============ Site settings ============
   let siteSettings = {}
   let cachedAwards = []
+  let cachedStacks = []
 
   const applySettings = (s) => {
     // Welcome widget owner name
@@ -181,8 +182,21 @@
     }
   }
 
+  const loadStacks = async () => {
+    try {
+      const backendUrl = window.BACKEND_URL || 'http://localhost:8080'
+      const res = await fetch(`${backendUrl}/api/v1/public/stacks`, {
+        signal: AbortSignal.timeout(3000),
+      })
+      if (res.ok) cachedStacks = await res.json()
+    } catch {
+      // fallback: empty
+    }
+  }
+
   loadSettings()
   loadAwards()
+  loadStacks()
 
   // ============ Certificate lightbox ============
   const certLightbox = document.getElementById('cert-lightbox')
@@ -363,42 +377,6 @@
               </div>
             </div>
           </div>
-        `,
-      },
-      skills: {
-        title: 'Skills',
-        html: `
-          <div class="aw-section">
-            <div class="aw-eyebrow"><i class="fa-solid fa-layer-group"></i> Tech Stack</div>
-            <h2 class="aw-title">기술</h2>
-            <div class="aw-skill-level-grid">
-              <div class="aw-skill-level-col">
-                <div class="aw-skill-level-head">Strong</div>
-                <div class="aw-skill-level-list">
-                  <div class="aw-skill-level-item"><i class="fa-brands fa-python aw-si-python"></i><span>Python</span></div>
-                  <div class="aw-skill-level-item"><i class="fa-brands fa-rust aw-si-rust"></i><span>Rust</span></div>
-                  <div class="aw-skill-level-item"><span class="aw-si-badge aw-si-sklearn">sklearn</span><span>scikit-learn</span></div>
-                  <div class="aw-skill-level-item"><span class="aw-si-badge aw-si-torch">torch</span><span>PyTorch</span></div>
-                </div>
-              </div>
-              <div class="aw-skill-level-col">
-                <div class="aw-skill-level-head">Knowledgeable</div>
-                <div class="aw-skill-level-list">
-                  <div class="aw-skill-level-item"><span class="aw-si-badge aw-si-gcp">GCP</span><span>GCP</span></div>
-                  <div class="aw-skill-level-item"><i class="fa-brands fa-aws aw-si-aws"></i><span>AWS</span></div>
-                  <div class="aw-skill-level-item"><i class="fa-brands fa-java aw-si-java"></i><span>Java</span></div>
-                  <div class="aw-skill-level-item"><i class="fa-brands fa-node-js aw-si-node"></i><span>Node.js</span></div>
-                </div>
-              </div>
-              <div class="aw-skill-level-col">
-                <div class="aw-skill-level-head">Etc</div>
-                <div class="aw-skill-level-list">
-                  <div class="aw-skill-level-item"><i class="fa-brands fa-figma aw-si-figma"></i><span>Figma</span></div>
-                  <div class="aw-skill-level-item"><span class="aw-si-badge aw-si-notion">N</span><span>Notion</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <div class="aw-section">
             <div class="aw-eyebrow"><i class="fa-solid fa-user"></i> Work Style</div>
@@ -423,6 +401,33 @@
             </div>
           </div>
         `,
+      },
+      skills: {
+        title: 'Skills',
+        html: (() => {
+          const cats = {}
+          cachedStacks.forEach((s) => {
+            const cat = s.category || 'Etc'
+            if (!cats[cat]) cats[cat] = []
+            cats[cat].push([s.name, s.description || ''])
+          })
+          const catIconMap = {
+            'Language': 'fa-solid fa-code',
+            'Frontend': 'fa-solid fa-window-maximize',
+            'Backend':  'fa-solid fa-server',
+            'Database': 'fa-solid fa-database',
+            'Cloud':    'fa-solid fa-cloud',
+            'DevOps':   'fa-solid fa-gears',
+            'AI/Data':  'fa-solid fa-brain',
+            'Etc':      'fa-solid fa-layer-group',
+          }
+          const catOrder = ['Language', 'AI/Data', 'Backend', 'Frontend', 'Cloud', 'DevOps', 'Database', 'Etc']
+          const sorted = catOrder.filter((c) => cats[c]).concat(Object.keys(cats).filter((c) => !catOrder.includes(c)))
+          const rendered = sorted.map((cat) =>
+            renderSkillCat(cat, catIconMap[cat] || 'fa-solid fa-layer-group', cats[cat])
+          ).join('')
+          return '<div class="aw-section"><div class="aw-eyebrow"><i class="fa-solid fa-layer-group"></i> Tech Stack</div><h2 class="aw-title">기술 스택</h2></div>' + rendered
+        })(),
       },
       career: {
         title: 'Awards',
