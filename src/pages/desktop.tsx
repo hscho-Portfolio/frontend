@@ -74,16 +74,22 @@ export const DesktopPage = ({ projects, shortcuts }: { projects: Project[]; shor
           <div class="welcome-widget-eyebrow">
             <span class="dot pulse"></span> System ready
           </div>
-          <h1 class="welcome-widget-title">
-            안녕하세요, <span>조호성</span>의 데스크톱입니다
-          </h1>
-          <p class="welcome-widget-desc">
-            아이콘을 더블클릭하거나 Dock에서 앱을 실행해 포트폴리오를 탐색해보세요.
-          </p>
-          <div class="welcome-widget-tags">
-            <span>AI Implementation</span>
-            <span>Full-stack</span>
-            <span>Cloud / Infra</span>
+          <div class="welcome-widget-profile">
+            <img class="welcome-widget-photo" src="/static/hosung.jpg" alt="조호성" />
+            <div class="welcome-widget-info">
+              <h1 class="welcome-widget-title">
+                <span>조호성</span>
+              </h1>
+              <p class="welcome-widget-role">AI Implementer · Full-stack · Cloud / Infra</p>
+              <p class="welcome-widget-desc">
+                데이터 분석과 모델 설계를 넘어 실제 서비스와 시스템으로 구현하는 AI 구현자입니다.
+              </p>
+              <div class="welcome-widget-tags">
+                <span>AI Implementation</span>
+                <span>Full-stack</span>
+                <span>Cloud / Infra</span>
+              </div>
+            </div>
           </div>
         </div>
       </main>
