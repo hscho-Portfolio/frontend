@@ -231,7 +231,7 @@
             <div>
               <div class="aw-profile-name">조호성</div>
               <div class="aw-profile-role">AI Implementer · Full-stack · Cloud / Infra</div>
-              <div class="aw-profile-bio">데이터를 분석하고 모델을 설계하는 데서 그치지 않고, 이를 실제 서비스와 시스템으로 구현해 운영까지 연결하는 AI 구현자입니다.</div>
+              <div class="aw-profile-bio">데이터를 분석하고 모델을 설계하는 데서 그치지 않고, 이를 실제 서비스와 시스템으로 구현해 운영까지 연결하는 AI 구현자입니다. 문제를 정의하고 데이터를 통해 해결 방향을 찾은 뒤 구현과 검증까지 끝내는 방식으로 성과를 만들어 왔습니다.</div>
               <div class="aw-tags" style="margin-top:10px">
                 <span class="aw-tag">#AI구현자</span>
                 <span class="aw-tag">#머신러닝</span>
@@ -241,11 +241,11 @@
               </div>
             </div>
           </div>
+
           <div class="aw-section">
             <div class="aw-eyebrow"><i class="fa-solid fa-flag"></i> Core Identity</div>
             <h2 class="aw-title">단순 분석가가 아니라 <em style="color:#7c3aed;font-style:normal">서비스로 연결하는 사람</em></h2>
-            <p class="aw-sub">머신러닝·딥러닝 모델을 설계한 뒤 API와 백엔드에 연동해 문제 해결로 이어가며, 데이터 흐름부터 결과 활용까지 전 과정을 직접 다룹니다. <strong style="color:#6d28d9">카드를 호버해보세요 →</strong></p>
-
+            <p class="aw-sub">머신러닝·딥러닝 모델 설계부터 API 연동, 클라우드 배포까지 전 과정을 직접 다룹니다. <strong style="color:#6d28d9">카드를 호버해보세요 →</strong></p>
             <div class="uiv-row">
               <div class="uiv-card is-indigo">
                 <div class="uiv-front">
@@ -255,39 +255,106 @@
                 </div>
                 <div class="uiv-content">
                   <p class="uiv-heading">AI Implementer</p>
-                  <p>YOLO·PyTorch·LangChain으로 모델을 만들고, FastAPI·Spring Boot로 서비스까지 직접 붙입니다.</p>
+                  <p>PyTorch · YOLO · LangChain · LangGraph로 모델을 만들고 FastAPI · Spring Boot로 서비스까지 직접 붙입니다. STT, RAG, 의도 분류 등 LLM 기반 기능을 실제 동작하는 시스템으로 구현합니다.</p>
                 </div>
               </div>
-
               <div class="uiv-card is-violet">
                 <div class="uiv-front">
-                  <div class="uiv-front-icon"><i class="fa-solid fa-database"></i></div>
+                  <div class="uiv-front-icon" style="display:flex;gap:6px;font-size:20px;align-items:center">
+                    <i class="fa-brands fa-python"></i>
+                    <i class="fa-brands fa-rust"></i>
+                  </div>
                   <p>Data</p>
                   <small>Engineer</small>
                 </div>
                 <div class="uiv-content">
                   <p class="uiv-heading">Data Engineer</p>
-                  <p>34만 건 텍스트 수집·정제부터 임베딩·클러스터링·감성 분석까지, 파이프라인 전 과정을 설계합니다.</p>
+                  <p>Python · <i class="fa-brands fa-rust"></i> Rust · SQL로 34만 건 텍스트 수집·정제부터 임베딩·클러스터링·LDA·감성 분석까지 파이프라인 전 과정을 설계합니다.</p>
                 </div>
               </div>
-
               <div class="uiv-card is-cyan">
                 <div class="uiv-front">
                   <div class="uiv-front-icon"><i class="fa-solid fa-flask"></i></div>
                   <p>Materials</p>
-                  <small>+ AI</small>
+                  <small>× AI</small>
                 </div>
                 <div class="uiv-content">
                   <p class="uiv-heading">Materials × AI</p>
-                  <p>신소재공학 복수전공으로 반도체·이차전지·디스플레이 공정을 이해하고 제조 데이터 해석에 연결합니다.</p>
+                  <p>신소재공학(주전공)으로 반도체·이차전지·디스플레이 공정을 이해하고 제조 데이터 해석에 연결합니다. 소재 물성과 공정·성능 간 상관관계 분석 역량을 보유합니다.</p>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="aw-section">
+            <div class="aw-eyebrow"><i class="fa-solid fa-timeline"></i> Experience</div>
+            <h2 class="aw-title">주요 프로젝트</h2>
+            <div class="aw-exp-list">
+              <div class="aw-exp-item">
+                <div class="aw-exp-period">02.2026 – 04.2026</div>
+                <div class="aw-exp-body">
+                  <div class="aw-exp-title">LG 스타일러 CX 전략 데이터 분석</div>
+                  <div class="aw-exp-org">소셜 미디어 기반 고객 경험 분석</div>
+                  <ul class="aw-exp-bullets">
+                    <li>34만 건 텍스트 데이터 수집·정제 및 분석 데이터셋 구축</li>
+                    <li>임베딩, 클러스터링, LDA, 감성 분석 기반 데이터 파이프라인 설계</li>
+                    <li>고객 행동을 Actor·Action 단위로 구조화하여 핵심 기회영역 도출</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="aw-exp-item">
+                <div class="aw-exp-period">06.2025 – 08.2025</div>
+                <div class="aw-exp-body">
+                  <div class="aw-exp-title">AI 기반 스마트 팩토리 품질 검사 시스템 (VODA)</div>
+                  <div class="aw-exp-org">K-SoftVation Showcase 프로젝트</div>
+                  <ul class="aw-exp-bullets">
+                    <li>파인튜닝 객체 탐지 모델(YOLO) 기반 불량 검출 및 OpenCV 품질 분류 구현</li>
+                    <li>FastAPI · Spring Boot · Next.js 기반 AI-서비스 통합 시스템 구축</li>
+                    <li>GCP VM · Docker · Nginx · GCS 기반 배포 및 CI/CD 파이프라인 구성</li>
+                    <li>Raspberry Pi · Arduino 연동으로 이미지 수집부터 자동 판정·제어 구현</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="aw-exp-item">
+                <div class="aw-exp-period">02.2025 – 06.2025</div>
+                <div class="aw-exp-body">
+                  <div class="aw-exp-title">AI 기반 시니어 복지 추천 플랫폼 (어르심)</div>
+                  <div class="aw-exp-org">캡스톤디자인 프로젝트</div>
+                  <ul class="aw-exp-bullets">
+                    <li>GPT 기반 챗봇에서 의도 분류 및 성격 분석(MBTI) 로직 구현</li>
+                    <li>성격 태그 기반 복지 프로그램 추천 및 자동 일정 등록 기능 개발</li>
+                    <li>STT 기반 음성 입력 처리 및 FastAPI · Spring Boot · Next.js 풀스택 구축</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="aw-exp-item">
+                <div class="aw-exp-period">09.2024 – 12.2024</div>
+                <div class="aw-exp-body">
+                  <div class="aw-exp-title">서울 공공자전거 수요 예측 시스템</div>
+                  <div class="aw-exp-org">오픈소스 프로젝트</div>
+                  <ul class="aw-exp-bullets">
+                    <li>날씨·대여 데이터를 활용한 LSTM 기반 시계열 수요 예측 모델 개발</li>
+                    <li>Flask API · MySQL · React 기반 웹 서비스와 모델 연동 및 Chart.js 시각화</li>
+                    <li>Docker · Kubernetes(k3s) · GCP 기반 서비스 배포</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="aw-section">
+            <div class="aw-eyebrow"><i class="fa-solid fa-graduation-cap"></i> Education</div>
             <div class="aw-row">
-              <div class="aw-row-key">Education</div>
-              <div class="aw-row-value">경기대학교 신소재공학과 (주전공) · 컴퓨터공학과 (복수전공) · GPA 4.01 / 4.5 · 2020.03 – 2026.08</div>
+              <div class="aw-row-key">학교</div>
+              <div class="aw-row-value">경기대학교 · 2020.03 – 2026.08</div>
+            </div>
+            <div class="aw-row">
+              <div class="aw-row-key">전공</div>
+              <div class="aw-row-value">신소재공학과 (주전공) · 컴퓨터공학과 (복수전공) · GPA 4.01 / 4.5</div>
+            </div>
+            <div class="aw-row">
+              <div class="aw-row-key">전공역량</div>
+              <div class="aw-row-value">반도체 공정·소자 구조 / 이차전지 소재·전기화학 / 디스플레이 공정 최적화 / 재료 물성·미세구조 분석</div>
             </div>
             <div class="aw-row">
               <div class="aw-row-key">Interest</div>
@@ -304,10 +371,6 @@
             <div class="aw-row">
               <div class="aw-row-key">Contact</div>
               <div class="aw-row-value">chohosung27@gmail.com · github.com/hscho0048 · +82-10-9757-0148</div>
-            </div>
-            <div class="aw-row">
-              <div class="aw-row-key">Now</div>
-              <div class="aw-row-value">문제를 정의하고 데이터로 해결 방향을 찾아 구현·검증까지 끝내는 AX 직무를 준비 중입니다.</div>
             </div>
           </div>
         `,

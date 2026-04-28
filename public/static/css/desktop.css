@@ -1038,6 +1038,61 @@ html[data-theme='dark'] .aw-award-item {
 .aw-contact-card strong { font-size: 13px; font-weight: 700; color: var(--ink-100); }
 .aw-contact-card span { font-size: 12px; color: var(--ink-400); }
 
+/* ── Experience timeline ── */
+.aw-exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 12px;
+  border-left: 2px solid var(--ink-600);
+  padding-left: 20px;
+}
+.aw-exp-item {
+  position: relative;
+  padding: 0 0 24px 0;
+}
+.aw-exp-item::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #7c3aed;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px #7c3aed;
+}
+.aw-exp-period {
+  font-size: 11px;
+  font-weight: 600;
+  color: #7c3aed;
+  letter-spacing: 0.03em;
+  margin-bottom: 4px;
+}
+.aw-exp-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-100);
+}
+.aw-exp-org {
+  font-size: 11.5px;
+  color: var(--ink-400);
+  margin-bottom: 6px;
+}
+.aw-exp-bullets {
+  margin: 0;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.aw-exp-bullets li {
+  font-size: 12px;
+  color: var(--ink-300);
+  line-height: 1.5;
+}
+
 /* =========================================
    DARK MODE OVERRIDES
    흰 배경이 하드코딩된 컴포넌트를 다크 서피스로 교체
