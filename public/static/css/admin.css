@@ -3370,3 +3370,315 @@
   letter-spacing: -0.01em;
 }
 .adm-fp-retro li i { color: #a855f7; font-size: 14px; flex-shrink: 0; padding-top: 2px; }
+
+/* =====================================================================
+   DARK MODE — Admin Console
+   ===================================================================== */
+html[data-theme='dark'] .admin-login-body {
+  background: #0a0a0a;
+}
+html[data-theme='dark'] .login-blur {
+  background: rgba(0, 0, 0, 0.4);
+}
+html[data-theme='dark'] .topbar-slim {
+  background: rgba(20, 20, 20, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .topbar-slim .topbar-icon {
+  background: rgba(255, 255, 255, 0.06);
+}
+html[data-theme='dark'] .login-card {
+  background: rgba(28, 28, 28, 0.95);
+  border-color: rgba(255, 255, 255, 0.10);
+  box-shadow:
+    0 30px 80px -20px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}
+html[data-theme='dark'] .login-input {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+html[data-theme='dark'] .login-input:focus-within {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(139, 92, 246, 0.55);
+}
+html[data-theme='dark'] .login-foot {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .login-hint kbd {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--ink-200);
+}
+
+html[data-theme='dark'] .admin-body {
+  background: #0a0a0a;
+}
+html[data-theme='dark'] .admin-sidebar {
+  background: rgba(18, 18, 18, 0.98);
+  border-right-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .admin-brand {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .admin-sidebar-foot {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .admin-back,
+html[data-theme='dark'] .admin-logout {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ink-300);
+}
+html[data-theme='dark'] .admin-nav-item:hover {
+  background: rgba(139, 92, 246, 0.18);
+}
+
+html[data-theme='dark'] .admin-topbar {
+  background: rgba(18, 18, 18, 0.98);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .admin-search {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+html[data-theme='dark'] .admin-search:focus-within {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(139, 92, 246, 0.5);
+}
+html[data-theme='dark'] .admin-user {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+html[data-theme='dark'] .adm-card,
+html[data-theme='dark'] .adm-stat-card {
+  background: rgba(24, 24, 24, 0.98);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.4),
+              0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+}
+html[data-theme='dark'] .adm-card-danger {
+  background: rgba(40, 20, 20, 0.98);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+html[data-theme='dark'] .adm-recent li {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.06);
+}
+html[data-theme='dark'] .adm-recent li:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+
+html[data-theme='dark'] .adm-quick {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-quick:hover {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+html[data-theme='dark'] .adm-toolbar,
+html[data-theme='dark'] .adm-filters {
+  background: rgba(24, 24, 24, 0.98);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-input,
+html[data-theme='dark'] .adm-select,
+html[data-theme='dark'] .adm-filter-group select,
+html[data-theme='dark'] .adm-filter-group input,
+html[data-theme='dark'] .adm-search-inline input {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+  color: var(--ink-100);
+}
+html[data-theme='dark'] .adm-input:focus,
+html[data-theme='dark'] .adm-select:focus,
+html[data-theme='dark'] .adm-filter-group select:focus,
+html[data-theme='dark'] .adm-filter-group input:focus,
+html[data-theme='dark'] .adm-search-inline input:focus {
+  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(255, 255, 255, 0.10);
+}
+
+html[data-theme='dark'] .adm-table-wrap {
+  background: rgba(22, 22, 22, 0.99);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-table thead th {
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-table tbody td {
+  border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+html[data-theme='dark'] .adm-table tbody tr:hover {
+  background: rgba(139, 92, 246, 0.10);
+}
+html[data-theme='dark'] .adm-table-foot {
+  background: rgba(255, 255, 255, 0.03);
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-pagination button {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+  color: var(--ink-300);
+}
+
+html[data-theme='dark'] .adm-form-section {
+  background: rgba(22, 22, 22, 0.99);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-form-section-title {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-form-field input[type="text"],
+html[data-theme='dark'] .adm-form-field input[type="email"],
+html[data-theme='dark'] .adm-form-field input[type="url"],
+html[data-theme='dark'] .adm-form-field input[type="number"],
+html[data-theme='dark'] .adm-form-field input[type="date"],
+html[data-theme='dark'] .adm-form-field input[type="password"],
+html[data-theme='dark'] .adm-form-field select,
+html[data-theme='dark'] .adm-form-field textarea,
+html[data-theme='dark'] .adm-field input,
+html[data-theme='dark'] .adm-field select,
+html[data-theme='dark'] .adm-field textarea {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+  color: var(--ink-100);
+}
+html[data-theme='dark'] .adm-form-field input:focus,
+html[data-theme='dark'] .adm-form-field select:focus,
+html[data-theme='dark'] .adm-form-field textarea:focus,
+html[data-theme='dark'] .adm-field input:focus,
+html[data-theme='dark'] .adm-field select:focus,
+html[data-theme='dark'] .adm-field textarea:focus {
+  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(255, 255, 255, 0.10);
+}
+
+html[data-theme='dark'] .adm-stack-pool {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.20);
+}
+html[data-theme='dark'] .adm-stack-chip {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--ink-200);
+}
+
+html[data-theme='dark'] .adm-icon-btn {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+  color: var(--ink-300);
+}
+html[data-theme='dark'] .adm-icon-btn:hover {
+  background: rgba(139, 92, 246, 0.18);
+}
+
+html[data-theme='dark'] .adm-cat-tabs {
+  background: rgba(22, 22, 22, 0.98);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='dark'] .adm-stack-card,
+html[data-theme='dark'] .adm-cat-card {
+  background: rgba(24, 24, 24, 0.98);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-cat-card-foot {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-cat-card-order {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+html[data-theme='dark'] .adm-modal-card,
+html[data-theme='dark'] .adm-confirm-box {
+  background: rgba(22, 22, 22, 0.99);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+html[data-theme='dark'] .adm-modal-foot {
+  background: rgba(255, 255, 255, 0.03);
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='dark'] .adm-color-input input[type="color"],
+html[data-theme='dark'] .adm-color-input input[type="text"] {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+  color: var(--ink-100);
+}
+html[data-theme='dark'] .adm-stack-preview {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+html[data-theme='dark'] .adm-stack-preview-icon {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+html[data-theme='dark'] .adm-project-preview {
+  background: rgba(22, 22, 22, 0.98);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-media-field {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-media-preview {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+
+html[data-theme='dark'] .adm-tip {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(236, 72, 153, 0.10));
+  border-color: rgba(139, 92, 246, 0.25);
+}
+
+html[data-theme='dark'] .adm-stack-search input {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+  color: var(--ink-100);
+}
+html[data-theme='dark'] .adm-stack-search input:focus {
+  background: rgba(255, 255, 255, 0.10);
+}
+html[data-theme='dark'] .adm-stack-filter {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+html[data-theme='dark'] .adm-stack-filter:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+html[data-theme='dark'] .adm-stack-selected {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+html[data-theme='dark'] .adm-stack-empty {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+html[data-theme='dark'] .adm-arch-upload-meta {
+  background: rgba(255, 255, 255, 0.06);
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='dark'] .adm-fp-topbar {
+  background: rgba(18, 18, 18, 0.98);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  color: var(--ink-200);
+}
+html[data-theme='dark'] .adm-fp-desktop {
+  background: #111111;
+}
+
+html[data-theme='dark'] .hosung-popup-inner {
+  background: rgba(22, 22, 22, 0.99);
+  border-color: rgba(255, 255, 255, 0.10);
+}
+html[data-theme='dark'] .hosung-popup-title {
+  color: var(--ink-100);
+}
+html[data-theme='dark'] .hosung-popup-close {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink-400);
+}
