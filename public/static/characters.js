@@ -154,5 +154,25 @@
   // 각 색상 중복 없이 랜덤 픽
   const shuffled = [...COLORS].sort(() => Math.random() - 0.5)
   const chosen = shuffled.slice(0, COUNT)
-  chosen.forEach((color) => createCharacter(color))
+  const characters = chosen.map((color) => createCharacter(color))
+
+  // 오버레이가 열리면 캐릭터 숨기기
+  const folderOverlay = document.getElementById('folder-overlay')
+  const appOverlay    = document.getElementById('app-overlay')
+
+  const setVisible = (visible) => {
+    characters.forEach(({ el }) => {
+      el.style.visibility = visible ? 'visible' : 'hidden'
+    })
+  }
+
+  const observer = new MutationObserver(() => {
+    const anyOpen =
+      folderOverlay?.classList.contains('open') ||
+      appOverlay?.classList.contains('open')
+    setVisible(!anyOpen)
+  })
+
+  if (folderOverlay) observer.observe(folderOverlay, { attributes: true, attributeFilter: ['class'] })
+  if (appOverlay)    observer.observe(appOverlay,    { attributes: true, attributeFilter: ['class'] })
 })()
