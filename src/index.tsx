@@ -50,6 +50,7 @@ app.get('/desktop', async (c) => {
     title: 'CHO OS — Desktop',
     bodyClass: 'desktop-body',
     pageScript: '/static/desktop.js',
+    extraScripts: ['/static/characters.js'],
     css: CSS_BUNDLES.desktop,
   } as any)
 })

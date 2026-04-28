@@ -13,6 +13,7 @@ export type RenderOptions = {
   title?: string
   bodyClass?: string
   pageScript?: string
+  extraScripts?: string[]
   css?: string[]
 }
 
@@ -32,7 +33,7 @@ const BASE_CSS = ['/static/style.css']
 const RESPONSIVE_CSS = ['/static/css/responsive.css', '/static/css/components.css']
 
 export const renderer = jsxRenderer(
-  ({ children, title, bodyClass, pageScript, css = [] }: any) => {
+  ({ children, title, bodyClass, pageScript, extraScripts = [], css = [] }: any) => {
     const pageTitle = title || 'CHO OS — Portfolio'
     const cssLinks = [...BASE_CSS, ...css, ...RESPONSIVE_CSS]
     return (
@@ -63,6 +64,7 @@ export const renderer = jsxRenderer(
             }}
           ></script>
           {pageScript ? <script type="module" src={pageScript}></script> : null}
+          {extraScripts.map((src: string) => <script src={src}></script>)}
         </body>
       </html>
     )
