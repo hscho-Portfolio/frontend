@@ -340,6 +340,29 @@
               </div>
             </div>
           </div>
+
+          <div class="aw-section">
+            <div class="aw-eyebrow"><i class="fa-solid fa-file-lines"></i> Publications</div>
+            <h2 class="aw-title">논문 <span style="font-size:14px;font-weight:500;color:var(--ink-400)">한국정보기술학회 학술대회 논문집 게재 2편</span></h2>
+            <div class="aw-paper-list">
+              <div class="aw-paper-item">
+                <div class="aw-paper-title">LLM 기반과 자체 알고리즘의 복지 추천 기능에 따른 고령 인구의 기술 수용성 비교</div>
+                <ul class="aw-exp-bullets">
+                  <li>LLM 기반 vs 자체 알고리즘 추천 구조 비교 설계</li>
+                  <li>성향 분석·추천 단계 분리 및 태그 기반 알고리즘 구현</li>
+                  <li>응답 속도 최대 5,000배 이상 개선, 비용 0으로 절감</li>
+                </ul>
+              </div>
+              <div class="aw-paper-item">
+                <div class="aw-paper-title">이더리움 기반 본인 인증을 통한 투표 플랫폼의 개발</div>
+                <ul class="aw-exp-bullets">
+                  <li>이더리움 기반 본인 인증 및 투표 구조 설계</li>
+                  <li>웹 인증 + 블록체인 인증 분리 아키텍처 구현</li>
+                  <li>스마트 컨트랙트 기반 투표 기록·검증 시스템 구축</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         `,
       },
       skills: {

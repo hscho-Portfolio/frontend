@@ -1054,6 +1054,26 @@ html[data-theme='dark'] .aw-award-item {
 .aw-contact-card strong { font-size: 13px; font-weight: 700; color: var(--ink-100); }
 .aw-contact-card span { font-size: 12px; color: var(--ink-400); }
 
+/* ── Papers ── */
+.aw-paper-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 12px;
+}
+.aw-paper-item {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+.aw-paper-item:last-child { border-bottom: none; }
+.aw-paper-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--ink-100);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
 /* ── Skill level grid (Strong / Knowledgeable / Etc) ── */
 .aw-skill-level-grid {
   display: grid;
