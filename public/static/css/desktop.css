@@ -622,9 +622,10 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
   border-bottom: 1px solid var(--line);
 }
 .aw-avatar {
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   border-radius: 28px;
+  transform: rotate(45deg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -635,6 +636,14 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
     0 14px 30px rgba(139, 92, 246, 0.3),
     inset 0 1px 0 rgba(255, 255, 255, 0.4);
   flex-shrink: 0;
+  overflow: hidden;
+}
+.aw-avatar img {
+  transform: rotate(-45deg);
+  width: 160%;
+  height: 160%;
+  object-fit: cover;
+  border-radius: 0;
 }
 .aw-profile-name {
   font-size: 22px;

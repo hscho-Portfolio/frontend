@@ -220,7 +220,7 @@
     const profileImg  = s.profileImageUrl
 
     const avatarSrc  = profileImg || '/static/hosung.jpg'
-    const avatarHtml = `<img src="${avatarSrc}" alt="${ownerName}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />`
+    const avatarHtml = `<img src="${avatarSrc}" alt="${ownerName}" />`
 
     const contents = {
       about: {
@@ -265,11 +265,11 @@
                 <div class="uiv-front">
                   <div class="uiv-front-icon"><i class="fa-brands fa-rust"></i></div>
                   <p>Rust</p>
-                  <small>Crabpaste</small>
+                  <small>Systems</small>
                 </div>
                 <div class="uiv-content">
-                  <p class="uiv-heading">Crabpaste</p>
-                  <p>LAN 내 장치 간 클립보드 실시간 동기화 오픈소스. mDNS 자동 탐색, P2P WebSocket, 6자리 핀 페어링. CLI · egui · Tauri 멀티 인터페이스, 크로스 플랫폼 지원.</p>
+                  <p class="uiv-heading">Rust</p>
+                  <p>GC 없이 메모리 안전성 보장, 소유권 시스템으로 런타임 오버헤드 제로. Crabpaste 오픈소스로 mDNS 탐색 · P2P WebSocket · 핀 페어링을 경량 구현.</p>
                 </div>
               </div>
               <div class="uiv-card is-cyan">
