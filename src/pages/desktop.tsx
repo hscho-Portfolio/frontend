@@ -1,13 +1,7 @@
-import type { Project } from '../data/types'
+import type { Project, Shortcut } from '../data/types'
 
-const DESKTOP_ICONS = [
-  { id: 'projects', label: 'Projects', icon: 'fa-solid fa-folder', color: '#fbbf24' },
-  { id: 'about', label: 'About Me', icon: 'fa-solid fa-id-badge', color: '#60a5fa' },
-  { id: 'skills', label: 'Skills', icon: 'fa-solid fa-layer-group', color: '#a78bfa' },
-  { id: 'career', label: 'Career', icon: 'fa-solid fa-trophy', color: '#34d399' },
-  { id: 'research', label: 'Research', icon: 'fa-solid fa-flask', color: '#f472b6' },
-  { id: 'contact', label: 'Contact', icon: 'fa-solid fa-paper-plane', color: '#22d3ee' },
-  { id: 'admin', label: 'Admin', icon: 'fa-solid fa-lock', color: '#94a3b8' },
+const SHORTCUT_COLORS = [
+  '#6366f1', '#8b5cf6', '#ec4899', '#0ea5e9', '#10b981',
 ]
 
 const DOCK_APPS = [
@@ -19,7 +13,7 @@ const DOCK_APPS = [
   { id: 'admin', label: 'Admin', icon: 'fa-solid fa-lock', color: '#94a3b8' },
 ]
 
-export const DesktopPage = ({ projects }: { projects: Project[] }) => {
+export const DesktopPage = ({ projects, shortcuts }: { projects: Project[]; shortcuts: Shortcut[] }) => {
   return (
     <div id="desktop-root" class="desktop-root">
       {/* Wallpaper */}
@@ -56,13 +50,22 @@ export const DesktopPage = ({ projects }: { projects: Project[] }) => {
       {/* Desktop area */}
       <main class="desktop-area" id="desktop-area">
         <div class="desktop-icons">
-          {DESKTOP_ICONS.map((it) => (
-            <button class="desktop-icon" data-app={it.id} type="button">
-              <span class="desktop-icon-img" style={`--icon-color:${it.color}`}>
-                <i class={it.icon}></i>
+          {shortcuts.map((it, i) => (
+            <a
+              class="desktop-icon desktop-icon-shortcut"
+              href={`/project/${it.slug}`}
+              data-shortcut-slug={it.slug}
+            >
+              <span
+                class="desktop-icon-img"
+                style={it.thumbnailUrl
+                  ? `background-image:url(${it.thumbnailUrl});background-size:cover;background-position:center;--icon-color:${SHORTCUT_COLORS[i % 5]}`
+                  : `--icon-color:${SHORTCUT_COLORS[i % 5]}`}
+              >
+                {!it.thumbnailUrl && <i class="fa-solid fa-folder-open"></i>}
               </span>
-              <span class="desktop-icon-label">{it.label}</span>
-            </button>
+              <span class="desktop-icon-label">{it.title}</span>
+            </a>
           ))}
         </div>
 

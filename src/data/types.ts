@@ -54,6 +54,14 @@ export interface Project {
   links: ProjectLinks
 }
 
+export interface Shortcut {
+  id: number
+  title: string
+  slug: string
+  thumbnailUrl?: string
+  shortcutOrder: number
+}
+
 export interface Award {
   id: number
   prize: string

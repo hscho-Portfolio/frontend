@@ -1369,6 +1369,12 @@
   box-shadow: 0 6px 14px -4px rgba(239, 68, 68, 0.25);
 }
 
+/* --- Shortcut toggle button --- */
+.adm-shortcut-btn { color: #94a3b8; }
+.adm-shortcut-btn:hover { color: #f59e0b; border-color: rgba(245,158,11,0.35); }
+.adm-shortcut-btn.active { color: #f59e0b; border-color: rgba(245,158,11,0.4); }
+.adm-shortcut-btn.active:hover { color: #d97706; }
+
 /* --- Filters bar (admin-projects) --- */
 .adm-filters {
   display: flex;

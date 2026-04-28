@@ -3,7 +3,7 @@ import { renderer } from './renderer'
 import { IntroPage } from './pages/intro'
 import { DesktopPage } from './pages/desktop'
 import { ProjectDetailPage } from './pages/project-detail'
-import { fetchProjects, fetchProjectBySlug } from './data/api'
+import { fetchProjects, fetchProjectBySlug, fetchShortcuts } from './data/api'
 import { AdminLoginPage } from './pages/admin-login'
 import { AdminDashboardPage } from './pages/admin-dashboard'
 import { AdminProjectsPage } from './pages/admin-projects'
@@ -46,8 +46,8 @@ app.get('/', (c) =>
 )
 
 app.get('/desktop', async (c) => {
-  const projects = await fetchProjects()
-  return c.render(<DesktopPage projects={projects} />, {
+  const [projects, shortcuts] = await Promise.all([fetchProjects(), fetchShortcuts()])
+  return c.render(<DesktopPage projects={projects} shortcuts={shortcuts} />, {
     title: 'CHO OS — Desktop',
     bodyClass: 'desktop-body',
     pageScript: '/static/desktop.js',

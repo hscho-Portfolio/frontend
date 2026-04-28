@@ -63,6 +63,7 @@ const renderProjectRow = (project) => {
   const category = project.category?.name || '-'
   const statusLabel = project.status === 'completed' ? 'Completed' : 'In Progress'
   const statusClass = project.status === 'completed' ? 'done' : 'wip'
+  const isShortcut = project.isDesktopShortcut
   return `
     <tr data-project-id="${project.id}">
       <td>
@@ -81,6 +82,14 @@ const renderProjectRow = (project) => {
       <td class="adm-cell-sub">${escapeHtml(formatPeriod(project.startDate, project.endDate))}</td>
       <td class="th-right">
         <div class="adm-table-actions">
+          <button
+            class="adm-icon-btn adm-shortcut-btn ${isShortcut ? 'active' : ''}"
+            data-project-shortcut="${project.id}"
+            title="${isShortcut ? '바로가기 해제' : '바로가기 등록'}"
+            type="button"
+          >
+            <i class="fa-${isShortcut ? 'solid' : 'regular'} fa-star"></i>
+          </button>
           <a class="adm-icon-btn" href="/admin/dashboard/projects/${project.id}" title="Edit">
             <i class="fa-solid fa-pen-to-square"></i>
           </a>
@@ -164,6 +173,24 @@ const initProjectsListPage = () => {
       ? filtered.map(renderProjectRow).join('')
       : '<tr><td colspan="8">No projects found.</td></tr>'
     if (totalLabel) totalLabel.textContent = `Total ${filtered.length}`
+
+    $$('[data-project-shortcut]', body).forEach((button) => {
+      button.addEventListener('click', async () => {
+        const projectId = button.getAttribute('data-project-shortcut')
+        if (!projectId) return
+        try {
+          const updated = await requestJson(`/api/v1/projects/${projectId}/shortcut`, { method: 'PATCH' })
+          projects = projects.map((p) => String(p.id) === projectId ? { ...p, isDesktopShortcut: updated.isDesktopShortcut } : p)
+          const isNowShortcut = updated.isDesktopShortcut
+          button.classList.toggle('active', isNowShortcut)
+          button.title = isNowShortcut ? '바로가기 해제' : '바로가기 등록'
+          button.querySelector('i').className = `fa-${isNowShortcut ? 'solid' : 'regular'} fa-star`
+          toast(isNowShortcut ? '바로가기에 등록됐어요.' : '바로가기에서 해제됐어요.', 'success')
+        } catch (error) {
+          toast(error.message || '변경에 실패했어요.', 'error')
+        }
+      })
+    })
 
     $$('[data-project-delete]', body).forEach((button) => {
       button.addEventListener('click', async () => {
