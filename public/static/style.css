@@ -68,30 +68,31 @@
 }
 
 html[data-theme='dark'] {
-  --bg-1: #282828;
-  --bg-2: #2e2e2e;
-  --bg-3: #343434;
-  --bg-deep: #1c1c1c;
+  --bg-1: #5c6068;
+  --bg-2: #666b72;
+  --bg-3: #72777e;
+  --bg-deep: #52565c;
 
-  --surface: #383838;
-  --surface-1: rgba(58, 58, 58, 0.85);
-  --surface-2: rgba(58, 58, 58, 0.65);
-  --surface-3: rgba(58, 58, 58, 0.96);
+  --surface: #9ea4aa;
+  --surface-1: rgba(158, 164, 170, 0.92);
+  --surface-2: rgba(158, 164, 170, 0.72);
+  --surface-3: rgba(158, 164, 170, 0.97);
 
-  --ink-100: #f5f5f5;
-  --ink-200: #e2e2e2;
-  --ink-300: #c8c8c8;
-  --ink-400: #999999;
-  --ink-500: #707070;
-  --ink-600: #555555;
+  /* 밝은 서피스 위에 어두운 텍스트 */
+  --ink-100: #1a1c1e;
+  --ink-200: #2c2f34;
+  --ink-300: #46494f;
+  --ink-400: #62676f;
+  --ink-500: #80868e;
+  --ink-600: #9ea4aa;
 
-  --line: rgba(255, 255, 255, 0.1);
-  --line-strong: rgba(255, 255, 255, 0.18);
-  --line-soft: rgba(0, 0, 0, 0.35);
+  --line: rgba(0, 0, 0, 0.1);
+  --line-strong: rgba(0, 0, 0, 0.18);
+  --line-soft: rgba(0, 0, 0, 0.3);
 
-  --glass: rgba(58, 58, 58, 0.6);
-  --glass-strong: rgba(58, 58, 58, 0.85);
-  --glass-soft: rgba(58, 58, 58, 0.4);
+  --glass: rgba(158, 164, 170, 0.55);
+  --glass-strong: rgba(158, 164, 170, 0.85);
+  --glass-soft: rgba(158, 164, 170, 0.38);
 
   --wallpaper-image: url('/static/background_dark.svg');
   --wallpaper-mesh-opacity: 0.34;

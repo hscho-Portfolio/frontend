@@ -102,15 +102,16 @@
 }
 
 html[data-theme='dark'] .topbar {
-  background: rgba(40, 40, 40, 0.88);
-  border-bottom-color: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+  background: rgba(82, 86, 92, 0.92);
+  border-bottom-color: rgba(0, 0, 0, 0.18);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+  color: var(--ink-100);
 }
 
 html[data-theme='dark'] .topbar-menu-item:hover,
 html[data-theme='dark'] .topbar-icon:hover,
 html[data-theme='dark'] .topbar-theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 @media (min-aspect-ratio: 16/9) {
@@ -118,7 +119,7 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
     height: clamp(26px, 2.7vh, 34px);
     background: rgba(255, 255, 255, 0.2);
   }
-  html[data-theme='dark'] .topbar { background: rgba(40, 40, 40, 0.82); }
+  html[data-theme='dark'] .topbar { background: rgba(82, 86, 92, 0.88); }
 }
 
 /* =========================================
@@ -877,91 +878,91 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
    흰 배경이 하드코딩된 컴포넌트를 다크 서피스로 교체
 ========================================= */
 html[data-theme='dark'] .welcome-widget {
-  background: rgba(62, 62, 62, 0.90);
-  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(158, 164, 170, 0.92);
+  border-color: rgba(0, 0, 0, 0.12);
   box-shadow:
-    0 24px 60px rgba(0, 0, 0, 0.28),
-    0 4px 12px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 24px 60px rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 html[data-theme='dark'] .welcome-widget-tags span {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.14);
 }
 html[data-theme='dark'] .dock-tooltip {
-  background: rgba(60, 60, 60, 0.97);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(130, 136, 142, 0.97);
+  border-color: rgba(0, 0, 0, 0.14);
   color: var(--ink-100);
 }
 html[data-theme='dark'] .folder-backdrop {
-  background: rgba(20, 20, 20, 0.45);
+  background: rgba(40, 44, 48, 0.45);
 }
 html[data-theme='dark'] .folder-window,
 html[data-theme='dark'] .app-window {
-  background: rgba(64, 64, 64, 0.98);
-  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(148, 154, 160, 0.98);
+  border-color: rgba(0, 0, 0, 0.14);
   box-shadow:
-    0 40px 80px rgba(0, 0, 0, 0.32),
-    0 12px 28px rgba(0, 0, 0, 0.16),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    0 40px 80px rgba(0, 0, 0, 0.25),
+    0 12px 28px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 html[data-theme='dark'] .folder-toolbar {
-  background: rgba(72, 72, 72, 0.95);
-  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(138, 144, 150, 0.95);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 html[data-theme='dark'] .folder-search {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.14);
 }
 html[data-theme='dark'] .folder-search input {
   color: var(--ink-100);
 }
 html[data-theme='dark'] .chip {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.14);
   color: var(--ink-200);
 }
 html[data-theme='dark'] .chip:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.14);
   color: var(--ink-100);
 }
 html[data-theme='dark'] .project-card {
-  background: rgba(78, 78, 78, 0.97);
-  border-color: rgba(255, 255, 255, 0.14);
-  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+  background: rgba(168, 174, 180, 0.97);
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.15);
 }
 html[data-theme='dark'] .project-card:hover {
-  border-color: rgba(196, 181, 253, 0.45);
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.28);
+  border-color: rgba(109, 40, 217, 0.35);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.22);
 }
 html[data-theme='dark'] .stack-pill {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(0, 0, 0, 0.16);
 }
 html[data-theme='dark'] .aw-skill-cat {
-  background: rgba(62, 62, 62, 0.92);
-  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(158, 164, 170, 0.94);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 html[data-theme='dark'] .aw-skill {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.06);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 html[data-theme='dark'] .aw-tl-item {
-  background: rgba(62, 62, 62, 0.92);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(158, 164, 170, 0.94);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 html[data-theme='dark'] .aw-tl-item::before {
   background: var(--surface);
 }
 html[data-theme='dark'] .aw-research-card {
-  background: rgba(62, 62, 62, 0.92);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(158, 164, 170, 0.94);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 html[data-theme='dark'] .aw-contact-card {
-  background: rgba(62, 62, 62, 0.92);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(158, 164, 170, 0.94);
+  border-color: rgba(0, 0, 0, 0.1);
 }
 html[data-theme='dark'] .aw-contact-card:hover {
-  border-color: rgba(168, 139, 250, 0.4);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+  border-color: rgba(109, 40, 217, 0.35);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
