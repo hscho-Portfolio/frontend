@@ -843,9 +843,10 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
   margin-bottom: 3px;
 }
 .aw-award-contest {
-  font-size: 12px;
-  color: var(--ink-400);
+  font-size: 13.5px;
+  color: var(--ink-300);
   line-height: 1.45;
+  font-weight: 500;
 }
 .aw-award-date {
   font-family: 'JetBrains Mono', monospace;
