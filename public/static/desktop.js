@@ -340,7 +340,7 @@
         `,
       },
       career: {
-        title: 'Career',
+        title: 'Awards',
         html: (() => {
           const items = cachedAwards.length > 0
             ? cachedAwards.map((a) => renderAward(a.awardDate, a.prize, a.contest, a.certificateUrl)).join('')

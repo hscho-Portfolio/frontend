@@ -8,7 +8,7 @@ const DOCK_APPS = [
   { id: 'projects', label: 'Projects', icon: 'fa-solid fa-folder', color: '#fbbf24' },
   { id: 'about', label: 'About', icon: 'fa-solid fa-user', color: '#60a5fa' },
   { id: 'skills', label: 'Skills', icon: 'fa-solid fa-layer-group', color: '#a78bfa' },
-  { id: 'career', label: 'Career', icon: 'fa-solid fa-trophy', color: '#34d399' },
+  { id: 'career', label: 'Awards', icon: 'fa-solid fa-trophy', color: '#34d399' },
   { id: 'contact', label: 'Contact', icon: 'fa-solid fa-paper-plane', color: '#22d3ee' },
   { id: 'admin', label: 'Admin', icon: 'fa-solid fa-lock', color: '#94a3b8' },
 ]
