@@ -287,62 +287,6 @@
           </div>
 
           <div class="aw-section">
-            <div class="aw-eyebrow"><i class="fa-solid fa-timeline"></i> Experience</div>
-            <h2 class="aw-title">주요 프로젝트</h2>
-            <div class="aw-exp-list">
-              <div class="aw-exp-item">
-                <div class="aw-exp-period">02.2026 – 04.2026</div>
-                <div class="aw-exp-body">
-                  <div class="aw-exp-title">LG 스타일러 CX 전략 데이터 분석</div>
-                  <div class="aw-exp-org">소셜 미디어 기반 고객 경험 분석</div>
-                  <ul class="aw-exp-bullets">
-                    <li>34만 건 텍스트 데이터 수집·정제 및 분석 데이터셋 구축</li>
-                    <li>임베딩, 클러스터링, LDA, 감성 분석 기반 데이터 파이프라인 설계</li>
-                    <li>고객 행동을 Actor·Action 단위로 구조화하여 핵심 기회영역 도출</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="aw-exp-item">
-                <div class="aw-exp-period">06.2025 – 08.2025</div>
-                <div class="aw-exp-body">
-                  <div class="aw-exp-title">AI 기반 스마트 팩토리 품질 검사 시스템 (VODA)</div>
-                  <div class="aw-exp-org">K-SoftVation Showcase 프로젝트</div>
-                  <ul class="aw-exp-bullets">
-                    <li>파인튜닝 객체 탐지 모델(YOLO) 기반 불량 검출 및 OpenCV 품질 분류 구현</li>
-                    <li>FastAPI · Spring Boot · Next.js 기반 AI-서비스 통합 시스템 구축</li>
-                    <li>GCP VM · Docker · Nginx · GCS 기반 배포 및 CI/CD 파이프라인 구성</li>
-                    <li>Raspberry Pi · Arduino 연동으로 이미지 수집부터 자동 판정·제어 구현</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="aw-exp-item">
-                <div class="aw-exp-period">02.2025 – 06.2025</div>
-                <div class="aw-exp-body">
-                  <div class="aw-exp-title">AI 기반 시니어 복지 추천 플랫폼 (어르심)</div>
-                  <div class="aw-exp-org">캡스톤디자인 프로젝트</div>
-                  <ul class="aw-exp-bullets">
-                    <li>GPT 기반 챗봇에서 의도 분류 및 성격 분석(MBTI) 로직 구현</li>
-                    <li>성격 태그 기반 복지 프로그램 추천 및 자동 일정 등록 기능 개발</li>
-                    <li>STT 기반 음성 입력 처리 및 FastAPI · Spring Boot · Next.js 풀스택 구축</li>
-                  </ul>
-                </div>
-              </div>
-              <div class="aw-exp-item">
-                <div class="aw-exp-period">09.2024 – 12.2024</div>
-                <div class="aw-exp-body">
-                  <div class="aw-exp-title">서울 공공자전거 수요 예측 시스템</div>
-                  <div class="aw-exp-org">오픈소스 프로젝트</div>
-                  <ul class="aw-exp-bullets">
-                    <li>날씨·대여 데이터를 활용한 LSTM 기반 시계열 수요 예측 모델 개발</li>
-                    <li>Flask API · MySQL · React 기반 웹 서비스와 모델 연동 및 Chart.js 시각화</li>
-                    <li>Docker · Kubernetes(k3s) · GCP 기반 서비스 배포</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="aw-section">
             <div class="aw-eyebrow"><i class="fa-solid fa-graduation-cap"></i> Education</div>
             <div class="aw-row">
               <div class="aw-row-key">학교</div>
