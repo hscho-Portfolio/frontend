@@ -939,12 +939,12 @@ html[data-theme='dark'] .stack-pill {
   border-color: rgba(255, 255, 255, 0.14);
 }
 html[data-theme='dark'] .aw-skill-cat {
-  background: rgba(22, 22, 22, 0.95);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(40, 40, 40, 0.98);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 html[data-theme='dark'] .aw-skill {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.08);
+  background: rgba(55, 55, 55, 0.98);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 html[data-theme='dark'] .aw-tl-item {
   background: rgba(22, 22, 22, 0.95);
