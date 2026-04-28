@@ -302,18 +302,17 @@
         title: 'Career',
         html: `
           <div class="aw-section">
-            <div class="aw-eyebrow"><i class="fa-solid fa-briefcase"></i> Career Timeline</div>
-            <h2 class="aw-title">지금까지 걸어온 길</h2>
-            <p class="aw-sub">학력, 교육, 프로젝트 이력을 시간순으로.</p>
+            <div class="aw-eyebrow"><i class="fa-solid fa-trophy"></i> Awards & Honors</div>
+            <h2 class="aw-title">수상 내역</h2>
+            <p class="aw-sub">각종 경진대회 및 학술대회 수상 이력입니다.</p>
           </div>
-          <div class="aw-timeline">
-            ${renderTL('2026', 'AWS 기반 포트폴리오 CMS 구축', 'OS형 인터페이스 + FastAPI + AWS 운영 경험 확보')}
-            ${renderTL('2026', 'AI Infra / 생산시스템 직무 준비', '제조 도메인 + AI 서비스 결합 방향 모색')}
-            ${renderTL('2025', 'LG DX School 수료', '데이터 분석, ML, 백엔드 풀스택 교육 과정')}
-            ${renderTL('2025', '고령층 복지 추천 서비스', '룰 기반 + 컨텐츠 기반 추천 시스템 구현')}
-            ${renderTL('2025', 'QLED 소자 데이터 분석', '회귀 모델로 CE/EQE 예측 baseline 구축')}
-            ${renderTL('2024', '관광 리뷰 NLP 분석', 'LDA 토픽 모델링 + 감성 분류')}
-            ${renderTL('2024', '블록체인 투표 플랫폼', '스마트 컨트랙트 기반 무결성 보장 투표')}
+          <div class="aw-award-list">
+            ${renderAward('2025.08', '우수사업계획서상', '2025 AI Powered SW 창업경진대회')}
+            ${renderAward('2025.08', '우수상', 'K-SoftVation Showcase 프로젝트 경진대회')}
+            ${renderAward('2025.06', '동상', '2025 한국정보기술학회 하계종합학술대회')}
+            ${renderAward('2024.11', '장려상', '제5회 세종시 빅데이터 분석 아이디어 공모전')}
+            ${renderAward('2024.10', '우수상 (생성형 AI 부문)', '2024 캡스톤디자인 및 AI 해커톤 경진대회')}
+            ${renderAward('2024.05', '은상', '2024 한국정보기술학회 하계종합학술대회')}
           </div>
         `,
       },
@@ -380,6 +379,18 @@
             )
             .join('')}
         </div>
+      </div>`
+  }
+
+  function renderAward(date, prize, contest) {
+    return `
+      <div class="aw-award-item">
+        <div class="aw-award-icon"><i class="fa-solid fa-trophy"></i></div>
+        <div class="aw-award-body">
+          <div class="aw-award-prize">${prize}</div>
+          <div class="aw-award-contest">${contest}</div>
+        </div>
+        <div class="aw-award-date">${date}</div>
       </div>`
   }
 
