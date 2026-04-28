@@ -111,7 +111,7 @@ export async function fetchProjects(): Promise<Project[]> {
   try {
     const res = await fetch(`${BACKEND_URL}/api/v1/public/projects`, {
       headers: { Accept: 'application/json' },
-      signal: AbortSignal.timeout(3000),
+      signal: AbortSignal.timeout(10000),
     })
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     const data: ApiProjectList[] = await res.json()
@@ -125,7 +125,7 @@ export async function fetchProjectBySlug(slug: string): Promise<Project | null> 
   try {
     const res = await fetch(`${BACKEND_URL}/api/v1/public/projects/${slug}`, {
       headers: { Accept: 'application/json' },
-      signal: AbortSignal.timeout(3000),
+      signal: AbortSignal.timeout(10000),
     })
     if (res.status === 404) return null
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
@@ -166,7 +166,7 @@ export async function fetchStacks(): Promise<TechStack[]> {
   try {
     const res = await fetch(`${BACKEND_URL}/api/v1/public/stacks`, {
       headers: { Accept: 'application/json' },
-      signal: AbortSignal.timeout(3000),
+      signal: AbortSignal.timeout(10000),
     })
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     const data: { id: number; name: string; category: string; iconUrl?: string; color: string; description?: string }[] =
