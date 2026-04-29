@@ -126,7 +126,7 @@ export async function fetchProjects(): Promise<Project[]> {
     const data: ApiProjectList[] = await res.json()
     return data.map(mapListToProject)
   } catch {
-    return PROJECTS
+    return []
   }
 }
 

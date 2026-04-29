@@ -122,6 +122,13 @@ export const DesktopPage = ({ projects, shortcuts }: { projects: Project[]; shor
             </div>
           </div>
           <div class="folder-grid" id="folder-grid">
+            {projects.length === 0 && (
+              <div class="folder-empty">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <p>프로젝트를 불러오지 못했습니다.</p>
+                <span>잠시 후 다시 시도해주세요.</span>
+              </div>
+            )}
             {projects.map((p) => (
               <a
                 class="project-card"
