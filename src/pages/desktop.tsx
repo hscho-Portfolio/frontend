@@ -52,34 +52,8 @@ export const DesktopPage = ({ projects, shortcuts }: { projects: Project[]; shor
 
       {/* Desktop area */}
       <main class="desktop-area" id="desktop-area">
-        <div class="desktop-icons">
-          {shortcuts.slice(0, 4).map((it, i) => {
-            const c = SC_COLORS[i]
-            return (
-              <a
-                class="sc-parent desktop-icon-shortcut"
-                href={`/project/${it.slug}`}
-                data-shortcut-slug={it.slug}
-                style={`--sc-c1:${c.c1};--sc-c2:${c.c2};--sc-circle:${c.circle};--sc-text:${c.text}`}
-              >
-                <div class="sc-card">
-                  <div class="sc-glass"></div>
-                  <div class="sc-logo">
-                    <span class="sc-circle sc-circle1"></span>
-                    <span class="sc-circle sc-circle2"></span>
-                    <span class="sc-circle sc-circle3"></span>
-                    <span class="sc-circle sc-circle4"></span>
-                  </div>
-                  <div class="sc-content">
-                    <span class="sc-title">{it.title}</span>
-                  </div>
-                  <div class="sc-bottom">
-                    <span class="sc-view-more">View →</span>
-                  </div>
-                </div>
-              </a>
-            )
-          })}
+        <div class="desktop-icons" id="desktop-shortcuts">
+          {/* shortcuts loaded by desktop.js CSR */}
         </div>
 
         {/* Welcome widget */}

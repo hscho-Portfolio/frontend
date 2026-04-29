@@ -55,6 +55,67 @@
   const appTitle = document.getElementById('app-title')
   const appBody = document.getElementById('app-window-body')
 
+  // ============ CSR Shortcut cards loading ============
+  const SC_COLORS = [
+    { c1: 'rgb(106,90,205)', c2: 'rgb(147,112,219)', circle: 'rgba(147,112,219,0.28)', text: '#3c2f80' },
+    { c1: '#0284c7',         c2: '#38bdf8',           circle: 'rgba(56,189,248,0.28)',  text: '#0c4a6e' },
+    { c1: '#059669',         c2: '#34d399',           circle: 'rgba(52,211,153,0.28)',  text: '#064e3b' },
+    { c1: '#be185d',         c2: '#f472b6',           circle: 'rgba(244,114,182,0.28)', text: '#831843' },
+  ]
+
+  const renderShortcutCard = (it, i) => {
+    const c = SC_COLORS[i % SC_COLORS.length]
+    const safeTitle = (it.title || '').replace(/"/g, '&quot;').replace(/</g, '&lt;')
+    return `
+      <a class="sc-parent desktop-icon-shortcut"
+         href="/project/${it.slug}"
+         data-shortcut-slug="${it.slug}"
+         style="--sc-c1:${c.c1};--sc-c2:${c.c2};--sc-circle:${c.circle};--sc-text:${c.text}">
+        <div class="sc-card">
+          <div class="sc-glass"></div>
+          <div class="sc-logo">
+            <span class="sc-circle sc-circle1"></span>
+            <span class="sc-circle sc-circle2"></span>
+            <span class="sc-circle sc-circle3"></span>
+            <span class="sc-circle sc-circle4"></span>
+          </div>
+          <div class="sc-content">
+            <span class="sc-title">${safeTitle}</span>
+          </div>
+          <div class="sc-bottom">
+            <span class="sc-view-more">View →</span>
+          </div>
+        </div>
+      </a>`
+  }
+
+  const loadAndRenderShortcuts = async () => {
+    const container = document.getElementById('desktop-shortcuts')
+    if (!container) return
+    const backendUrl = window.BACKEND_URL || 'https://api.hscho-portfolio.site'
+    try {
+      const res = await fetch(`${backendUrl}/api/v1/public/shortcuts`, {
+        signal: AbortSignal.timeout(15000),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      const shortcuts = await res.json()
+      container.innerHTML = shortcuts.slice(0, 4).map(renderShortcutCard).join('')
+      // re-attach click listeners for loader
+      container.querySelectorAll('.desktop-icon-shortcut').forEach((link) => {
+        link.addEventListener('click', (e) => {
+          const href = link.getAttribute('href')
+          if (!href || !href.startsWith('/project/')) return
+          e.preventDefault()
+          const label = link.querySelector('.sc-title')?.textContent || 'Project'
+          showProjectLoader(label)
+          requestAnimationFrame(() => { setTimeout(() => { window.location.href = href }, 50) })
+        })
+      })
+    } catch {
+      // silently fail — no cards shown
+    }
+  }
+
   // ============ CSR Project loading ============
   const THUMB_FALLBACKS = [
     'linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#ec4899 100%)',
@@ -216,6 +277,8 @@
     projectLoaderOverlay.classList.remove('active')
     projectLoaderOverlay.setAttribute('aria-hidden', 'true')
   }
+
+  loadAndRenderShortcuts()
 
   document.querySelectorAll('.desktop-icon-shortcut').forEach((link) => {
     link.addEventListener('click', (e) => {
