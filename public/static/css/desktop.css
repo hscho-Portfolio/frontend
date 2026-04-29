@@ -564,7 +564,7 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
 .project-card {
   display: flex;
   flex-direction: column;
-  min-height: 320px;
+  min-height: 365px;
   border-radius: var(--r-lg);
   overflow: hidden;
   background: rgba(255, 255, 255, 0.85);
@@ -626,7 +626,13 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
   backdrop-filter: blur(10px);
 }
 
-.project-card-body { padding: 16px 18px 18px; }
+.project-card-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: 0;
+  padding: 16px 18px 18px;
+}
 .project-card-title {
   font-size: 15px;
   font-weight: 700;
@@ -657,7 +663,9 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
 .project-card-foot {
   display: flex;
   align-items: center;
+  flex: 0 0 auto;
   gap: 6px;
+  margin-top: auto;
   font-size: 11px;
   color: var(--ink-400);
   font-weight: 500;

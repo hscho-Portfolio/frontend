@@ -136,7 +136,6 @@ export const DesktopPage = ({ projects, shortcuts }: { projects: Project[]; shor
                     ? `background-image:url(${p.thumbnailUrl})`
                     : `background:${p.thumbColor}`}
                 >
-                  {!p.thumbnailUrl ? <i class={p.icon || 'fa-regular fa-image'}></i> : null}
                   {p.featured ? <span class="badge-featured">★ Featured</span> : null}
                 </div>
                 <div class="project-card-body">
