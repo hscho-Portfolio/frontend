@@ -8,14 +8,14 @@
   right: 32px;
   transform: translateY(-50%);
   display: grid;
-  grid-template-columns: 180px;
+  grid-template-columns: 160px;
   gap: 12px;
   z-index: 2;
 }
 
 .sc-parent {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   perspective: 1200px;
   text-decoration: none;
   display: block;
