@@ -40,11 +40,18 @@ export const AdminStacksPage = () => {
               </label>
               <label class="adm-field">
                 <span>Category *</span>
-                <select id="stackAdminCategory">
+                <input
+                  type="text"
+                  id="stackAdminCategory"
+                  list="stackAdminCategoryList"
+                  placeholder="직접 입력 또는 선택"
+                  autocomplete="off"
+                />
+                <datalist id="stackAdminCategoryList">
                   {STACK_CATEGORIES.map((c) => (
                     <option value={c.name}>{c.name}</option>
                   ))}
-                </select>
+                </datalist>
               </label>
             </div>
 

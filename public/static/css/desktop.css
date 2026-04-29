@@ -460,8 +460,9 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
 }
 .folder-window {
   width: min(1280px, 94vw);
-  height: min(860px, 88vh);
-  max-height: 88vh;
+  height: min(900px, calc(100vh - 48px));
+  max-height: calc(100vh - 48px);
+  min-height: 0;
 }
 .folder-overlay.open .folder-window,
 .app-overlay.open .app-window {
@@ -477,6 +478,7 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
   background: rgba(255, 255, 255, 0.55);
   border-bottom: 1px solid var(--line);
   flex-wrap: wrap;
+  flex: 0 0 auto;
 }
 .folder-search {
   display: flex;
@@ -530,11 +532,32 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 22px;
-  padding: 24px;
-  overflow-y: auto;
-  flex: 1;
+  padding: 24px 24px 36px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  flex: 1 1 auto;
   min-height: 0;
   align-content: start;
+  scrollbar-gutter: stable;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.folder-grid::-webkit-scrollbar {
+  width: 10px;
+}
+.folder-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+.folder-grid::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.45);
+  border: 3px solid transparent;
+  border-radius: 999px;
+  background-clip: padding-box;
+}
+.folder-grid::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.58);
+  border: 3px solid transparent;
+  background-clip: padding-box;
 }
 
 /* Project card */
