@@ -24,28 +24,20 @@
 .sc-card {
   height: 100%;
   border-radius: 24px;
-  background: linear-gradient(135deg, var(--sc-c1, rgb(106,90,205)) 0%, var(--sc-c2, rgb(147,112,219)) 100%);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   transition: all 0.6s ease-in-out;
   transform-style: preserve-3d;
   position: relative;
   box-shadow:
-    rgba(30, 30, 60, 0)   28px 36px 20px -28px,
-    rgba(30, 30, 60, 0.2) 0px  18px 18px -4px;
+    rgba(30, 30, 60, 0.08) 0px 8px 24px -4px,
+    inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
-/* ── Glass overlay ── */
-.sc-glass {
-  transform-style: preserve-3d;
-  position: absolute;
-  inset: 6px;
-  border-radius: 20px;
-  background: linear-gradient(160deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 100%);
-  transform: translate3d(0, 0, 18px);
-  border-right:  1px solid rgba(255,255,255,0.25);
-  border-bottom: 1px solid rgba(255,255,255,0.25);
-  transition: all 0.6s ease-in-out;
-  pointer-events: none;
-}
+/* ── Glass overlay (hidden for transparent card) ── */
+.sc-glass { display: none; }
 
 /* ── Concentric circles logo ── */
 .sc-logo {
@@ -83,11 +75,12 @@
 }
 .sc-title {
   display: block;
-  color: var(--sc-text, #3c2f80);
-  font-weight: 800;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 700;
   font-size: 11.5px;
   line-height: 1.4;
   word-break: keep-all;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.25);
 }
 
 /* ── Bottom bar ── */
@@ -101,19 +94,19 @@
   pointer-events: none;
 }
 .sc-view-more {
-  color: var(--sc-text, #6a5acd);
+  color: rgba(255, 255, 255, 0.7);
   font-size: 11px;
   font-weight: 700;
-  opacity: 0.65;
   transition: all 0.3s ease-in-out;
 }
 
 /* ── Hover ── */
 .sc-parent:hover .sc-card {
   transform: rotate3d(1, -1, 0, 25deg);
+  background: rgba(255, 255, 255, 0.15);
   box-shadow:
-    rgba(30, 30, 60, 0.3)  22px 36px 20px -28px,
-    rgba(30, 30, 60, 0.15) 0px  18px 22px  0px;
+    rgba(30, 30, 60, 0.15) 0px 12px 28px -4px,
+    inset 0 1px 0 rgba(255,255,255,0.4);
 }
 .sc-parent:hover .sc-circle2 { transform: translate3d(0,0,39px); }
 .sc-parent:hover .sc-circle3 { transform: translate3d(0,0,51px); }
