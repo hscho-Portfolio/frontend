@@ -55,14 +55,80 @@
   const appTitle = document.getElementById('app-title')
   const appBody = document.getElementById('app-window-body')
 
+  // ============ CSR Project loading ============
+  const THUMB_FALLBACKS = [
+    'linear-gradient(135deg,#6366f1 0%,#8b5cf6 50%,#ec4899 100%)',
+    'linear-gradient(135deg,#0ea5e9 0%,#22d3ee 50%,#a78bfa 100%)',
+    'linear-gradient(135deg,#f59e0b 0%,#ef4444 50%,#ec4899 100%)',
+    'linear-gradient(135deg,#10b981 0%,#06b6d4 100%)',
+    'linear-gradient(135deg,#1e40af 0%,#7c3aed 100%)',
+    'linear-gradient(135deg,#ec4899 0%,#f97316 100%)',
+  ]
+
+  const renderProjectCard = (p, idx) => {
+    const thumbStyle = p.thumbnailUrl
+      ? `background-image:url(${p.thumbnailUrl});background-size:cover;background-position:center center`
+      : `background:${THUMB_FALLBACKS[idx % THUMB_FALLBACKS.length]}`
+    const statusKey  = p.status === 'completed' ? 'done' : 'wip'
+    const statusLabel = p.status === 'completed' ? 'Completed' : 'In Progress'
+    const stacks = (p.stacks || []).slice(0, 4).map((s) => `<span class="stack-pill">${s.name}</span>`).join('')
+    const featuredBadge = p.isFeatured ? '<span class="badge-featured">★ Featured</span>' : ''
+    const safeTitle = (p.title || '').replace(/"/g, '&quot;')
+    return `
+      <a class="project-card"
+         href="/project/${p.slug}"
+         data-status="${p.status}"
+         data-featured="${p.isFeatured}"
+         data-title="${safeTitle.toLowerCase()}">
+        <div class="project-card-thumb" style="${thumbStyle}">${featuredBadge}</div>
+        <div class="project-card-body">
+          <div class="project-card-title">${p.title || ''}</div>
+          <div class="project-card-tagline">${p.summary || ''}</div>
+          <div class="project-card-stacks">${stacks}</div>
+          <div class="project-card-foot">
+            <span class="status-dot status-${statusKey}"></span>
+            <span>${statusLabel}</span>
+          </div>
+        </div>
+      </a>`
+  }
+
+  let cachedProjects = null
+
+  const loadAndRenderProjects = async () => {
+    if (!grid) return
+    if (cachedProjects) {
+      grid.innerHTML = cachedProjects.map(renderProjectCard).join('')
+      applyFilter()
+      return
+    }
+    const backendUrl = window.BACKEND_URL || 'https://api.hscho-portfolio.site'
+    try {
+      const res = await fetch(`${backendUrl}/api/v1/public/projects`, {
+        signal: AbortSignal.timeout(30000),
+      })
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      cachedProjects = await res.json()
+      grid.innerHTML = cachedProjects.map(renderProjectCard).join('')
+      applyFilter()
+    } catch {
+      grid.innerHTML = `
+        <div class="folder-empty">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <p>프로젝트를 불러오지 못했습니다.</p>
+          <span>잠시 후 다시 시도해주세요.</span>
+        </div>`
+    }
+  }
+
   const openFolder = (id) => {
     if (id === 'projects') {
       showProjectLoader('Projects', 'Fetching projects...')
-      setTimeout(() => {
+      loadAndRenderProjects().finally(() => {
         hideProjectLoader()
         folderTitle.textContent = 'Projects'
         folderOverlay.classList.add('open')
-      }, 600)
+      })
     } else if (id === 'admin') {
       window.location.href = '/admin/login'
     } else {

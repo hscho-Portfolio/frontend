@@ -8,7 +8,7 @@ import { PROJECTS } from './projects'
 import { ALL_STACKS } from './stacks'
 
 export const BACKEND_URL: string =
-  (import.meta as any).env?.VITE_BACKEND_URL ?? 'http://localhost:8080'
+  (import.meta as any).env?.VITE_BACKEND_URL ?? 'https://api.hscho-portfolio.site'
 
 const resolveAssetUrl = (url?: string | null): string | undefined => {
   if (!url) return undefined

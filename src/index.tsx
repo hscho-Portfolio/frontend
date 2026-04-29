@@ -46,8 +46,8 @@ app.get('/', (c) =>
 )
 
 app.get('/desktop', async (c) => {
-  const [projects, shortcuts] = await Promise.all([fetchProjects(), fetchShortcuts()])
-  return c.render(<DesktopPage projects={projects} shortcuts={shortcuts} />, {
+  const shortcuts = await fetchShortcuts()
+  return c.render(<DesktopPage projects={[]} shortcuts={shortcuts} />, {
     title: 'CHO OS — Desktop',
     bodyClass: 'desktop-body',
     pageScript: '/static/desktop.js',
