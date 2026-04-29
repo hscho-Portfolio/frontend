@@ -36,25 +36,6 @@
 }
 .window-bar-detail { background: rgba(255, 255, 255, 0.85); }
 
-/* Loading shell */
-.pd-loading-shell {
-  min-height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.pd-loading-spinner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  color: #94a3b8;
-  font-size: 14px;
-}
-.pd-loading-spinner i {
-  font-size: 28px;
-  color: #a78bfa;
-}
 
 .pd-hero {
   position: relative;

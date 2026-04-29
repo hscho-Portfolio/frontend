@@ -55,10 +55,11 @@ app.get('/desktop', (c) => {
   } as any)
 })
 
-app.get('/project/:slug', (c) => {
+app.get('/project/:slug', async (c) => {
   const slug = c.req.param('slug')
-  return c.render(<ProjectDetailPage project={null} />, {
-    title: `CHO OS — Project`,
+  const project = await fetchProjectBySlug(slug)
+  return c.render(<ProjectDetailPage project={project} />, {
+    title: `CHO OS — Project / ${slug}`,
     bodyClass: 'project-body',
     pageScript: '/static/project-detail.js',
     css: CSS_BUNDLES.project,
