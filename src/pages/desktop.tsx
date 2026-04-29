@@ -69,9 +69,6 @@ export const DesktopPage = ({ projects, shortcuts }: { projects: Project[]; shor
                     <span class="sc-circle sc-circle2"></span>
                     <span class="sc-circle sc-circle3"></span>
                     <span class="sc-circle sc-circle4"></span>
-                    <span class="sc-circle sc-circle5">
-                      <i class="fa-solid fa-folder-open"></i>
-                    </span>
                   </div>
                   <div class="sc-content">
                     <span class="sc-title">{it.title}</span>
