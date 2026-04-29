@@ -1,6 +1,10 @@
 import { AdminShell } from './admin-shell'
 import { STACK_CATEGORIES } from '../data/stacks'
 
+const STACK_CAT_OPTIONS = STACK_CATEGORIES.map((c) => (
+  <option value={c.name}>{c.name}</option>
+))
+
 export const AdminProjectFormPage = ({ mode, id }: { mode: 'new' | 'edit'; id?: string }) => {
   const isEdit = mode === 'edit'
   const titleText = isEdit ? `Edit Project / ${id}` : 'New Project'
@@ -112,42 +116,50 @@ export const AdminProjectFormPage = ({ mode, id }: { mode: 'new' | 'edit'; id?: 
             <header class="adm-card-head">
               <div>
                 <h3>Tech Stack</h3>
-                <p>Select backend stacks and optionally describe how they were used.</p>
+                <p>이 프로젝트에서 사용한 기술 스택을 직접 추가하세요.</p>
               </div>
-              <button type="button" class="btn-ghost adm-stack-new-btn" data-open-stack-modal>
-                <i class="fa-solid fa-plus"></i> Add Stack
+              <button type="button" class="btn-ghost" id="ps-add-btn">
+                <i class="fa-solid fa-plus"></i> Add
               </button>
             </header>
-
-            <div class="adm-stack-toolbar">
-              <div class="adm-stack-search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="stackSearch" placeholder="Search stack" />
+            {/* 스택 행 목록 */}
+            <div id="ps-list"></div>
+            {/* 추가 폼 (숨김) */}
+            <div id="ps-form" class="ps-inline-form" hidden>
+              <div class="adm-form-row three">
+                <label class="adm-field">
+                  <span>Name *</span>
+                  <input type="text" id="ps-name" placeholder="React" />
+                </label>
+                <label class="adm-field">
+                  <span>Category</span>
+                  <select id="ps-category">
+                    <option value="">-- 선택 --</option>
+                    {STACK_CAT_OPTIONS}
+                  </select>
+                </label>
+                <label class="adm-field">
+                  <span>Color</span>
+                  <div class="adm-color-input">
+                    <input type="color" id="ps-color-picker" value="#6db33f" />
+                    <input type="text" id="ps-color" value="#6db33f" placeholder="#6db33f" />
+                  </div>
+                </label>
               </div>
-              <div class="adm-stack-filters">
-                <button type="button" class="adm-stack-filter active" data-stack-cat="all">
-                  All
+              <label class="adm-field">
+                <span>Icon URL or FA class</span>
+                <input type="text" id="ps-icon" placeholder="fa-brands fa-react  or  https://..." />
+              </label>
+              <label class="adm-field">
+                <span>Usage Description</span>
+                <input type="text" id="ps-usage" placeholder="이 프로젝트에서 어떻게 사용했나요?" />
+              </label>
+              <div class="ps-form-actions">
+                <button type="button" class="btn-ghost" id="ps-cancel-btn">Cancel</button>
+                <button type="button" class="btn-primary" id="ps-confirm-btn">
+                  <i class="fa-solid fa-check"></i> Add Stack
                 </button>
-                {STACK_CATEGORIES.map((c) => (
-                  <button type="button" class="adm-stack-filter" data-stack-cat={c.name}>
-                    <i class={c.icon}></i>
-                    {c.name}
-                  </button>
-                ))}
               </div>
-            </div>
-
-            <div class="adm-stack-selected" id="stackSelected">
-              <span class="adm-stack-selected-label">Selected</span>
-              <span class="adm-stack-selected-count" id="stackSelectedCount">0</span>
-              <span class="adm-stack-selected-empty">No stack selected yet.</span>
-            </div>
-
-            <div class="adm-stack-list" id="stackList"></div>
-
-            <div class="adm-stack-empty" id="stackEmpty" hidden>
-              <i class="fa-regular fa-face-smile-beam"></i>
-              <span>No stacks match this filter.</span>
             </div>
           </section>
         </div>

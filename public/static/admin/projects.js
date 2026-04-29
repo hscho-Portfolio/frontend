@@ -1,6 +1,5 @@
 import { $, $$, escapeHtml, flashClass, toast, confirmModal } from './dom.js'
 import { requestJson } from './api.js'
-import { applyStackFilter, bindStackRow, updateSelectedCount } from './stack-picker.js'
 
 const formatPeriod = (startDate, endDate) => {
   if (!startDate) return '-'
@@ -32,31 +31,75 @@ const imageByType = (images, imageType) =>
     .filter((image) => image.imageType === imageType)
     .sort((a, b) => a.sortOrder - b.sortOrder)[0] || null
 
-const createStackRow = (stack, selected = null) => {
-  const checked = !!selected
-  return `
-    <div
-      class="adm-stack-row ${checked ? 'on' : ''}"
-      data-stack-id="${stack.id}"
-      data-stack-name="${escapeHtml(stack.name)}"
-      data-stack-cat="${escapeHtml(stack.category || '')}"
-    >
-      <label class="adm-stack-pick">
-        <input type="checkbox" ${checked ? 'checked' : ''} />
-        <span class="adm-stack-pick-mark" style="--c:${escapeHtml(stack.color || '#64748b')}">
-          <i class="fa-solid fa-cube"></i>
-        </span>
-        <span class="adm-stack-pick-name">${escapeHtml(stack.name)}</span>
-        <span class="adm-stack-pick-cat">${escapeHtml(stack.category || '')}</span>
-      </label>
-      <input
-        type="text"
-        class="adm-stack-usage"
-        value="${escapeHtml(selected?.usageDescription || '')}"
-        placeholder="How this stack was used"
-      />
+// ── Project Stack inline manager ──────────────────────────────
+let psItems = []   // { name, iconUrl, color, category, usageDescription }[]
+
+const renderPsIcon = (iconUrl) => {
+  if (!iconUrl) return '<i class="fa-solid fa-cube"></i>'
+  if (iconUrl.startsWith('fa-') || iconUrl.startsWith('fa '))
+    return `<i class="${escapeHtml(iconUrl)}"></i>`
+  return `<img src="${escapeHtml(iconUrl)}" alt="" style="width:18px;height:18px;object-fit:contain;display:block" />`
+}
+
+const renderPsList = () => {
+  const list = document.getElementById('ps-list')
+  if (!list) return
+  if (!psItems.length) {
+    list.innerHTML = '<p class="ps-empty">스택이 없습니다. Add 버튼으로 추가하세요.</p>'
+    return
+  }
+  list.innerHTML = psItems.map((s, i) => `
+    <div class="ps-row" data-ps-index="${i}">
+      <span class="ps-row-icon" style="background:${escapeHtml(s.color || '#64748b')}">${renderPsIcon(s.iconUrl)}</span>
+      <span class="ps-row-name">${escapeHtml(s.name)}</span>
+      <span class="ps-row-cat">${escapeHtml(s.category || '')}</span>
+      <span class="ps-row-usage">${escapeHtml(s.usageDescription || '')}</span>
+      <button type="button" class="adm-icon-btn adm-icon-btn-danger ps-row-del" data-ps-del="${i}" title="Remove">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
     </div>
-  `
+  `).join('')
+  list.querySelectorAll('[data-ps-del]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      psItems.splice(Number(btn.getAttribute('data-ps-del')), 1)
+      renderPsList()
+    })
+  })
+}
+
+const initPsForm = () => {
+  const addBtn     = document.getElementById('ps-add-btn')
+  const form       = document.getElementById('ps-form')
+  const cancelBtn  = document.getElementById('ps-cancel-btn')
+  const confirmBtn = document.getElementById('ps-confirm-btn')
+  const colorPicker = document.getElementById('ps-color-picker')
+  const colorHex   = document.getElementById('ps-color')
+  if (!addBtn || !form) return
+
+  addBtn.addEventListener('click', () => { form.hidden = false; document.getElementById('ps-name')?.focus() })
+  cancelBtn?.addEventListener('click', () => { form.hidden = true })
+  colorPicker?.addEventListener('input', (e) => { if (colorHex) colorHex.value = e.target.value })
+  colorHex?.addEventListener('input', (e) => {
+    if (/^#[0-9a-fA-F]{6}$/.test(e.target.value) && colorPicker) colorPicker.value = e.target.value
+  })
+  confirmBtn?.addEventListener('click', () => {
+    const name = document.getElementById('ps-name')?.value.trim()
+    if (!name) { alert('Name is required.'); return }
+    psItems.push({
+      name,
+      iconUrl:          document.getElementById('ps-icon')?.value.trim() || '',
+      color:            document.getElementById('ps-color')?.value.trim() || '#64748b',
+      category:         document.getElementById('ps-category')?.value || '',
+      usageDescription: document.getElementById('ps-usage')?.value.trim() || '',
+    })
+    renderPsList()
+    // 폼 초기화
+    ;['ps-name','ps-icon','ps-usage'].forEach(id => { const el = document.getElementById(id); if (el) el.value = '' })
+    document.getElementById('ps-category').value = ''
+    document.getElementById('ps-color').value = '#64748b'
+    document.getElementById('ps-color-picker').value = '#64748b'
+    form.hidden = true
+  })
 }
 
 const renderProjectRow = (project) => {
@@ -242,7 +285,6 @@ const initProjectFormPage = () => {
   const mode = form.getAttribute('data-mode') || 'new'
   const projectId = form.getAttribute('data-project-id') || ''
   const categorySelect = $('#project-category-id')
-  const stackList = $('#stackList')
 
   const setLoading = (on) => {
     if (!saveButton) return
@@ -260,14 +302,6 @@ const initProjectFormPage = () => {
     categorySelect.value = selectedId ? String(selectedId) : ''
   }
 
-  const renderStacks = (stacks, selectedStacks = []) => {
-    if (!stackList) return
-    const selectedMap = new Map(selectedStacks.map((stack) => [String(stack.id), stack]))
-    stackList.innerHTML = stacks.map((stack) => createStackRow(stack, selectedMap.get(String(stack.id)))).join('')
-    $$('.adm-stack-row', stackList).forEach(bindStackRow)
-    updateSelectedCount()
-    applyStackFilter()
-  }
 
   const fillForm = (project) => {
     $('#project-title').value = project.title || ''
@@ -291,13 +325,7 @@ const initProjectFormPage = () => {
   }
 
   const selectedStacksPayload = () =>
-    $$('.adm-stack-row', stackList)
-      .filter((row) => row.querySelector('input[type="checkbox"]')?.checked)
-      .map((row, index) => ({
-        stackId: Number(row.getAttribute('data-stack-id')),
-        usageDescription: row.querySelector('.adm-stack-usage')?.value?.trim() || '',
-        sortOrder: index,
-      }))
+    psItems.map((s, index) => ({ ...s, sortOrder: index }))
 
   const payloadFromForm = () => ({
     title: $('#project-title').value.trim(),
@@ -334,20 +362,26 @@ const initProjectFormPage = () => {
 
   const load = async () => {
     try {
-      const [categories, stacks] = await Promise.all([
-        requestJson('/api/v1/categories'),
-        requestJson('/api/v1/stacks'),
-      ])
-
+      const categories = await requestJson('/api/v1/categories')
       fillCategories(categories)
-      renderStacks(stacks)
 
       if (mode === 'edit' && projectId) {
         const project = await requestJson(`/api/v1/projects/${projectId}`)
         fillCategories(categories, project.category?.id)
-        renderStacks(stacks, project.stacks || [])
+        // 저장된 스택 복원
+        psItems = (project.stacks || []).map((s) => ({
+          name:             s.name || '',
+          iconUrl:          s.iconUrl || '',
+          color:            s.color || '#64748b',
+          category:         s.category || '',
+          usageDescription: s.usageDescription || '',
+        }))
+        renderPsList()
         fillForm(project)
+      } else {
+        renderPsList()
       }
+      initPsForm()
       document.dispatchEvent(new Event('project-form-loaded'))
     } catch (error) {
       toast(error.message || 'Failed to load project form.', 'error')
@@ -458,21 +492,14 @@ const initFullPreview = () => {
     ).join('')
 
     // Stacks
-    const checkedRows = document.querySelectorAll('.adm-stack-row input[type="checkbox"]:checked')
-    const stackSec   = document.getElementById('fpStackSection')
-    const stackGrid  = document.getElementById('fpStackGrid')
-    const stackItems = Array.from(checkedRows).map(cb => {
-      const row  = cb.closest('.adm-stack-row')
-      const name = row?.getAttribute('data-stack-name') || ''
-      const cat  = row?.getAttribute('data-stack-cat')  || ''
-      return { name, cat }
-    })
-    stackSec.hidden = stackItems.length === 0
-    stackGrid.innerHTML = stackItems.map(s =>
+    const stackSec  = document.getElementById('fpStackSection')
+    const stackGrid = document.getElementById('fpStackGrid')
+    stackSec.hidden = psItems.length === 0
+    stackGrid.innerHTML = psItems.map(s =>
       `<div class="adm-fp-stack-card">
-        <div class="adm-fp-stack-icon"><i class="fa-solid fa-cube"></i></div>
+        <div class="adm-fp-stack-icon">${renderPsIcon(s.iconUrl)}</div>
         <div class="adm-fp-stack-name">${escapeHtml(s.name)}</div>
-        <div class="adm-fp-stack-cat">${escapeHtml(s.cat)}</div>
+        <div class="adm-fp-stack-cat">${escapeHtml(s.category || '')}</div>
       </div>`
     ).join('')
 
