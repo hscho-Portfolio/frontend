@@ -627,7 +627,7 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
   background-color: rgba(248, 250, 252, 0.84);
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center top;
+  background-position: center center;
 }
 .project-card-thumb::after {
   content: '';
