@@ -120,6 +120,9 @@ export const DesktopPage = ({ projects, shortcuts }: { projects: Project[]; shor
               <button class="chip" data-filter="in_progress">In Progress</button>
               <button class="chip" data-filter="completed">Completed</button>
             </div>
+            <button class="folder-back-btn" data-close="folder" title="데스크톱으로 돌아가기" type="button">
+              <i class="fa-solid fa-house"></i>
+            </button>
           </div>
           <div class="folder-grid" id="folder-grid">
             {projects.length === 0 && (

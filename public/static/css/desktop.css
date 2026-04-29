@@ -507,7 +507,27 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
 }
 .folder-search input::placeholder { color: var(--ink-500); }
 
-.folder-filters { display: flex; gap: 6px; flex-wrap: wrap; }
+.folder-filters { display: flex; gap: 6px; flex-wrap: wrap; flex: 1 1 auto; }
+
+.folder-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-500);
+  font-size: 13px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.folder-back-btn:hover {
+  background: var(--surface-2, rgba(0,0,0,0.06));
+  color: var(--ink-900);
+}
 .chip {
   padding: 6px 12px;
   border-radius: 999px;
