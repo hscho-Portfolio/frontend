@@ -189,6 +189,23 @@ export const DesktopPage = ({ projects, shortcuts }: { projects: Project[]; shor
         </div>
       </div>
 
+      {/* Project loading overlay — shown while navigating to /project/:slug */}
+      <div id="project-loader-overlay" class="project-loader-overlay" aria-hidden="true">
+        <div class="terminal-loader">
+          <div class="terminal-header">
+            <div class="terminal-controls">
+              <span class="control close"></span>
+              <span class="control minimize"></span>
+              <span class="control maximize"></span>
+            </div>
+            <div class="terminal-title" id="loader-title">Loading...</div>
+          </div>
+          <div class="loader-content">
+            <div class="loader-text" id="loader-text">Loading project...</div>
+          </div>
+        </div>
+      </div>
+
       {/* Dock */}
       <footer class="dock" aria-label="dock">
         <ul class="dock-list">

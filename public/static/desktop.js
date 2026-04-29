@@ -128,6 +128,47 @@
   })
   searchInput?.addEventListener('input', applyFilter)
 
+  // ============ Project icon loading overlay ============
+  const projectLoaderOverlay = document.getElementById('project-loader-overlay')
+  const loaderTitle = document.getElementById('loader-title')
+  const loaderText = document.getElementById('loader-text')
+
+  const showProjectLoader = (projectName) => {
+    if (!projectLoaderOverlay) return
+    if (loaderTitle) loaderTitle.textContent = projectName || 'Loading...'
+    if (loaderText) loaderText.textContent = `Loading ${projectName || 'project'}...`
+    projectLoaderOverlay.classList.add('active')
+    projectLoaderOverlay.setAttribute('aria-hidden', 'false')
+  }
+
+  document.querySelectorAll('.desktop-icon-shortcut').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href')
+      if (!href || !href.startsWith('/project/')) return
+      e.preventDefault()
+      const label = link.querySelector('.desktop-icon-label')?.textContent || 'Project'
+      showProjectLoader(label)
+      // navigate after one animation frame so the overlay renders first
+      requestAnimationFrame(() => {
+        setTimeout(() => { window.location.href = href }, 50)
+      })
+    })
+  })
+
+  // Also intercept project cards inside the folder overlay
+  document.addEventListener('click', (e) => {
+    const card = e.target.closest('.project-card')
+    if (!card) return
+    const href = card.getAttribute('href')
+    if (!href || !href.startsWith('/project/')) return
+    e.preventDefault()
+    const title = card.querySelector('.project-card-title')?.textContent || 'Project'
+    showProjectLoader(title)
+    requestAnimationFrame(() => {
+      setTimeout(() => { window.location.href = href }, 50)
+    })
+  })
+
   // ============ Auto-open via query (?open=projects) ============
   const params = new URLSearchParams(window.location.search)
   if (params.get('open')) {

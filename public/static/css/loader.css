@@ -1,0 +1,145 @@
+/* =====================================================
+   Project Loading Overlay
+   Source: loaders/white_terminal_db_loader.css (light)
+           loaders/black_terminal_db_loader.css (dark)
+   ===================================================== */
+
+@keyframes loaderBlinkCursor {
+  50% { border-right-color: transparent; }
+}
+
+@keyframes loaderTypeAndDelete {
+  0%,  10% { width: 0; }
+  45%, 55% { width: 10em; }
+  90%, 100% { width: 0; }
+}
+
+/* Fullscreen backdrop */
+.project-loader-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  align-items: center;
+  justify-content: center;
+  animation: loaderFadeIn 0.15s ease;
+}
+
+.project-loader-overlay.active {
+  display: flex;
+}
+
+@keyframes loaderFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* === Terminal window shell (shared) === */
+.project-loader-overlay .terminal-loader {
+  width: 400px;
+  height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  animation: loaderSlideUp 0.2s ease;
+}
+
+@keyframes loaderSlideUp {
+  from { transform: translateY(12px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.project-loader-overlay .terminal-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+}
+
+.project-loader-overlay .terminal-controls {
+  position: absolute;
+  left: 10px;
+  display: flex;
+  gap: 7px;
+}
+
+.project-loader-overlay .control {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+}
+
+.project-loader-overlay .control.close    { background-color: #ff5f57; }
+.project-loader-overlay .control.minimize { background-color: #ffbd2e; }
+.project-loader-overlay .control.maximize { background-color: #28c840; }
+
+.project-loader-overlay .terminal-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.project-loader-overlay .loader-content {
+  padding: 18px;
+}
+
+.project-loader-overlay .loader-text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right-width: 2px;
+  border-right-style: solid;
+  animation: loaderTypeAndDelete 3s steps(18) infinite,
+             loaderBlinkCursor   0.5s step-end infinite alternate;
+  font-weight: 700;
+  font-family: Consolas, Monaco, monospace;
+  font-size: 14px;
+}
+
+/* === Light theme === */
+:root:not([data-theme="dark"]) .project-loader-overlay .terminal-loader {
+  background: #ffffff;
+  border: 1px solid #d9dde3;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+
+:root:not([data-theme="dark"]) .project-loader-overlay .terminal-header {
+  background-color: #eef1f5;
+  border-bottom: 1px solid #d9dde3;
+}
+
+:root:not([data-theme="dark"]) .project-loader-overlay .terminal-title {
+  color: #4b5563;
+}
+
+:root:not([data-theme="dark"]) .project-loader-overlay .loader-content {
+  color: #111827;
+}
+
+:root:not([data-theme="dark"]) .project-loader-overlay .loader-text {
+  color: #16a34a;
+  border-right-color: #16a34a;
+}
+
+/* === Dark theme === */
+[data-theme="dark"] .project-loader-overlay .terminal-loader {
+  background: #1c1c1c;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .project-loader-overlay .terminal-header {
+  background-color: #343434;
+}
+
+[data-theme="dark"] .project-loader-overlay .terminal-title {
+  color: rgba(238, 238, 238, 0.76);
+}
+
+[data-theme="dark"] .project-loader-overlay .loader-text {
+  color: rgb(0, 196, 0);
+  border-right-color: rgb(0, 196, 0);
+}
