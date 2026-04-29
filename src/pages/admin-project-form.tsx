@@ -133,10 +133,10 @@ export const AdminProjectFormPage = ({ mode, id }: { mode: 'new' | 'edit'; id?: 
                 </label>
                 <label class="adm-field">
                   <span>Category</span>
-                  <select id="ps-category">
-                    <option value="">-- 선택 --</option>
-                    {STACK_CAT_OPTIONS}
-                  </select>
+                  <input type="text" id="ps-category" list="ps-category-list" placeholder="직접 입력 또는 선택" autocomplete="off" />
+                  <datalist id="ps-category-list">
+                    {STACK_CATEGORIES.map((c) => <option value={c.name} />)}
+                  </datalist>
                 </label>
                 <label class="adm-field">
                   <span>Color</span>
