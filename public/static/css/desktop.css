@@ -195,21 +195,10 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
   text-align: center;
 }
 
-/* shortcut icons (project thumbnails) */
+/* shortcut icons — now use sc-parent / sc-card (shortcut-cards.css) */
 .desktop-icon-shortcut {
   text-decoration: none;
   color: inherit;
-}
-.desktop-icon-shortcut .desktop-icon-img {
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
-}
-.desktop-icon-label {
-  max-width: 80px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 /* =========================================

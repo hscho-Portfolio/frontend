@@ -1,7 +1,10 @@
 import type { Project, Shortcut } from '../data/types'
 
-const SHORTCUT_COLORS = [
-  '#6366f1', '#8b5cf6', '#ec4899', '#0ea5e9', '#10b981',
+const SC_COLORS = [
+  { c1: 'rgb(106,90,205)', c2: 'rgb(147,112,219)', circle: 'rgba(147,112,219,0.28)', text: '#3c2f80' },
+  { c1: '#0284c7',         c2: '#38bdf8',           circle: 'rgba(56,189,248,0.28)',  text: '#0c4a6e' },
+  { c1: '#059669',         c2: '#34d399',           circle: 'rgba(52,211,153,0.28)',  text: '#064e3b' },
+  { c1: '#be185d',         c2: '#f472b6',           circle: 'rgba(244,114,182,0.28)', text: '#831843' },
 ]
 
 const DOCK_APPS = [
@@ -50,23 +53,36 @@ export const DesktopPage = ({ projects, shortcuts }: { projects: Project[]; shor
       {/* Desktop area */}
       <main class="desktop-area" id="desktop-area">
         <div class="desktop-icons">
-          {shortcuts.map((it, i) => (
-            <a
-              class="desktop-icon desktop-icon-shortcut"
-              href={`/project/${it.slug}`}
-              data-shortcut-slug={it.slug}
-            >
-              <span
-                class="desktop-icon-img"
-                style={it.thumbnailUrl
-                  ? `background-image:url(${it.thumbnailUrl});background-size:cover;background-position:center;--icon-color:${SHORTCUT_COLORS[i % 5]}`
-                  : `--icon-color:${SHORTCUT_COLORS[i % 5]}`}
+          {shortcuts.slice(0, 4).map((it, i) => {
+            const c = SC_COLORS[i]
+            return (
+              <a
+                class="sc-parent desktop-icon-shortcut"
+                href={`/project/${it.slug}`}
+                data-shortcut-slug={it.slug}
+                style={`--sc-c1:${c.c1};--sc-c2:${c.c2};--sc-circle:${c.circle};--sc-text:${c.text}`}
               >
-                {!it.thumbnailUrl && <i class="fa-solid fa-folder-open"></i>}
-              </span>
-              <span class="desktop-icon-label">{it.title}</span>
-            </a>
-          ))}
+                <div class="sc-card">
+                  <div class="sc-glass"></div>
+                  <div class="sc-logo">
+                    <span class="sc-circle sc-circle1"></span>
+                    <span class="sc-circle sc-circle2"></span>
+                    <span class="sc-circle sc-circle3"></span>
+                    <span class="sc-circle sc-circle4"></span>
+                    <span class="sc-circle sc-circle5">
+                      <i class="fa-solid fa-folder-open"></i>
+                    </span>
+                  </div>
+                  <div class="sc-content">
+                    <span class="sc-title">{it.title}</span>
+                  </div>
+                  <div class="sc-bottom">
+                    <span class="sc-view-more">View →</span>
+                  </div>
+                </div>
+              </a>
+            )
+          })}
         </div>
 
         {/* Welcome widget */}

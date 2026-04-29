@@ -1,0 +1,140 @@
+/* Desktop shortcut 3D cards — adapted from Uiverse.io by chase2k25 */
+/* All selectors are prefixed .sc- to avoid conflicts */
+
+/* ── Layout ── */
+.desktop-icons {
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, 180px);
+  gap: 16px;
+  z-index: 2;
+}
+
+.sc-parent {
+  width: 180px;
+  height: 200px;
+  perspective: 1200px;
+  text-decoration: none;
+  display: block;
+}
+
+/* ── Card shell ── */
+.sc-card {
+  height: 100%;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--sc-c1, rgb(106,90,205)) 0%, var(--sc-c2, rgb(147,112,219)) 100%);
+  transition: all 0.6s ease-in-out;
+  transform-style: preserve-3d;
+  position: relative;
+  box-shadow:
+    rgba(30, 30, 60, 0)   28px 36px 20px -28px,
+    rgba(30, 30, 60, 0.2) 0px  18px 18px -4px;
+}
+
+/* ── Glass overlay ── */
+.sc-glass {
+  transform-style: preserve-3d;
+  position: absolute;
+  inset: 6px;
+  border-radius: 26px;
+  border-top-left-radius: 100%;
+  background: linear-gradient(0deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.7) 100%);
+  transform: translate3d(0, 0, 18px);
+  border-right:  1px solid rgba(255,255,255,0.5);
+  border-bottom: 1px solid rgba(255,255,255,0.5);
+  transition: all 0.6s ease-in-out;
+  pointer-events: none;
+}
+
+/* ── Concentric circles logo ── */
+.sc-logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.sc-circle {
+  display: block;
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  top: 0;
+  left: 0;
+  background: var(--sc-circle, rgba(147,112,219,0.28));
+  box-shadow: rgba(100,100,111,0.18) 6px 6px 12px 0;
+  transition: all 0.6s ease-in-out;
+}
+
+.sc-circle1 { width: 96px; transform: translate3d(0,0,15px); top: 6px;  left: 6px;  }
+.sc-circle2 { width: 76px; transform: translate3d(0,0,27px); top: 7px;  left: 7px;  transition-delay: 0.3s; }
+.sc-circle3 { width: 58px; transform: translate3d(0,0,39px); top: 9px;  left: 9px;  transition-delay: 0.6s; }
+.sc-circle4 { width: 40px; transform: translate3d(0,0,51px); top: 12px; left: 12px; transition-delay: 0.9s; }
+.sc-circle5 {
+  width: 24px;
+  transform: translate3d(0,0,63px);
+  top: 15px; left: 15px;
+  display: grid;
+  place-content: center;
+  background: rgba(255,255,255,0.9) !important;
+  transition-delay: 1.2s;
+}
+.sc-circle5 i {
+  font-size: 10px;
+  color: var(--sc-text, #3c2f80);
+}
+
+/* ── Text content ── */
+.sc-content {
+  position: absolute;
+  left: 0; right: 0;
+  padding: 52px 24px 0 14px;
+  transform: translate3d(0, 0, 19px);
+  pointer-events: none;
+}
+.sc-title {
+  display: block;
+  color: var(--sc-text, #3c2f80);
+  font-weight: 800;
+  font-size: 11.5px;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+/* ── Bottom bar ── */
+.sc-bottom {
+  position: absolute;
+  bottom: 14px; left: 14px; right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  transform: translate3d(0, 0, 19px);
+  pointer-events: none;
+}
+.sc-view-more {
+  color: var(--sc-text, #6a5acd);
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.75;
+  transition: all 0.3s ease-in-out;
+}
+
+/* ── Hover ── */
+.sc-parent:hover .sc-card {
+  transform: rotate3d(1, -1, 0, 25deg);
+  box-shadow:
+    rgba(30, 30, 60, 0.3)  22px 36px 20px -28px,
+    rgba(30, 30, 60, 0.15) 0px  18px 22px  0px;
+}
+.sc-parent:hover .sc-circle2 { transform: translate3d(0,0,39px); }
+.sc-parent:hover .sc-circle3 { transform: translate3d(0,0,51px); }
+.sc-parent:hover .sc-circle4 { transform: translate3d(0,0,63px); }
+.sc-parent:hover .sc-circle5 { transform: translate3d(0,0,75px); }
+.sc-parent:hover .sc-view-more { transform: translate3d(0,0,8px); opacity: 1; }
+
+/* ── Dark mode adjustments ── */
+[data-theme="dark"] .sc-circle5 { background: rgba(255,255,255,0.15) !important; }
+[data-theme="dark"] .sc-circle5 i { color: rgba(255,255,255,0.9); }

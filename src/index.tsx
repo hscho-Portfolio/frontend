@@ -24,7 +24,7 @@ import { NotFoundPage } from './pages/not-found'
  */
 const CSS_BUNDLES = {
   intro: ['/static/mac-laptop.css', '/static/css/desktop.css'],
-  desktop: ['/static/css/desktop.css', '/static/css/loader.css'],
+  desktop: ['/static/css/desktop.css', '/static/css/shortcut-cards.css', '/static/css/loader.css'],
   project: ['/static/css/desktop.css', '/static/css/project.css'],
   admin: ['/static/css/admin.css'],
   notFound: ['/static/css/project.css'], // 404는 project.css에 포함된 .nf-* 만 사용
