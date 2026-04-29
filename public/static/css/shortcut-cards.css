@@ -3,13 +3,13 @@
 
 /* ── Layout ── */
 .desktop-icons {
-  position: absolute;
-  top: 32px;
-  right: 32px;
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, 180px);
   gap: 16px;
   z-index: 2;
+  flex-shrink: 0;
+  align-self: center;
 }
 
 .sc-parent {
@@ -38,12 +38,11 @@
   transform-style: preserve-3d;
   position: absolute;
   inset: 6px;
-  border-radius: 26px;
-  border-top-left-radius: 100%;
-  background: linear-gradient(0deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.55) 100%);
+  border-radius: 20px;
+  background: linear-gradient(160deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.05) 100%);
   transform: translate3d(0, 0, 18px);
-  border-right:  1px solid rgba(255,255,255,0.35);
-  border-bottom: 1px solid rgba(255,255,255,0.35);
+  border-right:  1px solid rgba(255,255,255,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.25);
   transition: all 0.6s ease-in-out;
   pointer-events: none;
 }
@@ -69,10 +68,10 @@
   transition: all 0.6s ease-in-out;
 }
 
-.sc-circle1 { width: 96px; transform: translate3d(0,0,15px); top: 6px;  left: 6px;  opacity: 0.5; }
-.sc-circle2 { width: 76px; transform: translate3d(0,0,27px); top: 7px;  left: 7px;  opacity: 0.45; transition-delay: 0.3s; }
-.sc-circle3 { width: 58px; transform: translate3d(0,0,39px); top: 9px;  left: 9px;  opacity: 0.4;  transition-delay: 0.6s; }
-.sc-circle4 { width: 40px; transform: translate3d(0,0,51px); top: 12px; left: 12px; opacity: 0.35; transition-delay: 0.9s; }
+.sc-circle1 { width: 96px; transform: translate3d(0,0,15px); top: 6px;  left: 6px;  opacity: 0.22; }
+.sc-circle2 { width: 76px; transform: translate3d(0,0,27px); top: 7px;  left: 7px;  opacity: 0.18; transition-delay: 0.3s; }
+.sc-circle3 { width: 58px; transform: translate3d(0,0,39px); top: 9px;  left: 9px;  opacity: 0.14; transition-delay: 0.6s; }
+.sc-circle4 { width: 40px; transform: translate3d(0,0,51px); top: 12px; left: 12px; opacity: 0.10; transition-delay: 0.9s; }
 
 /* ── Text content ── */
 .sc-content {
