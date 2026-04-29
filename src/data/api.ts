@@ -10,6 +10,13 @@ import { ALL_STACKS } from './stacks'
 export const BACKEND_URL: string =
   (import.meta as any).env?.VITE_BACKEND_URL ?? 'http://localhost:8080'
 
+const resolveAssetUrl = (url?: string | null): string | undefined => {
+  if (!url) return undefined
+  if (/^(https?:)?\/\//.test(url) || url.startsWith('data:')) return url
+  if (url.startsWith('/')) return `${BACKEND_URL}${url}`
+  return url
+}
+
 // ── helpers ────────────────────────────────────────────────────────────────
 
 const THUMB_FALLBACKS = [
@@ -43,6 +50,7 @@ function sectionsOf(sections: ApiProjectDetail['sections'], type: string): strin
 // ── mappers ────────────────────────────────────────────────────────────────
 
 function mapListToProject(api: ApiProjectList): Project {
+  const thumbnailUrl = resolveAssetUrl(api.thumbnailUrl)
   return {
     slug: api.slug,
     title: api.title,
@@ -53,8 +61,8 @@ function mapListToProject(api: ApiProjectList): Project {
     period: '',
     category: api.category?.name ?? '',
     featured: api.isFeatured,
-    thumbColor: api.thumbnailUrl ?? nextFallback(),
-    thumbnailUrl: api.thumbnailUrl ?? undefined,
+    thumbColor: thumbnailUrl ?? nextFallback(),
+    thumbnailUrl,
     overview: api.summary ?? '',
     features: [],
     stacks: api.stacks.map((s) => ({
@@ -71,6 +79,7 @@ function mapListToProject(api: ApiProjectList): Project {
 const isFaClass = (v?: string | null) => !!v && v.trimStart().startsWith('fa-')
 
 function mapDetailToProject(api: ApiProjectDetail): Project {
+  const thumbnailUrl = resolveAssetUrl(api.thumbnailUrl)
   return {
     slug: api.slug,
     title: api.title,
@@ -83,8 +92,8 @@ function mapDetailToProject(api: ApiProjectDetail): Project {
     endDate: api.endDate,
     category: api.category?.name ?? '',
     featured: api.isFeatured,
-    thumbColor: api.thumbnailUrl ?? nextFallback(),
-    thumbnailUrl: api.thumbnailUrl ?? undefined,
+    thumbColor: thumbnailUrl ?? nextFallback(),
+    thumbnailUrl,
     overview: api.summary ?? api.description ?? '',
     features: sectionsOf(api.sections, 'features'),
     stacks: api.stacks.map((s) => ({
@@ -96,7 +105,7 @@ function mapDetailToProject(api: ApiProjectDetail): Project {
       usage: s.usageDescription,
     })),
     architecture: sectionsOf(api.sections, 'architecture'),
-    architectureImageUrl: api.images?.find((i) => i.imageType === 'architecture')?.imageUrl,
+    architectureImageUrl: resolveAssetUrl(api.images?.find((i) => i.imageType === 'architecture')?.imageUrl),
     retrospective: sectionsOf(api.sections, 'retrospective'),
     links: {
       github: api.githubUrl ?? undefined,
