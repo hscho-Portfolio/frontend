@@ -155,7 +155,7 @@
     try {
       const backendUrl = window.BACKEND_URL || 'http://localhost:8080'
       const res = await fetch(`${backendUrl}/api/v1/public/site-settings`, {
-        signal: AbortSignal.timeout(3000),
+        signal: AbortSignal.timeout(15000),
       })
       if (res.ok) {
         siteSettings = await res.json()
@@ -170,7 +170,7 @@
     try {
       const backendUrl = window.BACKEND_URL || 'http://localhost:8080'
       const res = await fetch(`${backendUrl}/api/v1/public/awards`, {
-        signal: AbortSignal.timeout(3000),
+        signal: AbortSignal.timeout(15000),
       })
       if (res.ok) cachedAwards = await res.json()
     } catch {
@@ -182,7 +182,7 @@
     try {
       const backendUrl = window.BACKEND_URL || 'http://localhost:8080'
       const res = await fetch(`${backendUrl}/api/v1/public/stacks`, {
-        signal: AbortSignal.timeout(3000),
+        signal: AbortSignal.timeout(30000),
       })
       if (res.ok) cachedStacks = await res.json()
     } catch {
