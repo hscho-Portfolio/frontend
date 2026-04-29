@@ -57,8 +57,12 @@
 
   const openFolder = (id) => {
     if (id === 'projects') {
-      folderTitle.textContent = 'Projects'
-      folderOverlay.classList.add('open')
+      showProjectLoader('Projects', 'Fetching projects...')
+      setTimeout(() => {
+        hideProjectLoader()
+        folderTitle.textContent = 'Projects'
+        folderOverlay.classList.add('open')
+      }, 600)
     } else if (id === 'admin') {
       window.location.href = '/admin/login'
     } else {
@@ -133,12 +137,18 @@
   const loaderTitle = document.getElementById('loader-title')
   const loaderText = document.getElementById('loader-text')
 
-  const showProjectLoader = (projectName) => {
+  const showProjectLoader = (label, text) => {
     if (!projectLoaderOverlay) return
-    if (loaderTitle) loaderTitle.textContent = projectName || 'Loading...'
-    if (loaderText) loaderText.textContent = `Loading ${projectName || 'project'}...`
+    if (loaderTitle) loaderTitle.textContent = label || 'Loading...'
+    if (loaderText) loaderText.textContent = text || `Loading ${label || ''}...`
     projectLoaderOverlay.classList.add('active')
     projectLoaderOverlay.setAttribute('aria-hidden', 'false')
+  }
+
+  const hideProjectLoader = () => {
+    if (!projectLoaderOverlay) return
+    projectLoaderOverlay.classList.remove('active')
+    projectLoaderOverlay.setAttribute('aria-hidden', 'true')
   }
 
   document.querySelectorAll('.desktop-icon-shortcut').forEach((link) => {
