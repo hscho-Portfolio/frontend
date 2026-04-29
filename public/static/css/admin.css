@@ -1636,6 +1636,11 @@
   position: relative;
   z-index: 1;
 }
+.adm-stack-card-icon img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
 .adm-stack-card-name {
   font-size: 14px;
   font-weight: 800;

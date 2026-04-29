@@ -42,19 +42,24 @@ const updateStackAdminPreview = () => {
   previewName.textContent = name
   previewCat.textContent  = cat
 
+  // reset inline styles
+  previewIcon.style.cssText = ''
   if (isFaClass(icon)) {
     previewIcon.className = icon
+    previewIcon.style.display = 'inline-block'
   } else if (icon) {
-    previewIcon.className = ''
-    previewIcon.style.backgroundImage = `url(${icon})`
-    previewIcon.style.backgroundSize  = 'contain'
-    previewIcon.style.backgroundRepeat = 'no-repeat'
-    previewIcon.style.backgroundPosition = 'center'
-    previewIcon.style.width  = '22px'
-    previewIcon.style.height = '22px'
+    // FA 7에서 <i>에서 클래스 제거 시 display:inline 으로 복귀해 width/height 무시됨
+    // → img 태그로 교체
+    const iconWrap = previewIcon.parentElement
+    const img = document.createElement('img')
+    img.src = icon
+    img.alt = ''
+    img.id = 'stackAdminPreviewIcon'
+    img.style.cssText = 'width:26px;height:26px;object-fit:contain;display:block'
+    iconWrap.replaceChild(img, previewIcon)
   } else {
     previewIcon.className = 'fa-solid fa-cube'
-    previewIcon.style.backgroundImage = ''
+    previewIcon.style.display = 'inline-block'
   }
 }
 
