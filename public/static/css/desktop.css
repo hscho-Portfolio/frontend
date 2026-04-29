@@ -458,6 +458,11 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
   transform: translateY(8px) scale(0.98);
   transition: transform 0.28s var(--easing);
 }
+.folder-window {
+  width: min(1280px, 94vw);
+  height: min(860px, 88vh);
+  max-height: 88vh;
+}
 .folder-overlay.open .folder-window,
 .app-overlay.open .app-window {
   transform: translateY(0) scale(1);
@@ -523,11 +528,13 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
 /* Folder grid */
 .folder-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 18px;
-  padding: 22px;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 22px;
+  padding: 24px;
   overflow-y: auto;
   flex: 1;
+  min-height: 0;
+  align-content: start;
 }
 
 /* Project card */
@@ -556,7 +563,7 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
 
 .project-card-thumb {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16 / 10;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -564,7 +571,9 @@ html[data-theme='dark'] .topbar-theme-toggle:hover {
   color: white;
   text-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   overflow: hidden;
-  background-size: cover;
+  background-color: rgba(248, 250, 252, 0.84);
+  background-repeat: no-repeat;
+  background-size: contain;
   background-position: center;
 }
 .project-card-thumb::after {

@@ -86,6 +86,7 @@
   .folder-overlay { padding: 14px; }
   .folder-window { max-width: 100%; max-height: 92vh; border-radius: 18px; }
   .folder-body { padding: 18px; }
+  .folder-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; padding: 18px; }
   .project-card-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
 
   /* App window */
