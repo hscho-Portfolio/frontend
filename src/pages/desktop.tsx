@@ -68,7 +68,7 @@ export const DesktopPage = ({ projects, shortcuts }: { projects: Project[]; shor
                 <span>조호성</span>
               </h1>
               <p class="welcome-widget-role">AI Implementer · Full-stack · Cloud / Infra · Rust</p>
-              <p class="welcome-widget-major">경기대학교 신소재공학과 · 컴퓨터공학과</p>
+              <p class="welcome-widget-major">신소재공학과 · 컴퓨터공학과</p>
               <p class="welcome-widget-desc">
                 데이터 분석과 모델 설계를 넘어 실제 서비스와 시스템으로 구현하는 AI 구현자입니다.
               </p>

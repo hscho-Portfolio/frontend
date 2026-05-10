@@ -498,10 +498,6 @@
           <div class="aw-section">
             <div class="aw-eyebrow"><i class="fa-solid fa-graduation-cap"></i> Education</div>
             <div class="aw-row">
-              <div class="aw-row-key">학교</div>
-              <div class="aw-row-value">경기대학교 · 2020.03 – 2026.08</div>
-            </div>
-            <div class="aw-row">
               <div class="aw-row-key">전공</div>
               <div class="aw-row-value">신소재공학과 (주전공) · 컴퓨터공학과 (복수전공) · GPA 4.01 / 4.5</div>
             </div>
