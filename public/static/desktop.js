@@ -406,7 +406,7 @@
     const email       = s.email       || 'hello@cho.os'
     const githubUrl   = s.githubUrl   || 'https://github.com/hscho0048'
     const linkedinUrl = s.linkedinUrl || 'https://linkedin.com'
-    const resumeUrl   = s.resumeUrl   || '#'
+    const resumeUrl   = '/static/docs/resume.pdf'
     const profileImg  = s.profileImageUrl
 
     const avatarSrc  = profileImg || '/static/hosung.jpg'
@@ -652,7 +652,7 @@
           <div class="aw-contact-grid">
             <a class="aw-contact-card" href="mailto:${email}"><i class="fa-solid fa-envelope"></i><div><strong>Email</strong><span>${email}</span></div></a>
             <a class="aw-contact-card" href="${githubUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i><div><strong>GitHub</strong><span>${githubUrl.replace(/^https?:\/\//, '')}</span></div></a>
-            <a class="aw-contact-card" href="${resumeUrl}" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-file-pdf"></i><div><strong>Resume</strong><span>이력서 다운로드</span></div></a>
+            <a class="aw-contact-card" href="${resumeUrl}" download="조호성_이력서.pdf"><i class="fa-solid fa-file-pdf"></i><div><strong>Resume</strong><span>이력서 다운로드</span></div></a>
           </div>
         `,
       },
